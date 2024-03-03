@@ -18,18 +18,33 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\sqlite\shell.c">
+    <ClCompile Include="lib\sqlite\shell.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\sqlite\sqlite3.c">
+    <ClCompile Include="lib\sqlite\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vendor\sqlite\sqlite3.h">
+    <ClInclude Include="lib\sqlite\sqlite3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vendor\sqlite\sqlite3ext.h">
+    <ClInclude Include="lib\sqlite\sqlite3ext.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DBManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Employee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Validation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="model\Department.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
