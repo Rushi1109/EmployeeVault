@@ -1,5 +1,6 @@
 #include "../include/DBManager.h"
 #include "../include/Config.h"
+#include "exception"
 #include <iostream>
 
 using EmployeeDB::Database;
@@ -13,7 +14,7 @@ void Database::openConnection() {
 	status = sqlite3_open(EmployeeDB::Config::dbFilePath, &db);
 
 	if (status != SQLITE_OK) {
-		std::cerr << "Error opening DB file" << sqlite3_errmsg(db) << '\n';
+		throw std::runtime_error(sqlite3_errmsg(db));
 	}
 	else {
 		std::cout << "Opened database file successfully" << '\n';
@@ -21,7 +22,14 @@ void Database::openConnection() {
 }
 
 void Database::closeConnection() {
-	sqlite3_close(db);
+	status = sqlite3_close(db);
+
+	if (status != SQLITE_OK) {
+		throw std::runtime_error(sqlite3_errmsg(db));
+	}
+	else {
+		std::cout << "Closed database file successfully" << '\n';
+	}
 }
 
 Database::Database() {

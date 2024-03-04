@@ -8,8 +8,8 @@ namespace EmployeeDB {
 
 	class Validator {
 	public:
-		static bool validateEmail(std::string email);
-		static bool validateMobile(std::string number);
+		static bool validateEmail(const std::string& email);
+		static bool validateMobile(const std::string& number);
 	};
 }
 
