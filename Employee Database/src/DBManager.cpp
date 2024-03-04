@@ -1,5 +1,8 @@
 #include "../include/DBManager.h"
+#include "../include/Config.h"
 #include <iostream>
+
+using EmployeeDB::Database;
 
 Database& Database::instance() {
 	static Database DB;
@@ -7,13 +10,13 @@ Database& Database::instance() {
 }
 
 void Database::openConnection() {
-	status = sqlite3_open("./data/Employee.db", &db);
+	status = sqlite3_open(EmployeeDB::Config::dbFilePath, &db);
 
-	if (status) {
-		std::cerr << "Error creating DB file" << sqlite3_errmsg(db) << '\n';
+	if (status != SQLITE_OK) {
+		std::cerr << "Error opening DB file" << sqlite3_errmsg(db) << '\n';
 	}
 	else {
-		std::cout << "Created database file successfully" << '\n';
+		std::cout << "Opened database file successfully" << '\n';
 	}
 }
 

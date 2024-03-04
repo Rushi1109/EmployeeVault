@@ -3,21 +3,25 @@
 
 #include "sqlite3.h"
 
-class Database {
-	static Database& instance();
+namespace EmployeeDB {
+
+	class Database {
+	public:
+		static Database& instance();
 
 
-private:
-	Database();
-	~Database();
+	private:
+		Database();
+		~Database();
 
-	void openConnection();
-	void closeConnection();
+		void openConnection();
+		void closeConnection();
 
-	sqlite3* db;
-	int status;
-	char* errMsg;
-};
+		sqlite3* db;
+		int status;
+		char* errMsg;
+	};
+}
 
 
 #endif // !_DBmanager_h_
