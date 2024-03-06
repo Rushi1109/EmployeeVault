@@ -2,26 +2,33 @@
 #define _DBmanager_h_
 
 #include "sqlite3.h"
+#include <string>
 
 namespace EmployeeDB {
 
-	class Database {
+	class DBManager {
 	public:
-		static Database& instance();
+		static DBManager& instance();
 
-		int execute(const char* sql);
-		int executeQuery(const char* sql, int (*callback)(void*, int, char**, char**), void*);
+		int executeQuery(const char*);
+		int executeSelectQuery(const char*);
 
+		std::string getResultString() const {
+			return resultString;
+		}
 	private:
-		Database();
-		~Database();
+		DBManager();
+		~DBManager();
 
 		void openConnection();
 		void closeConnection();
 
+		static int callback(void*, int, char**, char**);
+
 		sqlite3* db;
-		int status;
+		int resultCode;
 		char* errMsg;
+		inline static std::string resultString{ "" };
 	};
 }
 

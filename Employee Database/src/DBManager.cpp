@@ -3,17 +3,25 @@
 #include "exception"
 #include <iostream>
 
-using EmployeeDB::Database;
+using EmployeeDB::DBManager;
 
-Database& Database::instance() {
-	static Database DB;
+DBManager& DBManager::instance() {
+	static DBManager DB;
 	return DB;
 }
 
-void Database::openConnection() {
-	status = sqlite3_open(EmployeeDB::Config::dbFilePath, &db);
+DBManager::DBManager() {
+	openConnection();
+}
 
-	if (status != SQLITE_OK) {
+DBManager::~DBManager() {
+	closeConnection();
+}
+
+void DBManager::openConnection() {
+	resultCode = sqlite3_open(EmployeeDB::Config::dbFilePath, &db);
+
+	if (resultCode != SQLITE_OK) {
 		throw std::runtime_error(sqlite3_errmsg(db));
 	}
 	else {
@@ -21,10 +29,10 @@ void Database::openConnection() {
 	}
 }
 
-void Database::closeConnection() {
-	status = sqlite3_close(db);
+void DBManager::closeConnection() {
+	resultCode = sqlite3_close(db);
 
-	if (status != SQLITE_OK) {
+	if (resultCode != SQLITE_OK) {
 		throw std::runtime_error(sqlite3_errmsg(db));
 	}
 	else {
@@ -32,15 +40,37 @@ void Database::closeConnection() {
 	}
 }
 
-int Database::execute(const char* sql) {
-	
-};
+int DBManager::executeQuery(const char* queryString) {
+	resultCode = sqlite3_exec(db, queryString, 0, 0, &errMsg);
 
+	if (resultCode == SQLITE_OK) {
+		std::cout << "Successfully executed Query" << '\n';
+	}
+	else {
+		throw std::runtime_error{ errMsg };
+	}
 
-Database::Database() {
-	openConnection();
+	return resultCode;
 }
 
-Database::~Database() {
-	closeConnection();
+int DBManager::callback(void* NotUsed, int argc, char** argv, char** azColName) {
+	int i;
+	for (i = 0; i < argc; i++) {
+		resultString += azColName[i] + std::string{ " : " } + (argv[i] ? argv[i] : "NULL") + "\n";
+	}
+	std::cout << '\n';
+	return 0;
+}
+
+int DBManager::executeSelectQuery(const char* queryString) {
+	resultCode = sqlite3_exec(db, queryString, callback, 0, &errMsg);
+
+	if (resultCode == SQLITE_OK) {
+		std::cout << "Successfully executed Query" << '\n';
+	}
+	else {
+		throw std::runtime_error{ errMsg };
+	}
+
+	return resultCode;
 }

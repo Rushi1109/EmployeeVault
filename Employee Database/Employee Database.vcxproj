@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,6 +96,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -110,6 +111,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,6 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,6 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,14 +155,22 @@
     <ClCompile Include="lib\sqlite\shell.c" />
     <ClCompile Include="lib\sqlite\sqlite3.c" />
     <ClCompile Include="src\DBManager.cpp" />
+    <ClCompile Include="src\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Config.h" />
     <ClInclude Include="include\DBManager.h" />
-    <ClInclude Include="include\Validation.h" />
+    <ClInclude Include="include\Model.h" />
+    <ClInclude Include="include\model\Engineer.h" />
+    <ClInclude Include="include\model\Finance.h" />
+    <ClInclude Include="include\model\HR.h" />
+    <ClInclude Include="include\model\Manager.h" />
+    <ClInclude Include="include\model\QA.h" />
+    <ClInclude Include="include\Validator.h" />
     <ClInclude Include="lib\sqlite\sqlite3.h" />
     <ClInclude Include="lib\sqlite\sqlite3ext.h" />
-    <ClInclude Include="model\Department.h" />
-    <ClInclude Include="model\Employee.h" />
+    <ClInclude Include="include\model\Department.h" />
+    <ClInclude Include="include\model\Employee.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
