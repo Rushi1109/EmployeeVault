@@ -1,9 +1,9 @@
 CREATE TABLE "Department" (
 	"departmentID"	INTEGER NOT NULL UNIQUE,
 	"departmentName"	TEXT NOT NULL UNIQUE,
-	"baseSalary"	INTEGER NOT NULL,
-	"allowance"	INTEGER NOT NULL,
-	"deduction"	INTEGER NOT NULL,
+	"baseSalary"	REAL NOT NULL,
+	"allowance"	REAL NOT NULL,
+	"deduction"	REAL NOT NULL,
 	PRIMARY KEY("departmentID" AUTOINCREMENT)
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE "Employee" (
 	"departmentID"	INTEGER,
 	"managerID"	INTEGER,
 	"performanceMetric"	REAL,
-	"bonus"	NUMERIC,
+	"bonus"	REAL,
 	PRIMARY KEY("employeeID" AUTOINCREMENT),
 	UNIQUE("employeeID")
 );

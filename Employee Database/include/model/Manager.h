@@ -48,12 +48,21 @@ namespace EmployeeDB::Model {
             projectTitle = title;
         }
 
+        const std::string& getRole() const {
+            return projectTitle;
+        }
+
+        void setRole(const std::string& rl) {
+            role = rl;
+        }
+
     private:
         //int manager_id;
         int departmentID;
         short int teamSize;
         int yearsOfExperience;
         std::string projectTitle;
+        std::string role;
     };
 }
 

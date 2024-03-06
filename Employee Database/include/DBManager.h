@@ -9,6 +9,8 @@ namespace EmployeeDB {
 	public:
 		static Database& instance();
 
+		int execute(const char* sql);
+		int executeQuery(const char* sql, int (*callback)(void*, int, char**, char**), void*);
 
 	private:
 		Database();

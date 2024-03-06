@@ -32,6 +32,11 @@ void Database::closeConnection() {
 	}
 }
 
+int Database::execute(const char* sql) {
+	
+};
+
+
 Database::Database() {
 	openConnection();
 }

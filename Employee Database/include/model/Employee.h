@@ -145,7 +145,7 @@ namespace EmployeeDB::Model {
         std::string dateOfJoining;
         short departmentID;
         int managerID;
-        float performanceMetric;
+        double performanceMetric;
         int bonus;
     };
 }
