@@ -3,12 +3,21 @@
 #include "DBManager.h"
 #include "HRController.h"
 #include "EmployeeController.h"
+#include "DepartmentController.h"
 
 using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Controller::HRController;
+using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool HRController::insertHR(const HR& obj) {
+	int departmentID = DepartmentController::selectDepartmentIDbyName("Finance");
+
+	if (departmentID == -1) {
+		std::cerr << "Finance department not found.";
+		return false;
+	}
+
 	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {

@@ -27,7 +27,7 @@ int DepartmentController::selectDepartmentIDbyName(const std::string& department
 	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\";";
 	int departmentID{ 0 };
 
-	auto getDepartmentID = [](void* data, int argc, char** argv, char** azColName) -> int {
+	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* dID = static_cast<int*>(data);
 		if (!strcmp(*azColName, "departmentID")) {
 			*dID = std::stoi(argv[0]);
@@ -36,7 +36,7 @@ int DepartmentController::selectDepartmentIDbyName(const std::string& department
 		};
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str(), getDepartmentID, &departmentID);
+		DBManager::instance().executeSelectQuery(queryString.c_str(), getDepartmentIDCallback, &departmentID);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';

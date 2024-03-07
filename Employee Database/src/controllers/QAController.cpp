@@ -3,12 +3,21 @@
 #include "DBManager.h"
 #include "QAController.h"
 #include "EmployeeController.h"
+#include "DepartmentController.h"
 
 using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Controller::QAController;
+using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool QAController::insertQA(const QA& obj) {
+	int departmentID = DepartmentController::selectDepartmentIDbyName("QA");
+
+	if (departmentID == -1) {
+		std::cerr << "QA department not found.";
+		return false;
+	}
+
 	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {

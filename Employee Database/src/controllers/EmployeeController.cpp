@@ -35,7 +35,7 @@ int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
 	std::string queryString = "SELECT employeeID FROM Employee WHERE email=\"" + email + "\";";
 	int employeeID{ 0 };
 
-	auto getEmployeeID = [](void* data, int argc, char** argv, char** azColName) -> int {
+	auto getEmployeeIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* eID = static_cast<int*>(data);
 		if (!strcmp(*azColName,"employeeID")) {
 			*eID = std::stoi(argv[0]);
@@ -44,7 +44,7 @@ int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
 		};
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str(), getEmployeeID, &employeeID);
+		DBManager::instance().executeSelectQuery(queryString.c_str(), getEmployeeIDCallback, &employeeID);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
