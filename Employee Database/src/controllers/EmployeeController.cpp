@@ -33,7 +33,7 @@ bool EmployeeController::insertEmployee(const Employee& e) {
 
 int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
 	std::string queryString = "SELECT employeeID FROM Employee WHERE email=\"" + email + "\";";
-	int employeeID{ 0 };
+	int employeeID{ -1 };
 
 	auto getEmployeeIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* eID = static_cast<int*>(data);

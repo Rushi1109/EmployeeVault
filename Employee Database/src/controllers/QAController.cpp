@@ -10,13 +10,15 @@ using EmployeeDB::Controller::QAController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool QAController::insertQA(const QA& obj) {
+bool QAController::insertQA(QA& obj) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
 		std::cerr << "QA department not found.";
 		return false;
 	}
+
+	e.setDepartmentID(departmentID);
 
 	bool employeeResult = EmployeeController::insertEmployee(obj);
 

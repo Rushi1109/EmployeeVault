@@ -9,7 +9,7 @@ namespace EmployeeDB::Controller {
 
 	class EngineerController {
 	public:
-		static bool insertEngineer(const Engineer&);
+		static bool insertEngineer(Engineer&);
 	};
 }
 

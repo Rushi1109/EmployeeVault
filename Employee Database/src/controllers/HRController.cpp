@@ -10,13 +10,15 @@ using EmployeeDB::Controller::HRController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool HRController::insertHR(const HR& obj) {
-	int departmentID = DepartmentController::selectDepartmentIDbyName("Finance");
+bool HRController::insertHR(HR& obj) {
+	int departmentID = DepartmentController::selectDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
-		std::cerr << "Finance department not found.";
+		std::cerr << "HR department not found.";
 		return false;
 	}
+
+	e.setDepartmentID(departmentID);
 
 	bool employeeResult = EmployeeController::insertEmployee(obj);
 

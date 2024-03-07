@@ -25,7 +25,7 @@ bool DepartmentController::insertDepartment(const Department& d) {
 
 int DepartmentController::selectDepartmentIDbyName(const std::string& departmentName) {
 	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\";";
-	int departmentID{ 0 };
+	int departmentID{ -1 };
 
 	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* dID = static_cast<int*>(data);

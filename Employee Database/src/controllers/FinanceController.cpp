@@ -9,13 +9,15 @@ using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool FinanceController::insertFinance(const Finance& e) {
+bool FinanceController::insertFinance(Finance& e) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("Finance");
 
 	if (departmentID == -1) {
 		std::cerr << "Finance department not found.";
 		return false;
 	}
+
+	e.setDepartmentID(departmentID);
 
 	bool employeeResult = EmployeeController::insertEmployee(e);
 

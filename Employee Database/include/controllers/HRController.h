@@ -9,7 +9,7 @@ namespace EmployeeDB::Controller {
 
 	class HRController {
 	public:
-		static bool insertHR(const HR&);
+		static bool insertHR(HR&);
 	};
 }
 
