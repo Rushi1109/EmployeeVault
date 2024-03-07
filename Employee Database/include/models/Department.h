@@ -7,10 +7,6 @@ namespace EmployeeDB::Model {
 
 	class Department {
 	public:
-		void insertDepartment() const;
-		void deleteDepartment() const;
-		void updateDepartment() const;
-		void viewDepartment() const;
 		Department() = default;
 
         short getDepartmentID() const {
@@ -21,12 +17,12 @@ namespace EmployeeDB::Model {
             departmentID = id;
         }
 
-        const std::string& getName() const {
-            return name;
+        const std::string& getDepartmentName() const {
+            return departmentName;
         }
 
-        void setName(const std::string& employeeName) {
-            name = employeeName;
+        void setName(const std::string& deptName) {
+            departmentName = deptName;
         }
 
         double getBaseSalary() const {
@@ -55,7 +51,7 @@ namespace EmployeeDB::Model {
 
 	private:
 		short departmentID;
-		std::string name;
+		std::string departmentName;
 		double baseSalary;
 		double allowance;
 		double deduction;

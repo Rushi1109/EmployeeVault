@@ -1,5 +1,5 @@
-#include "../include/DBManager.h"
-#include "../include/Config.h"
+#include "DBManager.h"
+#include "Config.h"
 #include "exception"
 #include <iostream>
 
@@ -62,8 +62,8 @@ int DBManager::callback(void* NotUsed, int argc, char** argv, char** azColName) 
 	return 0;
 }
 
-int DBManager::executeSelectQuery(const char* queryString) {
-	resultCode = sqlite3_exec(db, queryString, callback, 0, &errMsg);
+int DBManager::executeSelectQuery(const char* queryString, int (*callback)(void*, int, char**, char**), void* arg) {
+	resultCode = sqlite3_exec(db, queryString, callback, arg, &errMsg);
 
 	if (resultCode == SQLITE_OK) {
 		std::cout << "Successfully executed Query" << '\n';

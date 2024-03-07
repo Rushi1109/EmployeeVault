@@ -1,31 +1,52 @@
 #include <iostream>
-#include "./include/DBManager.h"
+#include "DBManager.h"
+#include "Model.h"
+#include "EngineerController.h"
+#include "DepartmentController.h"
 
 using EmployeeDB::DBManager;
+using EmployeeDB::Model::Engineer, EmployeeDB::Controller::EngineerController;
+using EmployeeDB::Model::Department, EmployeeDB::Controller::DepartmentController;
 
 int main() {
-	DBManager& db = DBManager::instance();
+    DBManager& db = DBManager::instance();
+    db.executeQuery("PRAGMA foreign_keys = ON");
 
-	const char* createTableSQL = "CREATE TABLE IF NOT EXISTS Company ("
-		"ID INT PRIMARY KEY NOT NULL,"
-		"Name TEXT NOT NULL,"
-		"Age INT NOT NULL,"
-		"Salary REAL NOT NULL);";
+    //Engineer dummyEmployee;
 
-	db.executeQuery(createTableSQL);
+    //// Set dummy values for all attributes
+    //dummyEmployee.setFirstName("Rushi");
+    //dummyEmployee.setMiddleName("Mineshkumar");
+    //dummyEmployee.setLastName("Gandhi");
+    //dummyEmployee.setEmail("joDo@example.com");
+    //dummyEmployee.setAddress("123 Main St, Cityville");
+    //dummyEmployee.setDateOfBirth("1990-01-01");
+    //dummyEmployee.setDateOfJoining("2020-05-15");
+    //dummyEmployee.setPerformanceMetric(4.5);
+    //dummyEmployee.setMobileNo(7283902430);
+    //dummyEmployee.setGender(EmployeeDB::Model::Gender::Male);
+    //dummyEmployee.setDepartmentID(101);
+    //dummyEmployee.setManagerID(201);
+    //dummyEmployee.setBonus(50000);
+    //dummyEmployee.setTechnology("Cpp");
 
-	/*const char* insertDataSQL = "INSERT INTO Company (ID,Name,Age,Salary)"
-								"VALUES (16, 'Paul', 32, 20000.00 );"
-								"INSERT INTO Company "
-								"VALUES (140, 'Paolo', 26, 2222000.00);";
+    //EngineerController::insertEngineer(dummyEmployee);
 
-	db.executeQuery(insertDataSQL);*/
-	
-	const char* selectSQL = "SELECT * FROM Company";
+    //db.executeSelectQuery("SELECT Employee.*, Engineer.technology FROM Employee INNER JOIN Engineer ON Employee.employeeID = Engineer.employeeID;");
+    ////db.executeQuery("DELETE FROM Employee Where employeeID = 11");
 
-	db.executeSelectQuery(selectSQL);
+    //std::cout << DBManager::getResultString() << '\n';
 
-	std::cout << db.getResultString() << '\n';
+    Department dept;
 
-	return 0;
+    dept.setName("Engineer");
+    dept.setBaseSalary(500000.00);
+    dept.setAllowance(10000.00);
+    dept.setDeduction(1000);
+
+    DepartmentController::insertDepartment(dept);
+
+    std::cout << DepartmentController::selectDepartmentIDbyName("Engineer") << '\n';
+
+    return 0;
 }

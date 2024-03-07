@@ -6,7 +6,7 @@ namespace EmployeeDB::Model {
 
     class Finance : public Employee {
     public:
-        void computeSalary() override;
+        double computeSalary() override { return 10.2; };
 
         Finance() noexcept = default;
 

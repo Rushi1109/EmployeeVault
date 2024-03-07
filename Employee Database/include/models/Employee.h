@@ -6,17 +6,27 @@
 namespace EmployeeDB::Model {
     enum class Gender
     {
-        male, female, other
+        Male, Female, Other
     };
+
+    inline std::string getGenderString(Gender g) {
+        std::string tempStr{ "Male" };
+        switch (g) {
+        case EmployeeDB::Model::Gender::Male:
+            break;
+        case EmployeeDB::Model::Gender::Female:
+            tempStr = "Female";
+            break;
+        case EmployeeDB::Model::Gender::Other:
+            tempStr = "Other";
+            break;
+        }
+        return tempStr;
+    }
 
     class Employee {
     public:
-        virtual void computeSalary() = 0;
-
-        void insertEmployee() const;
-        void deleteEmployee() const;
-        void viewEmployee() const;
-        void updateEmployee() const;
+        virtual double computeSalary() { return 10.2; };
 
         Employee() noexcept = default;
 
@@ -116,7 +126,7 @@ namespace EmployeeDB::Model {
             managerID = id;
         }
 
-        float getPerformanceMetric() const {
+        double getPerformanceMetric() const {
             return performanceMetric;
         }
 

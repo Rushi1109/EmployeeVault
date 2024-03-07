@@ -6,7 +6,7 @@ namespace EmployeeDB::Model {
 
     class QA : public Employee {
     public:
-        void computeSalary() override;
+        double computeSalary() override { return 10.2; };
 
         QA() noexcept = default;
 

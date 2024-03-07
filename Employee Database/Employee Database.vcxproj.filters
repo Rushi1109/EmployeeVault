@@ -30,6 +30,24 @@
     <ClCompile Include="src\Validator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\controllers\EmployeeController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\EngineerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\FinanceController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\QAController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\HRController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\DepartmentController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\sqlite\sqlite3.h">
@@ -41,34 +59,52 @@
     <ClInclude Include="include\DBManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\Employee.h">
+    <ClInclude Include="include\models\Employee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Validator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\Department.h">
+    <ClInclude Include="include\models\Department.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\Manager.h">
+    <ClInclude Include="include\models\Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\HR.h">
+    <ClInclude Include="include\models\HR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\Engineer.h">
+    <ClInclude Include="include\models\Engineer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\QA.h">
+    <ClInclude Include="include\models\QA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\model\Finance.h">
+    <ClInclude Include="include\models\Finance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\EmployeeController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\EngineerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\FinanceController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\QAController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\HRController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\DepartmentController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

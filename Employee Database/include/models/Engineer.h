@@ -7,7 +7,7 @@ namespace EmployeeDB::Model {
 
     class Engineer : public Employee {
     public:
-        void computeSalary() override;
+        double computeSalary() override { return 10.2; };
 
         Engineer() noexcept = default;
 

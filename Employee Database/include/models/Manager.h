@@ -7,12 +7,7 @@ namespace EmployeeDB::Model {
 
     class Manager : public Employee {
     public:
-        void computeSalary() override;
-
-        void insertManager() const;
-        void deleteManager() const;
-        void updateManager() const;
-        void viewManager() const;
+        double computeSalary() override { return 10.2; };
 
         Manager() noexcept = default;
 
