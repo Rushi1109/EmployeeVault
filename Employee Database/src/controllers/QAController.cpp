@@ -10,7 +10,7 @@ using EmployeeDB::Controller::QAController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool QAController::insertQA(QA& obj) {
+bool QAController::insertQA(QA& e) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
@@ -20,17 +20,17 @@ bool QAController::insertQA(QA& obj) {
 
 	e.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(e);
 
 	if (!employeeResult) {
 		return false;
 	}
 
-	int employeeID = EmployeeController::selectEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
 
 	std::string queryString = "INSERT INTO QA (employeeID, testingTool) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\" " + obj.getTestingTool() + "\");";
+		"\" " + e.getTestingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());

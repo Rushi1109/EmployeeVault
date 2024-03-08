@@ -1,18 +1,20 @@
 #include <iostream>
 #include "DBManager.h"
 #include "Model.h"
-#include "EngineerController.h"
+#include "QAController.h"
 #include "DepartmentController.h"
+#include "EmployeeController.h"
 
 using EmployeeDB::DBManager;
-using EmployeeDB::Model::Engineer, EmployeeDB::Controller::EngineerController;
+using EmployeeDB::Model::QA, EmployeeDB::Controller::QAController;
 using EmployeeDB::Model::Department, EmployeeDB::Controller::DepartmentController;
+using EmployeeDB::Controller::EmployeeController;
 
 int main() {
     DBManager& db = DBManager::instance();
     db.executeQuery("PRAGMA foreign_keys = ON");
 
-    //Engineer dummyEmployee;
+    //QA dummyEmployee;
 
     //// Set dummy values for all attributes
     //dummyEmployee.setFirstName("Rushi");
@@ -25,28 +27,19 @@ int main() {
     //dummyEmployee.setPerformanceMetric(4.5);
     //dummyEmployee.setMobileNo(7283902430);
     //dummyEmployee.setGender(EmployeeDB::Model::Gender::Male);
-    //dummyEmployee.setDepartmentID(101);
     //dummyEmployee.setManagerID(201);
     //dummyEmployee.setBonus(50000);
-    //dummyEmployee.setTechnology("Cpp");
+    //dummyEmployee.setTestingTool("Chai-Mocha");
 
-    //EngineerController::insertEngineer(dummyEmployee);
+    //QAController::insertQA(dummyEmployee);
 
-    //db.executeSelectQuery("SELECT Employee.*, Engineer.technology FROM Employee INNER JOIN Engineer ON Employee.employeeID = Engineer.employeeID;");
-    ////db.executeQuery("DELETE FROM Employee Where employeeID = 11");
+    //db.executeSelectQuery("SELECT Employee.*, QA.testingTool FROM Employee INNER JOIN QA ON Employee.employeeID = QA.employeeID;");
 
-    //std::cout << DBManager::getResultString() << '\n';
+    //std::cout << db.getResultString() << '\n';
 
-    Department dept;
+    std::cout << DepartmentController::selectDepartmentIDbyName("QA") << '\n';
 
-    dept.setName("Engineer");
-    dept.setBaseSalary(500000.00);
-    dept.setAllowance(10000.00);
-    dept.setDeduction(1000);
-
-    DepartmentController::insertDepartment(dept);
-
-    std::cout << DepartmentController::selectDepartmentIDbyName("Engineer") << '\n';
+    std::cout << EmployeeController::deleteEmployee(12) << '\n';
 
     return 0;
 }

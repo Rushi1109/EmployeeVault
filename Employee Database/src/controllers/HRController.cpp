@@ -10,7 +10,7 @@ using EmployeeDB::Controller::HRController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool HRController::insertHR(HR& obj) {
+bool HRController::insertHR(HR& e) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
@@ -20,17 +20,17 @@ bool HRController::insertHR(HR& obj) {
 
 	e.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(e);
 
 	if (!employeeResult) {
 		return false;
 	}
 
-	int employeeID = EmployeeController::selectEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
 
 	std::string queryString = "INSERT INTO HR (employeeID, hrSpecialization) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\" " + obj.getHRSpecialization() + "\");";
+		"\" " + e.getHRSpecialization() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
