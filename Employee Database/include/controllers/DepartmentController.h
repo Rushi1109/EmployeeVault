@@ -11,6 +11,7 @@ namespace EmployeeDB::Controller {
 	public:
 		static bool insertDepartment(const Department&);
 		static int selectDepartmentIDbyName(const std::string&);
+		static bool deleteDepartment(int);
 	};
 }
 

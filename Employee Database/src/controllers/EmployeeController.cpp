@@ -54,8 +54,8 @@ int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
 	return employeeID;
 }
 
-bool EmployeeController::deleteEmployee(int id) {
-	std::string queryString = "DELETE FROM Employee WHERE employeeID=" + std::to_string(id) + ";";
+bool EmployeeController::deleteEmployee(int employeeID) {
+	std::string queryString = "DELETE FROM Employee WHERE employeeID=" + std::to_string(employeeID) + ";";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());

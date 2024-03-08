@@ -45,3 +45,16 @@ int DepartmentController::selectDepartmentIDbyName(const std::string& department
 
 	return departmentID;
 }
+
+bool DepartmentController::deleteDepartment(int departmentID) {
+	std::string queryString = "DELETE FROM Department WHERE Department=" + std::to_string(departmentID) + ";";
+
+	try {
+		DBManager::instance().executeQuery(queryString.c_str());
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return false;
+	}
+	return true;
+}
