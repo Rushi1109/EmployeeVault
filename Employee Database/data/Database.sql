@@ -13,7 +13,7 @@ CREATE TABLE "Employee" (
 	"middleName"	TEXT,
 	"lastName"	TEXT NOT NULL,
 	"dateOfBirth"	TEXT,
-	"mobileNo"	NUMERIC NOT NULL UNIQUE,
+	"mobileNo"	INTEGER NOT NULL UNIQUE,
 	"email"	TEXT NOT NULL UNIQUE,
 	"address"	TEXT NOT NULL,
 	"gender"	TEXT NOT NULL,
@@ -22,6 +22,7 @@ CREATE TABLE "Employee" (
 	"mentorID"	INTEGER,
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
+	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE SET NULL,
 	PRIMARY KEY("employeeID" AUTOINCREMENT),
 	UNIQUE("employeeID")
 );
@@ -52,7 +53,7 @@ CREATE TABLE "QA" (
 
 CREATE TABLE "Finance" (
 	"employeeID"	INTEGER NOT NULL,
-	"accountingSoftware"	TEXT,
+	"accountingTool"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
 
@@ -61,3 +62,8 @@ CREATE TABLE "HR" (
 	"hrSpecialization"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
+
+CREATE VIEW "ManagerView"
+AS
+	SELECT Employee.*, Manager.technology, Manager.projectTitle, Manager.yearsOfExp, Manager.teamSize 
+	FROM Employee INNER JOIN Manager ON Employee.employeeID = Manager.managerID;

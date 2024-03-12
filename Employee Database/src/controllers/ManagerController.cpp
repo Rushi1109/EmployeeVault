@@ -23,3 +23,16 @@ bool ManagerController::insertManager(Manager& manager) {
 	}
 	return true;
 }
+
+bool ManagerController::selectAllManager() {
+	std::string queryString = "SELECT * FROM ManagerView;";
+
+	try {
+		DBManager::instance().executeSelectQuery(queryString.c_str());
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return false;
+	}
+	return true;
+}

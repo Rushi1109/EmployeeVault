@@ -10,6 +10,7 @@ namespace EmployeeDB::Controller {
 	class FinanceController {
 	public:
 		static bool insertFinance(Finance&);
+		static bool selectAllFinance();
 	};
 }
 

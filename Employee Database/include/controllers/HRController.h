@@ -10,6 +10,7 @@ namespace EmployeeDB::Controller {
 	class HRController {
 	public:
 		static bool insertHR(HR&);
+		static bool selectAllHR();
 	};
 }
 

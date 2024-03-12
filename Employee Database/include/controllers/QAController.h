@@ -10,6 +10,7 @@ namespace EmployeeDB::Controller {
 	class QAController {
 	public:
 		static bool insertQA(QA&);
+		static bool selectAllQA();
 	};
 }
 

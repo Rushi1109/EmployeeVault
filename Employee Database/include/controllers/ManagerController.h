@@ -10,6 +10,7 @@ namespace EmployeeDB::Controller {
 	class ManagerController {
 	public:
 		static bool insertManager(Manager&);
+		static bool selectAllManager();
 	};
 }
 
