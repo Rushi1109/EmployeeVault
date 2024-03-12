@@ -118,12 +118,12 @@ namespace EmployeeDB::Model {
             departmentID = id;
         }
 
-        int getManagerID() const {
-            return managerID;
+        int getMentorID() const {
+            return mentorID;
         }
 
-        void setManagerID(int id) {
-            managerID = id;
+        void setMentorID(int id) {
+            mentorID = id;
         }
 
         double getPerformanceMetric() const {
@@ -154,7 +154,7 @@ namespace EmployeeDB::Model {
         Gender gender;
         std::string dateOfJoining;
         short departmentID;
-        int managerID;
+        int mentorID;
         double performanceMetric;
         int bonus;
     };

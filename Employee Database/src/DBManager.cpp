@@ -2,6 +2,7 @@
 #include "Config.h"
 #include "exception"
 #include <iostream>
+#include <iomanip>
 
 using EmployeeDB::DBManager;
 
@@ -53,12 +54,14 @@ int DBManager::executeQuery(const char* queryString) {
 	return resultCode;
 }
 
-int DBManager::callback(void* NotUsed, int argc, char** argv, char** azColName) {
+int DBManager::callback(void* notUsed, int argc, char** argv, char** azColName) {
+	std::cout << "|--------------------|----------------------------------------|\n";
 	int i;
 	for (i = 0; i < argc; i++) {
-		resultString += azColName[i] + std::string{ " : " } + (argv[i] ? argv[i] : "NULL") + "\n";
+		std::cout << "|" << std::setw(20) << std::left << azColName[i] << "|" << std::setw(40) << std::left << (argv[i] ? argv[i] : "NULL") << "|\n";
 	}
-	std::cout << '\n';
+	std::cout << "|--------------------|----------------------------------------|\n";
+	std::cout << std::endl;
 	return 0;
 }
 

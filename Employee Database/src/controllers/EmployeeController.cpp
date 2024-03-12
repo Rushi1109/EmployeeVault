@@ -4,8 +4,8 @@
 
 using EmployeeDB::Controller::EmployeeController;
 
-bool EmployeeController::insertEmployee(const Employee& e) {
-	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, managerID, performanceMetric, bonus)"
+bool EmployeeController::insertEmployee(Employee& e) {
+	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)"
 		+ std::string{ "VALUES (" } +
 		"\"" + e.getFirstName() + "\"" + ", " +
 		"\"" + e.getMiddleName() + "\"" + ", " +
@@ -17,7 +17,7 @@ bool EmployeeController::insertEmployee(const Employee& e) {
 		"\"" + EmployeeDB::Model::getGenderString(e.getGender()) + "\"" + ", " +
 		"\"" + e.getDateOfJoining() + "\"" + ", " +
 		std::to_string(e.getDepartmentID()) + ", " +
-		std::to_string(e.getManagerID()) + ", " +
+		std::to_string(e.getMentorID()) + ", " +
 		std::to_string(e.getPerformanceMetric()) + ", " +
 		std::to_string(e.getBonus()) + ");";
 

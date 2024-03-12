@@ -11,6 +11,14 @@ namespace EmployeeDB::Model {
 
         Manager() noexcept = default;
 
+        int getManagerID() const {
+            return managerID;
+        }
+
+        void setManagerID(int id) {
+            managerID = id;
+        }
+
         int getDepartmentID() const {
             return departmentID;
         }
@@ -43,21 +51,21 @@ namespace EmployeeDB::Model {
             projectTitle = title;
         }
 
-        const std::string& getRole() const {
-            return projectTitle;
+        const std::string& getTechnology() const {
+            return technology;
         }
 
-        void setRole(const std::string& rl) {
-            role = rl;
+        void setTechnology(const std::string& tech) {
+            technology = tech;
         }
 
     private:
-        //int manager_id;
+        int managerID;
         int departmentID;
         short int teamSize;
         int yearsOfExperience;
         std::string projectTitle;
-        std::string role;
+        std::string technology;
     };
 }
 

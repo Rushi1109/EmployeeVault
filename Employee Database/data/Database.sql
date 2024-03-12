@@ -19,7 +19,7 @@ CREATE TABLE "Employee" (
 	"gender"	TEXT NOT NULL,
 	"dateOfJoining"	TEXT NOT NULL,
 	"departmentID"	INTEGER,
-	"managerID"	INTEGER,
+	"mentorID"	INTEGER,
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
 	PRIMARY KEY("employeeID" AUTOINCREMENT),

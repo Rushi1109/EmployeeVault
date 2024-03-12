@@ -13,9 +13,6 @@ namespace EmployeeDB {
 		int executeQuery(const char*);
 		int executeSelectQuery(const char*, int (*)(void*, int, char**, char**) = DBManager::callback, void* = 0);
 
-		static std::string getResultString() {
-			return resultString;
-		}
 	private:
 		DBManager();
 		~DBManager();
@@ -28,7 +25,6 @@ namespace EmployeeDB {
 		sqlite3* db;
 		int resultCode;
 		char* errMsg;
-		inline static std::string resultString{ "" };
 	};
 }
 

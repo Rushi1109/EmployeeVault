@@ -23,6 +23,19 @@ bool DepartmentController::insertDepartment(const Department& d) {
 	return true;
 }
 
+bool DepartmentController::deleteDepartment(int departmentID) {
+	std::string queryString = "DELETE FROM Department WHERE Department=" + std::to_string(departmentID) + ";";
+
+	try {
+		DBManager::instance().executeQuery(queryString.c_str());
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return false;
+	}
+	return true;
+}
+
 int DepartmentController::selectDepartmentIDbyName(const std::string& departmentName) {
 	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\";";
 	int departmentID{ -1 };
@@ -46,15 +59,18 @@ int DepartmentController::selectDepartmentIDbyName(const std::string& department
 	return departmentID;
 }
 
-bool DepartmentController::deleteDepartment(int departmentID) {
-	std::string queryString = "DELETE FROM Department WHERE Department=" + std::to_string(departmentID) + ";";
+bool DepartmentController::selectAllDepartmentIDAndName() {
+	std::string queryString = "SELECT departmentID,departmentName FROM Department ORDER BY departmentID";
 
 	try {
-		DBManager::instance().executeQuery(queryString.c_str());
+		int i = 0;
+		DBManager::instance().executeSelectQuery(queryString.c_str());
 	}
-	catch (const std::exception& e) {
+	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';
 		return false;
 	}
+
 	return true;
+
 }
