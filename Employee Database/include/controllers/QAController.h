@@ -9,8 +9,8 @@ namespace EmployeeDB::Controller {
 
 	class QAController {
 	public:
-		static bool insertQA(QA&);
-		static bool selectAllQA();
+		static bool insertQA(QA& qa);
+		static bool selectQA(const std::string& attributeName = "", const std::string& attributeValue = "");
 	};
 }
 

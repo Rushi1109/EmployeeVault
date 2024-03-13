@@ -39,8 +39,8 @@ bool FinanceController::insertFinance(Finance& e) {
 	return true;
 }
 
-bool FinanceController::selectAllFinance() {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Finance;";
+bool FinanceController::selectFinance(const std::string& attributeName, const std::string& attributeValue) {
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Finance " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
 		DBManager::instance().executeSelectQuery(queryString.c_str());

@@ -4,7 +4,7 @@
 
 using EmployeeDB::Controller::EmployeeController;
 
-bool EmployeeController::insertEmployee(Employee& e) {
+bool EmployeeController::insertEmployee(const Employee& e) {
 	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)"
 		+ std::string{ "VALUES (" } +
 		"\"" + e.getFirstName() + "\"" + ", " +

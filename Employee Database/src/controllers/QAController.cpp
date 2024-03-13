@@ -42,8 +42,8 @@ bool QAController::insertQA(QA& e) {
 	return true;
 }
 
-bool QAController::selectAllQA() {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA;";
+bool QAController::selectQA(const std::string& attributeName, const std::string& attributeValue) {
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";;
 
 	try {
 		DBManager::instance().executeSelectQuery(queryString.c_str());

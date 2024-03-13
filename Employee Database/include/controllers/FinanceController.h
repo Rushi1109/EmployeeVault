@@ -9,8 +9,8 @@ namespace EmployeeDB::Controller {
 
 	class FinanceController {
 	public:
-		static bool insertFinance(Finance&);
-		static bool selectAllFinance();
+		static bool insertFinance(Finance& finance);
+		static bool selectFinance(const std::string& attributeName = "", const std::string& attributeValue = "");
 	};
 }
 

@@ -6,13 +6,13 @@ using EmployeeDB::Controller::ManagerController;
 using EmployeeDB::DBManager;
 
 bool ManagerController::insertManager(Manager& manager) {
-	std::string queryString = "INSERT INTO Manager (managerID, departmentID, teamSize, yearsOfExp, projectTitle, technology) VALUES (" +
+	std::string queryString = "INSERT INTO Manager (managerID, departmentID, teamSize, yearsOfExp, projectTitle, role) VALUES (" +
 		std::to_string(manager.getManagerID()) + ", " +
 		std::to_string(manager.getDepartmentID()) + ", " +
 		std::to_string(manager.getTeamSize()) + ", " +
 		std::to_string(manager.getYearsOfExperience()) + ", " +
 		"\"" + manager.getProjectTitle() + "\", " +
-		"\"" + manager.getTechnology() + "\");";
+		"\"" + manager.getRole() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -24,8 +24,8 @@ bool ManagerController::insertManager(Manager& manager) {
 	return true;
 }
 
-bool ManagerController::selectAllManager() {
-	std::string queryString = "SELECT * FROM ManagerView;";
+bool ManagerController::selectManager(const std::string& attributeName, const std::string& attributeValue) {
+	std::string queryString = "SELECT * FROM ManagerView " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
 		DBManager::instance().executeSelectQuery(queryString.c_str());

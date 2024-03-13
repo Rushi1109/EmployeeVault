@@ -54,7 +54,7 @@ int DBManager::executeQuery(const char* queryString) {
 	return resultCode;
 }
 
-int DBManager::callback(void* notUsed, int argc, char** argv, char** azColName) {
+int DBManager::callback(void* arg, int argc, char** argv, char** azColName) {
 	std::cout << "|--------------------|----------------------------------------|\n";
 	int i;
 	for (i = 0; i < argc; i++) {

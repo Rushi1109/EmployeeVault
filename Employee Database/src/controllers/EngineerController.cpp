@@ -39,8 +39,8 @@ bool EngineerController::insertEngineer(Engineer& e) {
 	return true;
 }
 
-bool EngineerController::selectAllEngineer() {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Engineer;";
+bool EngineerController::selectEngineer(const std::string& attributeName, const std::string& attributeValue) {
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Engineer " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
 		DBManager::instance().executeSelectQuery(queryString.c_str());

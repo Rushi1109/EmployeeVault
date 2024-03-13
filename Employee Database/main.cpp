@@ -8,10 +8,9 @@ using EmployeeDB::Controller::ManagerController;
 using EmployeeDB::DBManager;
 
 int main() {
-    DBManager& db = DBManager::instance();
-    db.executeCascadeQuery();
+    DBManager::executeCascadeQuery();
 
-    ManagerController::selectAllManager();
+    ManagerController::selectManager("lastName", "Smith");
 
     return 0;
 }

@@ -27,11 +27,11 @@ namespace EmployeeDB::Model {
             departmentID = id;
         }
 
-        short int getTeamSize() const {
+        int getTeamSize() const {
             return teamSize;
         }
 
-        void setTeamSize(short int size) {
+        void setTeamSize(int size) {
             teamSize = size;
         }
 
@@ -51,21 +51,21 @@ namespace EmployeeDB::Model {
             projectTitle = title;
         }
 
-        const std::string& getTechnology() const {
-            return technology;
+        const std::string& getRole() const {
+            return role;
         }
 
-        void setTechnology(const std::string& tech) {
-            technology = tech;
+        void setRole(const std::string& rl) {
+            role = rl;
         }
 
     private:
         int managerID;
         int departmentID;
-        short int teamSize;
+        int teamSize;
         int yearsOfExperience;
         std::string projectTitle;
-        std::string technology;
+        std::string role;
     };
 }
 

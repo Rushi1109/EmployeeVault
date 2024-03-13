@@ -6,7 +6,7 @@ CREATE TABLE "Department" (
 	"deduction"	REAL NOT NULL,
 	PRIMARY KEY("departmentID" AUTOINCREMENT)
 );
-
+ 
 CREATE TABLE "Employee" (
 	"employeeID"	INTEGER NOT NULL UNIQUE,
 	"firstName"	TEXT NOT NULL,
@@ -23,47 +23,47 @@ CREATE TABLE "Employee" (
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
 	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE SET NULL,
-	PRIMARY KEY("employeeID" AUTOINCREMENT),
-	UNIQUE("employeeID")
+	FOREIGN KEY("mentorID") REFERENCES "Employee"("employeeID") ON DELETE SET NULL,
+	UNIQUE("employeeID"),
+	PRIMARY KEY("employeeID" AUTOINCREMENT)
 );
-
+ 
 CREATE TABLE "Manager" (
 	"managerID"	INTEGER NOT NULL,
 	"departmentID"	INTEGER NOT NULL,
 	"teamSize"	INTEGER NOT NULL,
 	"yearsOfExp"	REAL NOT NULL,
 	"projectTitle"	TEXT,
-	"technology"	TEXT,
+	"role" TEXT,
 	PRIMARY KEY("managerID","departmentID"),
 	FOREIGN KEY("managerID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE,
 	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE CASCADE
 );
-
+ 
 CREATE TABLE "Engineer" (
 	"employeeID"	INTEGER NOT NULL,
 	"technology"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
-
+ 
 CREATE TABLE "QA" (
 	"employeeID"	INTEGER NOT NULL,
 	"testingTool"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
-
+ 
 CREATE TABLE "Finance" (
 	"employeeID"	INTEGER NOT NULL,
 	"accountingTool"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
-
+ 
 CREATE TABLE "HR" (
 	"employeeID"	INTEGER NOT NULL,
 	"hrSpecialization"	TEXT,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
 
-CREATE VIEW "ManagerView"
+CREATE VIEW ManagerView
 AS
-	SELECT Employee.*, Manager.technology, Manager.projectTitle, Manager.yearsOfExp, Manager.teamSize 
-	FROM Employee INNER JOIN Manager ON Employee.employeeID = Manager.managerID;
+	SELECT Employee.*,Manager.teamSize,Manager.yearsOfExp,Manager.projectTitle,Manager.role FROM Employee INNER JOIN Manager ON Employee.employeeID = Manager.managerID;

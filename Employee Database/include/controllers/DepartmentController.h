@@ -9,10 +9,10 @@ namespace EmployeeDB::Controller {
 
 	class DepartmentController {
 	public:
-		static bool insertDepartment(const Department&);
-		static bool deleteDepartment(int);
-		static bool selectAllDepartment();
-		static int selectDepartmentIDbyName(const std::string&);
+		static bool insertDepartment(const Department& department);
+		static bool deleteDepartment(int departmentID);
+		static bool selectDepartment(const std::string& attributeName = "", const std::string& attributeValue = "");
+		static int selectDepartmentIDbyName(const std::string& departmentName);
 		static bool selectAllDepartmentIDAndName();
 	};
 }

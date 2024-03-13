@@ -9,8 +9,8 @@ namespace EmployeeDB::Controller {
 
 	class HRController {
 	public:
-		static bool insertHR(HR&);
-		static bool selectAllHR();
+		static bool insertHR(HR& hr);
+		static bool selectHR(const std::string& attributeName = "", const std::string& attributeValue = "");
 	};
 }
 
