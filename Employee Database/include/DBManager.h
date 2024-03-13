@@ -12,6 +12,7 @@ namespace EmployeeDB {
 
 		int executeQuery(const char*);
 		int executeSelectQuery(const char*, int (*)(void*, int, char**, char**) = DBManager::callback, void* = 0);
+		static void executeCascadeQuery();
 
 	private:
 		DBManager();

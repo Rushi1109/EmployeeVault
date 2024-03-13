@@ -9,7 +9,7 @@ using EmployeeDB::DBManager;
 
 int main() {
     DBManager& db = DBManager::instance();
-    db.executeQuery("PRAGMA foreign_keys = ON");
+    db.executeCascadeQuery();
 
     ManagerController::selectAllManager();
 

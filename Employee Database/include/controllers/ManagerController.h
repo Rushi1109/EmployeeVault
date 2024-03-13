@@ -11,6 +11,7 @@ namespace EmployeeDB::Controller {
 	public:
 		static bool insertManager(Manager&);
 		static bool selectAllManager();
+		static bool deleteManager(int managerID);
 	};
 }
 
