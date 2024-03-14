@@ -1,8 +1,10 @@
 #ifndef _Config_h_
 #define _Config_h_
 
+#include <filesystem>
+
 namespace EmployeeDB::Config {
-	static const char* dbFilePath = "./data/Employee.db";
+	static std::filesystem::path dbFilePath = "./data/Employee.db";
 }
 
 #endif

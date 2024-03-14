@@ -20,7 +20,7 @@ DBManager::~DBManager() {
 }
 
 void DBManager::openConnection() {
-	resultCode = sqlite3_open(EmployeeDB::Config::dbFilePath, &db);
+	resultCode = sqlite3_open(EmployeeDB::Config::dbFilePath.string().c_str(), &db);
 
 	if (resultCode != SQLITE_OK) {
 		throw std::runtime_error(sqlite3_errmsg(db));
