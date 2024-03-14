@@ -10,7 +10,7 @@ using EmployeeDB::Controller::HRController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool HRController::insertHR(HR& e) {
+bool HRController::insertHR(HR& obj) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
@@ -18,19 +18,19 @@ bool HRController::insertHR(HR& e) {
 		return false;
 	}
 
-	e.setDepartmentID(departmentID);
+	obj.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(e);
+	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {
 		return false;
 	}
 
-	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
 
 	std::string queryString = "INSERT INTO HR (employeeID, hrSpecialization) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\"" + e.getHRSpecialization() + "\");";
+		"\"" + obj.getHRSpecialization() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -53,4 +53,38 @@ bool HRController::selectHR(const std::string& attributeName, const std::string&
 		return false;
 	}
 	return true;
+}
+
+bool HRController::updateHR(HR& obj) {
+
+	bool employeeResult = EmployeeController::updateEmployee(obj);
+
+	if (!employeeResult) {
+		return false;
+	}
+
+	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+
+	if (updateQueryCondition.size() != 0) {
+		std::string queryString = "UPDATE HR SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+
+		try {
+			DBManager::instance().executeQuery(queryString.c_str());
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+			return false;
+		}
+	}
+	return true;
+}
+
+std::string HRController::getUpdateQueryCondition(HR& obj) {
+	std::string updateQueryCondition{ "" };
+
+	if (obj.getHRSpecialization() != "#") {
+		updateQueryCondition = "hrSpecialization = \"" + obj.getHRSpecialization() + "\"";
+	}
+
+	return updateQueryCondition;
 }

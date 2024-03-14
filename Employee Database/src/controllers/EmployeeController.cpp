@@ -4,22 +4,22 @@
 
 using EmployeeDB::Controller::EmployeeController;
 
-bool EmployeeController::insertEmployee(const Employee& e) {
+bool EmployeeController::insertEmployee(const Employee& obj) {
 	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)"
 		+ std::string{ "VALUES (" } +
-		"\"" + e.getFirstName() + "\"" + ", " +
-		"\"" + e.getMiddleName() + "\"" + ", " +
-		"\"" + e.getLastName() + "\"" + ", " +
-		"\"" + e.getDateOfBirth() + "\"" + ", " +
-		std::to_string(e.getMobileNo()) + ", " +
-		"\"" + e.getEmail() + "\"" + ", " +
-		"\"" + e.getAddress() + "\"" + ", " +
-		"\"" + EmployeeDB::Model::getGenderString(e.getGender()) + "\"" + ", " +
-		"\"" + e.getDateOfJoining() + "\"" + ", " +
-		std::to_string(e.getDepartmentID()) + ", " +
-		std::to_string(e.getMentorID()) + ", " +
-		std::to_string(e.getPerformanceMetric()) + ", " +
-		std::to_string(e.getBonus()) + ");";
+		"\"" + obj.getFirstName() + "\"" + ", " +
+		"\"" + obj.getMiddleName() + "\"" + ", " +
+		"\"" + obj.getLastName() + "\"" + ", " +
+		"\"" + obj.getDateOfBirth() + "\"" + ", " +
+		std::to_string(obj.getMobileNo()) + ", " +
+		"\"" + obj.getEmail() + "\"" + ", " +
+		"\"" + obj.getAddress() + "\"" + ", " +
+		"\"" + EmployeeDB::Model::getGenderString(obj.getGender()) + "\"" + ", " +
+		"\"" + obj.getDateOfJoining() + "\"" + ", " +
+		std::to_string(obj.getDepartmentID()) + ", " +
+		std::to_string(obj.getMentorID()) + ", " +
+		std::to_string(obj.getPerformanceMetric()) + ", " +
+		std::to_string(obj.getBonus()) + ");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -31,13 +31,45 @@ bool EmployeeController::insertEmployee(const Employee& e) {
 	return true;
 }
 
-int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
+bool EmployeeController::deleteEmployee(int employeeID) {
+	std::string queryString = "DELETE FROM Employee WHERE employeeID=" + std::to_string(employeeID) + ";";
+
+	try {
+		DBManager::instance().executeQuery(queryString.c_str());
+	}
+	catch(const std::exception& e) {
+		std::cerr << e.what() << '\n';
+		return false;
+	}
+	return true;
+}
+
+bool EmployeeController::updateEmployee(Employee& obj) {
+
+	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+
+	if (updateQueryCondition.size() != 0) {
+		std::string queryString = "UPDATE Employee SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+
+		try {
+			DBManager::instance().executeQuery(queryString.c_str());
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+			return false;
+		}
+	}
+	return true;
+}
+
+
+int EmployeeController::getEmployeeIDbyEmail(const std::string& email) {
 	std::string queryString = "SELECT employeeID FROM Employee WHERE email=\"" + email + "\";";
 	int employeeID{ -1 };
 
 	auto getEmployeeIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* eID = static_cast<int*>(data);
-		if (!strcmp(*azColName,"employeeID")) {
+		if (!strcmp(*azColName, "employeeID")) {
 			*eID = std::stoi(argv[0]);
 		}
 		return 0;
@@ -54,15 +86,100 @@ int EmployeeController::selectEmployeeIDbyEmail(const std::string& email) {
 	return employeeID;
 }
 
-bool EmployeeController::deleteEmployee(int employeeID) {
-	std::string queryString = "DELETE FROM Employee WHERE employeeID=" + std::to_string(employeeID) + ";";
+int EmployeeController::getDepartmentIDbyEmployeeID(int employeeID) {
+	std::string queryString = "SELECT departmentID FROM Employee WHERE employeeID = " + std::to_string(employeeID) + ";";
+	int departmentID{ -1 };
+
+	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
+		int* eID = static_cast<int*>(data);
+		if (!strcmp(*azColName, "departmentID")) {
+			*eID = std::stoi(argv[0]);
+		}
+		return 0;
+		};
 
 	try {
-		DBManager::instance().executeQuery(queryString.c_str());
+		DBManager::instance().executeSelectQuery(queryString.c_str(), getDepartmentIDCallback, &departmentID);
 	}
-	catch(const std::exception& e) {
+	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		return false;
+		return -1;
 	}
-	return true;
+	return departmentID;
+}
+
+std::string EmployeeController::getUpdateQueryCondition(Employee& obj) {
+	std::string updateQueryCondition{ "" };
+
+	if (obj.getFirstName() != "#") {
+		updateQueryCondition += "firstName = \"" + obj.getFirstName() + "\"";
+	}
+	if (obj.getMiddleName() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "middleName = \"" + obj.getMiddleName() + "\"";
+	}
+	if (obj.getLastName() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "lastName = \"" + obj.getLastName() + "\"";
+	}
+	if (obj.getDateOfBirth() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "dateOfBirth = \"" + obj.getDateOfBirth() + "\"";
+	}
+	if (obj.getMobileNo() != -1) {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "mobileNo = " + std::to_string(obj.getMobileNo());
+	}
+	if (obj.getEmail() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "email = \"" + obj.getEmail() + "\"";
+	}
+	if (obj.getAddress() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "address = \"" + obj.getAddress() + "\"";
+	}
+	if (obj.getGender() != EmployeeDB::Model::Gender::Other) {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "gender = \"" + EmployeeDB::Model::getGenderString(obj.getGender()) + "\"";
+	}
+	if (obj.getDateOfJoining() != "#") {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "dateOfJoining = \"" + obj.getDateOfJoining() + "\"";
+	}
+	if (obj.getMentorID() != -1) {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "mentorID = " + std::to_string(obj.getMentorID());
+	}
+	if (obj.getPerformanceMetric() != -1.0) {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "performanceMetric = " + std::to_string(obj.getPerformanceMetric());
+	}
+	if (obj.getBonus() != -1.0) {
+		if (updateQueryCondition.size() != 0) {
+			updateQueryCondition += ", ";
+		}
+		updateQueryCondition += "bonus = " + std::to_string(obj.getBonus());
+	}
+
+	return updateQueryCondition;
 }

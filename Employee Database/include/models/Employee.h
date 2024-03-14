@@ -164,11 +164,11 @@ namespace EmployeeDB::Model {
             performanceMetric = metric;
         }
 
-        int getBonus() const {
+        double getBonus() const {
             return bonus;
         }
 
-        void setBonus(int b) {
+        void setBonus(double b) {
             bonus = b;
         }
 
@@ -187,7 +187,7 @@ namespace EmployeeDB::Model {
         short departmentID;
         int mentorID;
         double performanceMetric;
-        int bonus;
+        double bonus;
     };
 }
 

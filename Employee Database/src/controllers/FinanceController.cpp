@@ -9,7 +9,7 @@ using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool FinanceController::insertFinance(Finance& e) {
+bool FinanceController::insertFinance(Finance& obj) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("Finance");
 
 	if (departmentID == -1) {
@@ -17,17 +17,17 @@ bool FinanceController::insertFinance(Finance& e) {
 		return false;
 	}
 
-	e.setDepartmentID(departmentID);
+	obj.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(e);
+	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {
 		return false;
 	}
 
-	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
 
-	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + e.getAccountingTool() + "\");";
+	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + obj.getAccountingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -50,4 +50,38 @@ bool FinanceController::selectFinance(const std::string& attributeName, const st
 		return false;
 	}
 	return true;
+}
+
+bool FinanceController::updateFinance(Finance& obj) {
+
+	bool employeeResult = EmployeeController::updateEmployee(obj);
+
+	if (!employeeResult) {
+		return false;
+	}
+
+	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+
+	if (updateQueryCondition.size() != 0) {
+		std::string queryString = "UPDATE Finance SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+
+		try {
+			DBManager::instance().executeQuery(queryString.c_str());
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+			return false;
+		}
+	}
+	return true;
+}
+
+std::string FinanceController::getUpdateQueryCondition(Finance& obj) {
+	std::string updateQueryCondition{ "" };
+
+	if (obj.getAccountingTool() != "#") {
+		updateQueryCondition = "accountingTool = \"" + obj.getAccountingTool() + "\"";
+	}
+
+	return updateQueryCondition;
 }

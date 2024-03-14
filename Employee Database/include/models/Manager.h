@@ -21,8 +21,8 @@ namespace EmployeeDB::Model {
             departmentID{ 0 },
             teamSize{ 0 },
             yearsOfExperience{ 0 },
-            projectTitle{ "" },
-            role{ "" } {
+            projectTitle{ "#" },
+            role{ "#" } {
         }
 
         int getManagerID() const {
@@ -49,11 +49,11 @@ namespace EmployeeDB::Model {
             teamSize = size;
         }
 
-        int getYearsOfExperience() const {
+        double getYearsOfExperience() const {
             return yearsOfExperience;
         }
 
-        void setYearsOfExperience(int years) {
+        void setYearsOfExperience(double years) {
             yearsOfExperience = years;
         }
 
@@ -78,7 +78,7 @@ namespace EmployeeDB::Model {
         int managerID;
         int departmentID;
         int teamSize;
-        int yearsOfExperience;
+        double yearsOfExperience;
         std::string projectTitle;
         std::string role;
     };

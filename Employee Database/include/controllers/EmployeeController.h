@@ -10,9 +10,12 @@ namespace EmployeeDB::Controller {
 	class EmployeeController {
 	public:
 		static bool insertEmployee(const Employee& employee);
-		static int selectEmployeeIDbyEmail(const std::string& email);
 		static bool deleteEmployee(int employeeID);
-		static bool updateEmployee(const Employee& employee);
+		static bool updateEmployee(Employee& employee);
+		static int getEmployeeIDbyEmail(const std::string& email);
+		static int getDepartmentIDbyEmployeeID(int employeeID);
+	private:
+		static std::string getUpdateQueryCondition(Employee& employee);
 	};
 }
 

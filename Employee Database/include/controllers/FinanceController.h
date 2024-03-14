@@ -11,6 +11,9 @@ namespace EmployeeDB::Controller {
 	public:
 		static bool insertFinance(Finance& finance);
 		static bool selectFinance(const std::string& attributeName = "", const std::string& attributeValue = "");
+		static bool updateFinance(Finance& finance);
+	private:
+		static std::string getUpdateQueryCondition(Finance& finance);
 	};
 }
 

@@ -10,7 +10,7 @@ using EmployeeDB::Controller::QAController;
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool QAController::insertQA(QA& e) {
+bool QAController::insertQA(QA& obj) {
 	int departmentID = DepartmentController::selectDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
@@ -18,19 +18,19 @@ bool QAController::insertQA(QA& e) {
 		return false;
 	}
 
-	e.setDepartmentID(departmentID);
+	obj.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(e);
+	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {
 		return false;
 	}
 
-	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
 
 	std::string queryString = "INSERT INTO QA (employeeID, testingTool) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\"" + e.getTestingTool() + "\");";
+		"\"" + obj.getTestingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -53,4 +53,38 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 		return false;
 	}
 	return true;
+}
+
+bool QAController::updateQA(QA& obj) {
+
+	bool employeeResult = EmployeeController::updateEmployee(obj);
+
+	if (!employeeResult) {
+		return false;
+	}
+
+	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+
+	if (updateQueryCondition.size() != 0) {
+		std::string queryString = "UPDATE QA SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+
+		try {
+			DBManager::instance().executeQuery(queryString.c_str());
+		}
+		catch (const std::exception& e) {
+			std::cerr << e.what() << '\n';
+			return false;
+		}
+	}
+	return true;
+}
+
+std::string QAController::getUpdateQueryCondition(QA& obj) {
+	std::string updateQueryCondition{ "" };
+
+	if (obj.getTestingTool() != "#") {
+		updateQueryCondition = "testingTool = \"" + obj.getTestingTool() + "\"";
+	}
+
+	return updateQueryCondition;
 }
