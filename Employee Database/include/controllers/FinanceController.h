@@ -3,9 +3,9 @@
 
 #include "Finance.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::Finance;
 
-	using EmployeeDB::Model::Finance;
+namespace EmployeeDB::Controller {
 
 	class FinanceController {
 	public:

@@ -3,9 +3,9 @@
 
 #include "QA.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::QA;
 
-	using EmployeeDB::Model::QA;
+namespace EmployeeDB::Controller {
 
 	class QAController {
 	public:

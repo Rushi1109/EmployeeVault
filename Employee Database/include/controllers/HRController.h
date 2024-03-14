@@ -3,9 +3,9 @@
 
 #include "HR.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::HR;
 
-	using EmployeeDB::Model::HR;
+namespace EmployeeDB::Controller {
 
 	class HRController {
 	public:

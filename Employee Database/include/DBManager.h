@@ -10,8 +10,8 @@ namespace EmployeeDB {
 	public:
 		static DBManager& instance();
 
-		int executeQuery(const char*);
-		int executeSelectQuery(const char*, int (*)(void*, int, char**, char**) = DBManager::callback, void* = 0);
+		int executeQuery(const char* query);
+		int executeSelectQuery(const char* query, int (*callback)(void*, int, char**, char**) = DBManager::callback, void* arg = 0);
 		static void executeCascadeQuery();
 
 	private:
@@ -21,7 +21,7 @@ namespace EmployeeDB {
 		void openConnection();
 		void closeConnection();
 
-		static int callback(void*, int, char**, char**);
+		static int callback(void* arg, int argc, char** argv, char** azColName);
 
 		sqlite3* db;
 		int resultCode;

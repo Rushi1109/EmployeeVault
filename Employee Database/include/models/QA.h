@@ -6,9 +6,8 @@ namespace EmployeeDB::Model {
 
     class QA : public Employee {
     public:
-        double computeSalary() override { return 10.2; };
-
-        QA() noexcept = default;
+        QA() : testingTool{ "" } {}
+        QA(bool isUpdateObj) : Employee{ isUpdateObj }, testingTool{ "#" } {}
 
         const std::string& getTestingTool() const {
             return testingTool;
@@ -17,6 +16,8 @@ namespace EmployeeDB::Model {
         void setTestingTool(const std::string& tool) {
             testingTool = tool;
         }
+
+        double computeSalary() override { return 10.2; };
     private:
         std::string testingTool;
     };

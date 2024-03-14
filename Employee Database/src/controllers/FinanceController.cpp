@@ -27,7 +27,7 @@ bool FinanceController::insertFinance(Finance& e) {
 
 	int employeeID = EmployeeController::selectEmployeeIDbyEmail(e.getEmail());
 
-	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + e.getAccountingSoftware() + "\");";
+	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + e.getAccountingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());

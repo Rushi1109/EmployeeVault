@@ -174,7 +174,6 @@
     <ClInclude Include="include\controllers\ManagerController.h" />
     <ClInclude Include="include\controllers\QAController.h" />
     <ClInclude Include="include\DBManager.h" />
-    <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\models\Engineer.h" />
     <ClInclude Include="include\models\Finance.h" />
     <ClInclude Include="include\models\HR.h" />

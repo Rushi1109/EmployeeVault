@@ -3,9 +3,9 @@
 
 #include "Department.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::Department;
 
-	using EmployeeDB::Model::Department;
+namespace EmployeeDB::Controller {
 
 	class DepartmentController {
 	public:

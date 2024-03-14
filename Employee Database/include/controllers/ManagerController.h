@@ -3,9 +3,9 @@
 
 #include "Manager.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::Manager;
 
-	using EmployeeDB::Model::Manager;
+namespace EmployeeDB::Controller {
 
 	class ManagerController {
 	public:

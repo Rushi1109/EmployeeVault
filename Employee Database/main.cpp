@@ -2,7 +2,6 @@
 #include <exception>
 #include "DBManager.h"
 #include "ManagerController.h"
-#include "Model.h"
 
 using EmployeeDB::Controller::ManagerController;
 using EmployeeDB::DBManager;
@@ -10,7 +9,17 @@ using EmployeeDB::DBManager;
 int main() {
     DBManager::executeCascadeQuery();
 
-    ManagerController::selectManager("lastName", "Smith");
+	Manager m;
+	m.setManagerID(2);
+	m.setDepartmentID(1);
+	m.setTeamSize(5);
+	m.setYearsOfExperience(5.5);
+	m.setProjectTitle("CPP Project");
+	m.setRole("CPP");
+
+	ManagerController::insertManager(m);
+
+    ManagerController::selectManager();
 
     return 0;
 }

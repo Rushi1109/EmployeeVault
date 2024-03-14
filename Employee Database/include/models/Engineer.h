@@ -7,9 +7,8 @@ namespace EmployeeDB::Model {
 
     class Engineer : public Employee {
     public:
-        double computeSalary() override { return 10.2; };
-
-        Engineer() noexcept = default;
+        Engineer() : technology{ "" } {}
+        Engineer(bool isUpdateObj) : Employee{ isUpdateObj }, technology{ "#" } {}
 
         const std::string& getTechnology() const {
             return technology;
@@ -18,6 +17,8 @@ namespace EmployeeDB::Model {
         void setTechnology(const std::string& tech) {
             technology = tech;
         }
+
+        double computeSalary() override { return 10.2; };
     private:
         std::string technology;
     };

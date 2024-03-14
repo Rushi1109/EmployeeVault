@@ -86,9 +86,6 @@
     <ClInclude Include="include\models\Finance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Config.h">
       <Filter>Header Files</Filter>
     </ClInclude>

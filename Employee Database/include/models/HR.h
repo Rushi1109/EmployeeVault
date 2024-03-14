@@ -7,9 +7,8 @@ namespace EmployeeDB::Model {
 
     class HR : public Employee {
     public:
-        double computeSalary() override { return 10.2; };
-
-        HR() noexcept = default;
+        HR() : hrSpecialization{ "" } {}
+        HR(bool isUpdateObj) : Employee{ isUpdateObj }, hrSpecialization{ "#" } {}
 
         const std::string& getHRSpecialization() const {
             return hrSpecialization;
@@ -18,6 +17,8 @@ namespace EmployeeDB::Model {
         void setHRSpecialization(const std::string& specialization) {
             hrSpecialization = specialization;
         }
+
+        double computeSalary() override { return 10.2; };
     private:
         std::string hrSpecialization;
     };

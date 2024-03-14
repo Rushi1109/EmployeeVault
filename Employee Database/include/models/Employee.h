@@ -26,9 +26,39 @@ namespace EmployeeDB::Model {
 
     class Employee {
     public:
-        virtual double computeSalary() { return 10.2; };
+        Employee() :
+            firstName{ "" },
+            middleName{ "" },
+            lastName{ "" },
+            email{ "" },
+            address{ "" },
+            dateOfBirth{ "" },
+            dateOfJoining{ "" },
+            performanceMetric{ 0.0 },
+            mobileNo{ 0 },
+            gender{ Gender::Male },
+            employeeID{ 0 },
+            departmentID{ 0 },
+            mentorID{ 0 },
+            bonus{ 0 } {
+        }
 
-        Employee() noexcept = default;
+        Employee(bool isUpdateObj) :
+            firstName{ "#" },
+            middleName{ "#" },
+            lastName{ "#" },
+            email{ "#" },
+            address{ "#" },
+            dateOfBirth{ "#" },
+            dateOfJoining{ "#" },
+            performanceMetric{ -1.0 },
+            mobileNo{ -1 },
+            gender{ Gender::Other },
+            employeeID{ -1 },
+            departmentID{ -1 },
+            mentorID{ -1 },
+            bonus{ -1 } {
+        }
 
         int getEmployeeID() const {
             return employeeID;
@@ -142,6 +172,7 @@ namespace EmployeeDB::Model {
             bonus = b;
         }
 
+        virtual double computeSalary() { return 10.2; }
     private:
         int	employeeID;
         std::string firstName;

@@ -19,7 +19,7 @@ CREATE TABLE "Employee" (
 	"gender"	TEXT NOT NULL,
 	"dateOfJoining"	TEXT NOT NULL,
 	"departmentID"	INTEGER,
-	"mentorID"	INTEGER,
+	"mentorID"	INTEGER NOT NULL,
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
 	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE SET NULL,

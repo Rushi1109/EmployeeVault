@@ -3,9 +3,9 @@
 
 #include "Engineer.h"
 
-namespace EmployeeDB::Controller {
+using EmployeeDB::Model::Engineer;
 
-	using EmployeeDB::Model::Engineer;
+namespace EmployeeDB::Controller {
 
 	class EngineerController {
 	public:

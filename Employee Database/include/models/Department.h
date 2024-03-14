@@ -7,13 +7,27 @@ namespace EmployeeDB::Model {
 
 	class Department {
 	public:
-		Department() = default;
+        Department() :
+            departmentName{ "" },
+            departmentID{ 0 },
+            baseSalary{ 0.0 },
+            allowance{ 0.0 },
+            deduction{ 0.0 } {
+        }
 
-        short getDepartmentID() const {
+        Department(bool isUpdateObj) :
+            departmentName{ "#" },
+            departmentID{ -1 },
+            baseSalary{ -1.0 },
+            allowance{ -1.0 },
+            deduction{ -1.0 } {
+        }
+
+        int getDepartmentID() const {
             return departmentID;
         }
 
-        void setDepartmentID(short id) {
+        void setDepartmentID(int id) {
             departmentID = id;
         }
 
@@ -50,7 +64,7 @@ namespace EmployeeDB::Model {
         }
 
 	private:
-		short departmentID;
+		int departmentID;
 		std::string departmentName;
 		double baseSalary;
 		double allowance;
