@@ -73,22 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\models\;$(SolutionDir)$(ProjectName)\include\controllers\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\models\;$(SolutionDir)$(ProjectName)\include\controllers\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\models\;$(SolutionDir)$(ProjectName)\include\controllers\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\models\;$(SolutionDir)$(ProjectName)\include\controllers\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,25 +154,25 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lib\sqlite\shell.c" />
     <ClCompile Include="lib\sqlite\sqlite3.c" />
-    <ClCompile Include="src\controllers\DepartmentController.cpp" />
-    <ClCompile Include="src\controllers\EmployeeController.cpp" />
-    <ClCompile Include="src\controllers\EngineerController.cpp" />
-    <ClCompile Include="src\controllers\FinanceController.cpp" />
-    <ClCompile Include="src\controllers\HRController.cpp" />
-    <ClCompile Include="src\controllers\ManagerController.cpp" />
-    <ClCompile Include="src\controllers\QAController.cpp" />
+    <ClCompile Include="src\controller\DepartmentController.cpp" />
+    <ClCompile Include="src\controller\EmployeeController.cpp" />
+    <ClCompile Include="src\controller\EngineerController.cpp" />
+    <ClCompile Include="src\controller\FinanceController.cpp" />
+    <ClCompile Include="src\controller\HRController.cpp" />
+    <ClCompile Include="src\controller\ManagerController.cpp" />
+    <ClCompile Include="src\controller\QAController.cpp" />
     <ClCompile Include="src\DBManager.cpp" />
     <ClCompile Include="src\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Config.h" />
-    <ClInclude Include="include\controllers\DepartmentController.h" />
-    <ClInclude Include="include\controllers\EmployeeController.h" />
-    <ClInclude Include="include\controllers\EngineerController.h" />
-    <ClInclude Include="include\controllers\FinanceController.h" />
-    <ClInclude Include="include\controllers\HRController.h" />
-    <ClInclude Include="include\controllers\ManagerController.h" />
-    <ClInclude Include="include\controllers\QAController.h" />
+    <ClInclude Include="include\controller\DepartmentController.h" />
+    <ClInclude Include="include\controller\EmployeeController.h" />
+    <ClInclude Include="include\controller\EngineerController.h" />
+    <ClInclude Include="include\controller\FinanceController.h" />
+    <ClInclude Include="include\controller\HRController.h" />
+    <ClInclude Include="include\controller\ManagerController.h" />
+    <ClInclude Include="include\controller\QAController.h" />
     <ClInclude Include="include\DBManager.h" />
     <ClInclude Include="include\models\Engineer.h" />
     <ClInclude Include="include\models\Finance.h" />
