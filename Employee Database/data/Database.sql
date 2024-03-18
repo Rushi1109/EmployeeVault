@@ -35,7 +35,7 @@ CREATE TABLE "Manager" (
 	"yearsOfExp"	REAL NOT NULL,
 	"projectTitle"	TEXT,
 	"role" TEXT,
-	PRIMARY KEY("managerID","departmentID"),
+	PRIMARY KEY("managerID"),
 	FOREIGN KEY("managerID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE,
 	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE CASCADE
 );

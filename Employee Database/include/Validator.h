@@ -11,6 +11,7 @@ namespace EmployeeDB {
 		static bool validateEmail(const std::string& email);
 		static bool validateMobile(const std::string& number);
 		static bool validateDate(const std::string& date);
+		static bool validateNumber(const std::string& number);
 	};
 }
 
