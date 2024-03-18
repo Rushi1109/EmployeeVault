@@ -1,5 +1,5 @@
-#ifndef _Validator_h_
-#define _Validator_h
+#ifndef __Validator_h__
+#define __Validator_h__
 
 #include <regex>
 #include <string>

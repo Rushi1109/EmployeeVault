@@ -1,5 +1,5 @@
-#ifndef _Finance_h_
-#define _Finance_h_
+#ifndef __Finance_h__
+#define __Finance_h__
 #include "Employee.h"
 
 namespace EmployeeDB::Model {

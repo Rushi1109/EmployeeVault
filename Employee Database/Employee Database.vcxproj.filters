@@ -51,6 +51,9 @@
     <ClCompile Include="src\controller\ManagerController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\view\MainView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\sqlite\sqlite3.h">
@@ -62,28 +65,28 @@
     <ClInclude Include="include\DBManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\Employee.h">
+    <ClInclude Include="include\model\Employee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Validator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\Department.h">
+    <ClInclude Include="include\model\Department.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\Manager.h">
+    <ClInclude Include="include\model\Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\HR.h">
+    <ClInclude Include="include\model\HR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\Engineer.h">
+    <ClInclude Include="include\model\Engineer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\QA.h">
+    <ClInclude Include="include\model\QA.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\models\Finance.h">
+    <ClInclude Include="include\model\Finance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Config.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\controller\ManagerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\view\MainView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

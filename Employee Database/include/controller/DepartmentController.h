@@ -1,5 +1,5 @@
-#ifndef __DepartmentController_H__
-#define __DepartmentController_H__
+#ifndef __DepartmentController_h__
+#define __DepartmentController_h__
 
 #include "Department.h"
 

@@ -1,5 +1,5 @@
-#ifndef _QA_h_
-#define _QA_h_
+#ifndef __QA_h__
+#define __QA_h__
 #include "Employee.h"
 
 namespace EmployeeDB::Model {

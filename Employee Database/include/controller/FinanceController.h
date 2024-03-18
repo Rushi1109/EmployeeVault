@@ -1,5 +1,5 @@
-#ifndef __FinanceController_H__
-#define __FinanceController_H__
+#ifndef __FinanceController_h__
+#define __FinanceController_h__
 
 #include "Finance.h"
 

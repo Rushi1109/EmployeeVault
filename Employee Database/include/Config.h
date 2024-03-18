@@ -1,5 +1,5 @@
-#ifndef _Config_h_
-#define _Config_h_
+#ifndef __Config_h__
+#define __Config_h__
 
 #include <filesystem>
 

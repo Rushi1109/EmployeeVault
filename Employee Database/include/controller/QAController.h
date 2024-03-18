@@ -1,5 +1,5 @@
-#ifndef __QAController_H__
-#define __QAController_H__
+#ifndef __QAController_h__
+#define __QAController_h__
 
 #include "QA.h"
 

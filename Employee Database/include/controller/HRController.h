@@ -1,5 +1,5 @@
-#ifndef __HRController_H__
-#define __HRController_H__
+#ifndef __HRController_h__
+#define __HRController_h__
 
 #include "HR.h"
 

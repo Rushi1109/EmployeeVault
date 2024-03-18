@@ -1,5 +1,5 @@
-#ifndef _DBmanager_h_
-#define _DBmanager_h_
+#ifndef __DBmanager_h__
+#define __DBmanager_h__
 
 #include "sqlite3.h"
 #include <string>

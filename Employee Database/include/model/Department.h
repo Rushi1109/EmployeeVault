@@ -1,5 +1,5 @@
-#ifndef _Department_h_
-#define _Department_h_
+#ifndef __Department_h__
+#define __Department_h__
 
 #include <string>
 

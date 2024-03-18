@@ -1,5 +1,5 @@
-#ifndef _Manager_h_
-#define _Manager_h_
+#ifndef __Manager_h__
+#define __Manager_h__
 
 #include "Employee.h"
 
