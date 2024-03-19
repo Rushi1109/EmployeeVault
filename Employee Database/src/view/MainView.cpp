@@ -1,8 +1,11 @@
 #include <iostream>
 #include "MainView.h"
+#include "EmployeeView.h"
+#include "DepartmentView.h"
+#include "ManagerView.h"
 #include "DBManager.h"
 
-using EmployeeDB::View::MainView;
+using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView;
 using EmployeeDB::DBManager;
 
 void MainView::mainMenuView() {
@@ -81,6 +84,16 @@ void MainView::printTableMenu() {
 	std::cout << "5. QA\n";
 	std::cout << "6. Manager\n";
 	std::cout << "7. Main Menu\n";
+}
+
+void MainView::printDeleteOperationMenu() {
+	system("cls");
+	std::cout << "------------------------------------------Welcome to Employee Database-------------------------------------------------\n";
+	std::cout << "0. Exit\n";
+	std::cout << "1. Department\n";
+	std::cout << "2. Employee\n";
+	std::cout << "3. Manager\n";
+	std::cout << "4. Main Menu\n";
 }
 
 void MainView::insertMenuView() {
@@ -203,21 +216,21 @@ void MainView::deleteMenuView() {
 	bool isInvalidInput{ false };
 
 	while (true) {
-		printTableMenu();
+		printDeleteOperationMenu();
 		std::cout << "Please select an entity to delete:\n";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-7]\n";
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-4]\n";
 			isInvalidInput = false;
 		}
 
 		short int userInput;
 		std::cin >> userInput;
 		if (!std::cin.fail()) {
-			if (userInput >= 0 && userInput <= 6) {
+			if (userInput >= 0 && userInput <= 3) {
 				deleteMenuSelection(userInput);
 			}
-			else if (userInput == 7) {
+			else if (userInput == 4) {
 				return;
 			}
 			else {
@@ -237,22 +250,13 @@ void MainView::deleteMenuSelection(short int userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		//DepartmentView::delete();
+		DepartmentView::deleteDepartment();
 		break;
 	case 2:
-		//EngineerView::delete();
+		EmployeeView::deleteEmployee();
 		break;
 	case 3:
-		//FinanceView::delete();
-		break;
-	case 4:
-		//HRView::delete();
-		break;
-	case 5:
-		//QAView::delete();
-		break;
-	case 6:
-		//ManagerView::delete();
+		ManagerView::deleteManager();
 		break;
 	}
 }

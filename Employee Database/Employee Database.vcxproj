@@ -163,7 +163,10 @@
     <ClCompile Include="src\controller\QAController.cpp" />
     <ClCompile Include="src\DBManager.cpp" />
     <ClCompile Include="src\Validator.cpp" />
+    <ClCompile Include="src\view\DepartmentView.cpp" />
+    <ClCompile Include="src\view\EmployeeView.cpp" />
     <ClCompile Include="src\view\MainView.cpp" />
+    <ClCompile Include="src\view\ManagerView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Config.h" />
@@ -181,7 +184,10 @@
     <ClInclude Include="include\model\Manager.h" />
     <ClInclude Include="include\model\QA.h" />
     <ClInclude Include="include\Validator.h" />
+    <ClInclude Include="include\view\DepartmentView.h" />
+    <ClInclude Include="include\view\EmployeeView.h" />
     <ClInclude Include="include\view\MainView.h" />
+    <ClInclude Include="include\view\ManagerView.h" />
     <ClInclude Include="lib\sqlite\sqlite3.h" />
     <ClInclude Include="lib\sqlite\sqlite3ext.h" />
     <ClInclude Include="include\model\Department.h" />
