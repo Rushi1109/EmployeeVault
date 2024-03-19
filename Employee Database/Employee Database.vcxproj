@@ -165,6 +165,7 @@
     <ClCompile Include="src\Validator.cpp" />
     <ClCompile Include="src\view\DepartmentView.cpp" />
     <ClCompile Include="src\view\EmployeeView.cpp" />
+    <ClCompile Include="src\view\EngineerView.cpp" />
     <ClCompile Include="src\view\MainView.cpp" />
     <ClCompile Include="src\view\ManagerView.cpp" />
   </ItemGroup>
@@ -186,6 +187,7 @@
     <ClInclude Include="include\Validator.h" />
     <ClInclude Include="include\view\DepartmentView.h" />
     <ClInclude Include="include\view\EmployeeView.h" />
+    <ClInclude Include="include\view\EngineerView.h" />
     <ClInclude Include="include\view\MainView.h" />
     <ClInclude Include="include\view\ManagerView.h" />
     <ClInclude Include="lib\sqlite\sqlite3.h" />

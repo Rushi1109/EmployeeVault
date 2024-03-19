@@ -3,9 +3,10 @@
 #include "EmployeeView.h"
 #include "DepartmentView.h"
 #include "ManagerView.h"
+#include "EngineerView.h"
 #include "DBManager.h"
 
-using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView;
+using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView, EmployeeDB::View::EngineerView;
 using EmployeeDB::DBManager;
 
 void MainView::mainMenuView() {
@@ -74,8 +75,6 @@ void MainView::mainMenuSelection(short int userInput) {
 };
 
 void MainView::printTableMenu() {
-	system("cls");
-	std::cout << "------------------------------------------Welcome to Employee Database-------------------------------------------------\n";
 	std::cout << "0. Exit\n";
 	std::cout << "1. Department\n";
 	std::cout << "2. Engineer\n";
@@ -100,6 +99,8 @@ void MainView::insertMenuView() {
 	bool isInvalidInput{ false };
 
 	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------Insert Menu-------------------------------------------------\n";
 		printTableMenu();
 		std::cout << "Please select an entity to insert:\n";
 
@@ -130,26 +131,39 @@ void MainView::insertMenuView() {
 }
 
 void MainView::insertMenuSelection(short int userInput) {
+	bool continueInsertion{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		//DepartmentView::insert();
+		/*while (continueInsertion) {
+			continueInsertion = DepartmentView::insertDepartment();
+		}*/
 		break;
 	case 2:
-		//EngineerView::insert();
+		while (continueInsertion) {
+			continueInsertion = EngineerView::insertEngineer();
+		}
 		break;
 	case 3:
-		//FinanceView::insert();
+		/*while (continueInsertion) {
+			continueInsertion = FinanceView::insertFinance();
+		}*/
 		break;
 	case 4:
-		//HRView::insert();
+		/*while (continueInsertion) {
+			continueInsertion = HRView::insertHR();
+		}*/
 		break;
 	case 5:
-		//QAView::insert();
+		/*while (continueInsertion) {
+			continueInsertion = QAView::insertQA();
+		}*/
 		break;
 	case 6:
-		//ManagerView::insert();
+		/*while (continueInsertion) {
+			continueInsertion = ManagerView::insertManager();
+		}*/
 		break;
 	}
 }
@@ -158,6 +172,8 @@ void MainView::updateMenuView() {
 	bool isInvalidInput{ false };
 
 	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------Update Menu-------------------------------------------------\n";
 		printTableMenu();
 		std::cout << "Please select an entity to update:\n";
 
@@ -216,6 +232,8 @@ void MainView::deleteMenuView() {
 	bool isInvalidInput{ false };
 
 	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------Delete Menu-------------------------------------------------\n";
 		printDeleteOperationMenu();
 		std::cout << "Please select an entity to delete:\n";
 
@@ -246,17 +264,24 @@ void MainView::deleteMenuView() {
 }
 
 void MainView::deleteMenuSelection(short int userInput) {
+	bool continueInsertion{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		DepartmentView::deleteDepartment();
+		while (continueInsertion) {
+			continueInsertion = DepartmentView::deleteDepartment();
+		}
 		break;
 	case 2:
-		EmployeeView::deleteEmployee();
+		while (continueInsertion) {
+			continueInsertion = EmployeeView::deleteEmployee();
+		}
 		break;
 	case 3:
-		ManagerView::deleteManager();
+		while (continueInsertion) {
+			continueInsertion = ManagerView::deleteManager();
+		}
 		break;
 	}
 }
@@ -265,6 +290,8 @@ void MainView::viewMenuView() {
 	bool isInvalidInput{ false };
 
 	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------View Menu-------------------------------------------------\n";
 		printTableMenu();
 		std::cout << "Please select an entity to view:\n";
 

@@ -18,7 +18,7 @@ CREATE TABLE "Employee" (
 	"address"	TEXT NOT NULL,
 	"gender"	TEXT NOT NULL,
 	"dateOfJoining"	TEXT NOT NULL,
-	"departmentID"	INTEGER,
+	"departmentID"	INTEGER NOT NULL,
 	"mentorID"	INTEGER NOT NULL,
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
@@ -34,7 +34,7 @@ CREATE TABLE "Manager" (
 	"teamSize"	INTEGER NOT NULL,
 	"yearsOfExp"	REAL NOT NULL,
 	"projectTitle"	TEXT,
-	"role" TEXT,
+	"role" TEXT NOT NULL,
 	PRIMARY KEY("managerID"),
 	FOREIGN KEY("managerID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE,
 	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE CASCADE
@@ -42,25 +42,25 @@ CREATE TABLE "Manager" (
  
 CREATE TABLE "Engineer" (
 	"employeeID"	INTEGER NOT NULL,
-	"technology"	TEXT,
+	"technology"	TEXT NOT NULL,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
  
 CREATE TABLE "QA" (
 	"employeeID"	INTEGER NOT NULL,
-	"testingTool"	TEXT,
+	"testingTool"	TEXT NOT NULL,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
  
 CREATE TABLE "Finance" (
 	"employeeID"	INTEGER NOT NULL,
-	"accountingTool"	TEXT,
+	"accountingTool"	TEXT NOT NULL,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
  
 CREATE TABLE "HR" (
 	"employeeID"	INTEGER NOT NULL,
-	"hrSpecialization"	TEXT,
+	"hrSpecialization"	TEXT NOT NULL,
 	FOREIGN KEY("employeeID") REFERENCES "Employee"("employeeID") ON DELETE CASCADE
 );
 

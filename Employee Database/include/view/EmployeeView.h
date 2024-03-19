@@ -7,7 +7,7 @@ namespace EmployeeDB::View {
 	class EmployeeView {
 	public:
 		static void printEmployeeFields();
-		static void getEmployeeInput(Employee& employee);
+		static void getInsertEmployeeInput(Employee& employee);
 		static bool deleteEmployee();
 	};
 }

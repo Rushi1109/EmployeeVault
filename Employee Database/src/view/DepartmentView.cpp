@@ -8,6 +8,7 @@ bool DepartmentView::deleteDepartment() {
 	std::cout << "Please enter ID of department to delete : \n";
 
 	bool isInvalidInput{ false };
+	int departmentID;
 
 	while (true) {
 		if (isInvalidInput) {
@@ -15,12 +16,10 @@ bool DepartmentView::deleteDepartment() {
 			isInvalidInput = false;
 		}
 
-		int departmentID;
 		std::cin >> departmentID;
 		if (!std::cin.fail()) {
 			if (departmentID > 0) {
-				DepartmentController::deleteDepartment(departmentID);
-				return true;
+				break;
 			}
 			else {
 				isInvalidInput = true;
@@ -32,4 +31,31 @@ bool DepartmentView::deleteDepartment() {
 			isInvalidInput = true;
 		}
 	}
+
+	DepartmentController::deleteDepartment(departmentID);
+
+	isInvalidInput = false;
+
+	while (true) {
+		if (!isInvalidInput) {
+			std::cout << "Do you want to delete another Department? [y/n] : ";
+		}
+		unsigned char userChoice;
+		std::cin >> userChoice;
+
+		if (userChoice == 'y' || userChoice == 'Y') {
+			return true;
+		}
+		else if (userChoice == 'n' || userChoice == 'N') {
+			return false;
+		}
+		else {
+			std::cin.clear();
+			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			std::cerr << "Wrong Input, Please enter character [y/n] : ";
+			isInvalidInput = true;
+		}
+	}
+
+	return false;
 }

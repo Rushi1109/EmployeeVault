@@ -1,28 +1,14 @@
 #ifndef __Employee_h__
 #define __Employee_h__
 
-#include<string>
+#include <string>
+#include <algorithm>
 
 namespace EmployeeDB::Model {
     enum class Gender
     {
         Male, Female, Other
     };
-
-    inline std::string getGenderString(Gender g) {
-        std::string tempStr{ "Male" };
-        switch (g) {
-        case EmployeeDB::Model::Gender::Male:
-            break;
-        case EmployeeDB::Model::Gender::Female:
-            tempStr = "Female";
-            break;
-        case EmployeeDB::Model::Gender::Other:
-            tempStr = "Other";
-            break;
-        }
-        return tempStr;
-    }
 
     class Employee {
     public:
@@ -189,6 +175,37 @@ namespace EmployeeDB::Model {
         double performanceMetric;
         double bonus;
     };
+
+    inline std::string getGenderString(Gender g) {
+        std::string tempStr{ "Male" };
+        switch (g) {
+        case EmployeeDB::Model::Gender::Male:
+            break;
+        case EmployeeDB::Model::Gender::Female:
+            tempStr = "Female";
+            break;
+        case EmployeeDB::Model::Gender::Other:
+            tempStr = "Other";
+            break;
+        }
+        return tempStr;
+    }
+
+    inline Gender getGenderFromString(std::string& genderString) {
+        Gender gender{ Gender::Male };
+
+        std::transform(genderString.begin(), genderString.end(), genderString.begin(), ::tolower);
+        if (genderString == "male") {
+            gender = Gender::Male;
+        }
+        else if (genderString == "female") {
+            gender = Gender::Female;
+        }
+        else if (genderString == "other") {
+            gender = Gender::Other;
+        }
+        return gender;
+    }
 }
 
 #endif // !

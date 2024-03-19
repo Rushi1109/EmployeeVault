@@ -63,6 +63,9 @@
     <ClCompile Include="src\view\ManagerView.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\view\EngineerView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lib\sqlite\sqlite3.h">
@@ -132,6 +135,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\view\ManagerView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\view\EngineerView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
