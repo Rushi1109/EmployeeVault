@@ -30,3 +30,8 @@ TEST(TestGender, Test_validateGender) {
 	ASSERT_EQ(EmployeeDB::Validator::validateGender(std::string("emale")), false);
 	ASSERT_EQ(EmployeeDB::Validator::validateGender(std::string("OTHEr")), true);
 }
+
+int main(int argc, char** argv) {
+	testing::InitGoogleTest(&argc, argv);
+	return RUN_ALL_TESTS();
+}
