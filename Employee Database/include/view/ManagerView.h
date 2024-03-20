@@ -6,6 +6,9 @@
 namespace EmployeeDB::View {
 	class ManagerView {
 	public:
+		static void printManagerFields();
+		static void getInsertManagerInput(Manager& manager);
+		static bool insertManager();
 		static bool deleteManager();
 	};
 }

@@ -19,9 +19,16 @@ void MainView::mainMenuView() {
 			isInvalidInput = false;
 		}
 
-		short int userInput;
-		std::cin >> userInput;
-		if (!std::cin.fail()) {
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
 			if (userInput >= 0 && userInput <= 5) {
 				mainMenuSelection(userInput);
 			}
@@ -29,9 +36,7 @@ void MainView::mainMenuView() {
 				isInvalidInput = true;
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		catch (...) {
 			isInvalidInput = true;
 		}
 	}
@@ -106,9 +111,16 @@ void MainView::insertMenuView() {
 			isInvalidInput = false;
 		}
 
-		short int userInput;
-		std::cin >> userInput;
-		if (!std::cin.fail()) {
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
 			if (userInput >= 0 && userInput <= 6) {
 				insertMenuSelection(userInput);
 			}
@@ -119,9 +131,7 @@ void MainView::insertMenuView() {
 				isInvalidInput = true;
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		catch (...) {
 			isInvalidInput = true;
 		}
 	}
@@ -133,9 +143,9 @@ void MainView::insertMenuSelection(short int userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		/*while (continueInsertion) {
+		while (continueInsertion) {
 			continueInsertion = DepartmentView::insertDepartment();
-		}*/
+		}
 		break;
 	case 2:
 		while (continueInsertion) {
@@ -158,9 +168,9 @@ void MainView::insertMenuSelection(short int userInput) {
 		}
 		break;
 	case 6:
-		/*while (continueInsertion) {
+		while (continueInsertion) {
 			continueInsertion = ManagerView::insertManager();
-		}*/
+		}
 		break;
 	}
 }
@@ -179,9 +189,16 @@ void MainView::updateMenuView() {
 			isInvalidInput = false;
 		}
 
-		short int userInput;
-		std::cin >> userInput;
-		if (!std::cin.fail()) {
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
 			if (userInput >= 0 && userInput <= 6) {
 				updateMenuSelection(userInput);
 			}
@@ -192,9 +209,7 @@ void MainView::updateMenuView() {
 				isInvalidInput = true;
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		catch (...) {
 			isInvalidInput = true;
 		}
 	}
@@ -235,13 +250,20 @@ void MainView::deleteMenuView() {
 		std::cout << "Please select an entity to delete:\n";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-4]\n";
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
 			isInvalidInput = false;
 		}
 
-		short int userInput;
-		std::cin >> userInput;
-		if (!std::cin.fail()) {
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
 			if (userInput >= 0 && userInput <= 3) {
 				deleteMenuSelection(userInput);
 			}
@@ -252,9 +274,7 @@ void MainView::deleteMenuView() {
 				isInvalidInput = true;
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		catch (...) {
 			isInvalidInput = true;
 		}
 	}
@@ -297,9 +317,16 @@ void MainView::viewMenuView() {
 			isInvalidInput = false;
 		}
 
-		short int userInput;
-		std::cin >> userInput;
-		if (!std::cin.fail()) {
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
 			if (userInput >= 0 && userInput <= 6) {
 				viewMenuSelection(userInput);
 			}
@@ -310,9 +337,7 @@ void MainView::viewMenuView() {
 				isInvalidInput = true;
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		catch (...) {
 			isInvalidInput = true;
 		}
 	}

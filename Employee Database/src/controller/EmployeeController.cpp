@@ -62,6 +62,29 @@ bool EmployeeController::updateEmployee(Employee& obj) {
 	return true;
 }
 
+bool EmployeeController::checkEmployeeExistence(const std::string& employeeID) {
+	std::string queryString = "SELECT EmployeeID FROM Employee WHERE EmployeeID = " + employeeID + ";";
+
+	int callbackCount{ 0 };
+	auto validateManagerIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
+		int* count = static_cast<int*>(data);
+		(*count)++;
+		return 0;
+		};
+
+	try {
+		DBManager::instance().executeSelectQuery(queryString.c_str(), validateManagerIDCallback, &callbackCount);
+	}
+	catch (std::exception& e) {
+		std::cerr << e.what() << '\n';
+	}
+
+	if (callbackCount == 0) {
+		return false;
+	}
+
+	return true;
+}
 
 int EmployeeController::getEmployeeIDbyEmail(const std::string& email) {
 	std::string queryString = "SELECT employeeID FROM Employee WHERE email=\"" + email + "\";";

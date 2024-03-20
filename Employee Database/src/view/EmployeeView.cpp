@@ -2,8 +2,9 @@
 #include "EmployeeView.h"
 #include "EmployeeController.h"
 #include "Validator.h"
+#include "Utility.h";
 
-using EmployeeDB::View::EmployeeView;
+using EmployeeDB::View::EmployeeView, EmployeeDB::View::Utility;
 using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Validator;
 
@@ -17,26 +18,22 @@ void EmployeeView::printEmployeeFields() {
 	std::cout << "6. email* :" << '\n';
 	std::cout << "7. address* :" << '\n';
 	std::cout << "8. gender* :" << '\n';
-	std::cout << "9. dateOfJoining*:" << '\n';
-	std::cout << "10. managerID*:" << '\n';
-	std::cout << "11. performanceMetric*:" << '\n';
-	std::cout << "12. bonus*:" << '\n';
+	std::cout << "9. dateOfJoining* :" << '\n';
+	std::cout << "10. managerID* :" << '\n';
+	std::cout << "11. performanceMetric :" << '\n';
+	std::cout << "12. bonus :" << '\n';
 }
 
 void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 	std::string userInput;
-	std::cin.ignore();
 
 	while (true) {
-		std::cout << "firstName*: ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::cout << "firstName* : ";
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "First Name is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
-
 			obj.setFirstName(userInput);
 			break;
 		}
@@ -44,60 +41,49 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	{
 		std::cout << "middleName : ";
-		char userChoice = std::cin.get();
-
-		if (userChoice != '\n') {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
+		std::getline(std::cin, userInput);
+		if (userInput.size() != 0) {
 			obj.setMiddleName(userInput);
 		}
 	}
 
 	while (true) {
 		std::cout << "lastName* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "Last Name is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
-
 			obj.setLastName(userInput);
 			break;
 		}
 	}
 
 	{
+		std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
 		while (true) {
-			std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-			char userChoice = std::cin.get();
+			std::getline(std::cin, userInput);
 
-			if (userChoice == '\n') {
+			if (userInput.size() == 0) {
 				break;
 			}
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
-
 			if (Validator::validateDate(userInput)) {
 				obj.setDateOfBirth(userInput);
 				break;
 			}
 			else {
-				std::cerr << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy]\n";
+				std::cerr << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
 			}
 		}
 	}
 
 	while (true) {
 		std::cout << "mobileNo* (Starting from [6-9]) : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "mobileNo is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			if (Validator::validateMobile(userInput)) {
 				obj.setMobileNo(std::stoll(userInput));
 				break;
@@ -110,13 +96,11 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	while (true) {
 		std::cout << "email* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "email is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			if (Validator::validateEmail(userInput)) {
 				obj.setEmail(userInput);
 				break;
@@ -129,13 +113,11 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	while (true) {
 		std::cout << "address* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "Address is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			obj.setAddress(userInput);
 			break;
 		}
@@ -143,14 +125,11 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	while (true) {
 		std::cout << "gender* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "Gender is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
-
 			if (Validator::validateGender(userInput)) {
 				obj.setGender(EmployeeDB::Model::getGenderFromString(userInput));
 				break;
@@ -163,14 +142,12 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	while (true) {
 		std::cout << "dateOfJoining* [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-		char userChoice = std::cin.get();
+		std::getline(std::cin, userInput);
 
-		if (userChoice == '\n') {
+		if (userInput.size() == 0) {
 			std::cout << "dateOfJoining is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			if (Validator::validateDate(userInput)) {
 				obj.setDateOfJoining(userInput);
 				break;
@@ -183,24 +160,22 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 
 	while (true) {
 		std::cout << "mentorID* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "mentorID is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			try {
 				if (stoi(userInput) > 0) {
 					obj.setMentorID(stoi(userInput));
-					break;
 				}
 				else {
 					throw "Negative Number";
 				}
 			}
 			catch (...) {
-				std::cerr << "Wrong input...Please enter Positive number!!\n";
+				std::cout << "Wrong input...Please enter again!!\n";
+				continue;
 			}
 			break;
 		}
@@ -209,15 +184,13 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 	{
 		while (true) {
 			std::cout << "performanceMetric : ";
-			char userChoice = std::cin.get();
+			std::getline(std::cin, userInput);
 
-			if (userChoice == '\n') {
+			if (userInput.size() == 0) {
 				break;
 			}
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			try {
-				if (stod(userInput) > 0.0) {
+				if (stod(userInput) >= 0.0) {
 					obj.setPerformanceMetric(stod(userInput));
 					break;
 				}
@@ -228,22 +201,19 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 			catch (...) {
 				std::cerr << "Wrong input...Please enter Positive real number!!\n";
 			}
-			break;
 		}
 	}
 
 	{
 		while (true) {
 			std::cout << "bonus : ";
-			char userChoice = std::cin.get();
+			std::getline(std::cin, userInput);
 
-			if (userChoice == '\n') {
+			if (userInput.size() == 0) {
 				break;
 			}
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			try {
-				if (stod(userInput) > 0.0) {
+				if (stod(userInput) >= 0.0) {
 					obj.setBonus(stod(userInput));
 					break;
 				}
@@ -254,63 +224,34 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 			catch (...) {
 				std::cerr << "Wrong input...Please enter Positive real number!!\n";
 			}
-			break;
 		}
 	}
 };
 
 bool EmployeeView::deleteEmployee() {
-	std::cout << "Please enter ID of employee to delete : \n";
+	if (!Utility::proceedFurther("deletion")) {
+		return false;
+	}
 
-	bool isInvalidInput{ false };
-	int employeeID;
+	std::string userInput;
+	std::cout << "Please enter ID of Employee to delete : \n";
 
 	while (true) {
-		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter the ID again : \n";
-			isInvalidInput = false;
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
+			std::cout << "Employee id is mandatory...Please enter again!!" << '\n';
 		}
-
-		std::cin >> employeeID;
-		if (!std::cin.fail()) {
-			if (employeeID > 0) {
+		else {
+			if (std::stoi(userInput) > 0) {
 				break;
 			}
 			else {
-				isInvalidInput = true;
+				std::cout << "Wrong input...Please enter positive integer number!!\n";
 			}
 		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			isInvalidInput = true;
-		}
 	}
 
-	EmployeeController::deleteEmployee(employeeID);
+	EmployeeController::deleteEmployee(std::stoi(userInput));
 
-	isInvalidInput = false;
-
-	while (true) {
-		if (!isInvalidInput) {
-			std::cout << "Do you want to delete another Employee? [y/n] : ";
-		}
-		unsigned char userChoice;
-		std::cin >> userChoice;
-
-		if (userChoice == 'y' || userChoice == 'Y') {
-			return true;
-		}
-		else if (userChoice == 'n' || userChoice == 'N') {
-			return false;
-		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
-			isInvalidInput = true;
-		}
-	}
-
-	return false;
+	return Utility::repeatOperation("delete", "Employee");
 }

@@ -35,7 +35,7 @@ namespace EmployeeDB::Model {
             return departmentName;
         }
 
-        void setName(const std::string& deptName) {
+        void setDepartmentName(const std::string& deptName) {
             departmentName = deptName;
         }
 

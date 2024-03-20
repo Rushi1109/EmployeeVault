@@ -1,41 +1,22 @@
 #include <iostream>
 #include "EmployeeView.h"
 #include "FinanceView.h"
-#include "FinanceController.h"
+#include "FinanceController.h"'
+#include "Utility.h"
 
-using EmployeeDB::View::EmployeeView, EmployeeDB::View::FinanceView;
+using EmployeeDB::View::EmployeeView, EmployeeDB::View::FinanceView, EmployeeDB::View::Utility;
 using EmployeeDB::Controller::FinanceController;
 
 bool FinanceView::insertFinance() {
 	Finance obj;
 
 	system("cls");
-	std::cout << "-----------------------------------------Insert Financier------------------------------------------------\n";
-
+	std::cout << "------------------------------------------Insert Finance-------------------------------------------------\n";
 	EmployeeView::printEmployeeFields();
-	std::cout << "13. Accounting Tool* : " << '\n';
+	std::cout << "13. accountingTool* : " << '\n';
 
-	bool isInvalidInput{ false };
-
-	while (true) {
-		if (!isInvalidInput) {
-			std::cout << "Do you want to proceed with insertion? [y/n] : ";
-		}
-		unsigned char userChoice;
-		std::cin >> userChoice;
-
-		if (userChoice == 'y' || userChoice == 'Y') {
-			break;
-		}
-		else if (userChoice == 'n' || userChoice == 'N') {
-			return false;
-		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
-			isInvalidInput = true;
-		}
+	if (!Utility::proceedFurther("insertion")) {
+		return false;
 	}
 
 	EmployeeView::getInsertEmployeeInput(obj);
@@ -43,14 +24,12 @@ bool FinanceView::insertFinance() {
 	std::string userInput;
 
 	while (true) {
-		std::cout << "Accounting Tool* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
-			std::cout << "Accounting Tool is mandatory...Please enter again!!" << '\n';
+		std::cout << "accountingTool* : ";
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
+			std::cout << "accountingTool is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			obj.setAccountingTool(userInput);
 			break;
 		}
@@ -58,28 +37,5 @@ bool FinanceView::insertFinance() {
 
 	FinanceController::insertFinance(obj);
 
-	isInvalidInput = false;
-
-	while (true) {
-		if (!isInvalidInput) {
-			std::cout << "Do you want to insert another Financier? [y/n] : ";
-		}
-		unsigned char userChoice;
-		std::cin >> userChoice;
-
-		if (userChoice == 'y' || userChoice == 'Y') {
-			return true;
-		}
-		else if (userChoice == 'n' || userChoice == 'N') {
-			return false;
-		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
-			isInvalidInput = true;
-		}
-	}
-
-	return false;
+	return Utility::repeatOperation("insert", "Finance");
 }

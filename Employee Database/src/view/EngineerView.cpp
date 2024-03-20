@@ -2,8 +2,9 @@
 #include "EmployeeView.h"
 #include "EngineerView.h"
 #include "EngineerController.h"
+#include "Utility.h"
 
-using EmployeeDB::View::EmployeeView, EmployeeDB::View::EngineerView;
+using EmployeeDB::View::EmployeeView, EmployeeDB::View::EngineerView, EmployeeDB::View::Utility;
 using EmployeeDB::Controller::EngineerController;
 
 bool EngineerView::insertEngineer() {
@@ -11,31 +12,11 @@ bool EngineerView::insertEngineer() {
 
 	system("cls");
 	std::cout << "------------------------------------------Insert Engineer-------------------------------------------------\n";
-
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. technology* : " << '\n';
 
-	bool isInvalidInput{ false };
-
-	while (true) {
-		if (!isInvalidInput) {
-			std::cout << "Do you want to proceed with insertion? [y/n] : ";
-		}
-		unsigned char userChoice;
-		std::cin >> userChoice;
-
-		if (userChoice == 'y' || userChoice == 'Y') {
-			break;
-		}
-		else if (userChoice == 'n' || userChoice == 'N') {
-			return false;
-		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
-			isInvalidInput = true;
-		}
+	if (!Utility::proceedFurther("insertion")) {
+		return false;
 	}
 
 	EmployeeView::getInsertEmployeeInput(obj);
@@ -44,13 +25,11 @@ bool EngineerView::insertEngineer() {
 
 	while (true) {
 		std::cout << "technology* : ";
-		char userChoice = std::cin.get();
-		if (userChoice == '\n') {
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
 			std::cout << "Technology is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			std::getline(std::cin, userInput);
-			userInput = userChoice + userInput;
 			obj.setTechnology(userInput);
 			break;
 		}
@@ -58,28 +37,5 @@ bool EngineerView::insertEngineer() {
 
 	EngineerController::insertEngineer(obj);
 
-	isInvalidInput = false;
-
-	while (true) {
-		if (!isInvalidInput) {
-			std::cout << "Do you want to insert another Engineer? [y/n] : ";
-		}
-		unsigned char userChoice;
-		std::cin >> userChoice;
-
-		if (userChoice == 'y' || userChoice == 'Y') {
-			return true;
-		}
-		else if (userChoice == 'n' || userChoice == 'N') {
-			return false;
-		}
-		else {
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
-			isInvalidInput = true;
-		}
-	}
-
-	return false;
+	return Utility::repeatOperation("insert", "Engineer");
 }

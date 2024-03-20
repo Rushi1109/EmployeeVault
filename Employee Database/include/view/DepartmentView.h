@@ -6,6 +6,10 @@
 namespace EmployeeDB::View {
 	class DepartmentView {
 	public:
+		static void printDepartmentFields();
+		static void getInsertDepartmentInput(Department& department);
+
+		static bool insertDepartment();
 		static bool deleteDepartment();
 	};
 }
