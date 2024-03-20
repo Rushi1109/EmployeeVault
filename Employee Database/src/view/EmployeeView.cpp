@@ -2,7 +2,7 @@
 #include "EmployeeView.h"
 #include "EmployeeController.h"
 #include "Validator.h"
-#include "Utility.h";
+#include "Utility.h"
 
 using EmployeeDB::View::EmployeeView, EmployeeDB::View::Utility;
 using EmployeeDB::Controller::EmployeeController;
@@ -227,31 +227,3 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 		}
 	}
 };
-
-bool EmployeeView::deleteEmployee() {
-	if (!Utility::proceedFurther("deletion")) {
-		return false;
-	}
-
-	std::string userInput;
-	std::cout << "Please enter ID of Employee to delete : \n";
-
-	while (true) {
-		std::getline(std::cin, userInput);
-		if (userInput.size() == 0) {
-			std::cout << "Employee id is mandatory...Please enter again!!" << '\n';
-		}
-		else {
-			if (std::stoi(userInput) > 0) {
-				break;
-			}
-			else {
-				std::cout << "Wrong input...Please enter positive integer number!!\n";
-			}
-		}
-	}
-
-	EmployeeController::deleteEmployee(std::stoi(userInput));
-
-	return Utility::repeatOperation("delete", "Employee");
-}

@@ -10,6 +10,7 @@ namespace EmployeeDB::View {
 		static void getInsertDepartmentInput(Department& department);
 
 		static bool insertDepartment();
+		static bool getDepartmentIDInput(Department& obj, const std::string& operation);
 		static bool deleteDepartment();
 	};
 }

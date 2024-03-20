@@ -1,7 +1,8 @@
 #include "Validator.h"
 #include "EmployeeController.h"
+#include "DepartmentController.h"
 
-using EmployeeDB::Controller::EmployeeController;
+using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::Validator;
 
 bool Validator::validateEmail(const std::string& email) {
@@ -29,4 +30,14 @@ bool Validator::validateEmployeeID(const std::string& employeeID) {
 	}
 
 	return EmployeeController::checkEmployeeExistence(employeeID);
+}
+
+bool Validator::validateDepartmentID(const std::string& departmentID) {
+	bool regexResult = std::regex_match(departmentID, std::regex("(^[0-9]+$)"));
+
+	if (!regexResult) {
+		return false;
+	}
+
+	return DepartmentController::checkDepartmentExistence(departmentID);
 }

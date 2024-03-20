@@ -117,20 +117,22 @@ bool ManagerView::insertManager() {
 	return Utility::repeatOperation("insert", "Manager");
 }
 
-bool ManagerView::deleteManager() {
-	if (!Utility::proceedFurther("deletion")) {
-		return false;
-	}
-
+bool ManagerView::getManagerIDInput(Manager& obj, const std::string& operation) {
 	std::string userInput;
-	std::cout << "Please enter ID of manager to delete : \n";
+
+	system("cls");
+	std::cout << "------------------------------------------" + operation + " Manager-------------------------------------------------\n";
+	std::cout << "Please enter Manager ID.\n";
+
 	while (true) {
+		std::cout << "Manager ID* : ";
 		std::getline(std::cin, userInput);
 		if (userInput.size() == 0) {
-			std::cout << "managerID is mandatory...Please enter again!!" << '\n';
+			std::cout << "Manager ID is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			if (std::stoi(userInput) > 0) {
+			if (Validator::validateEmployeeID(userInput)) {
+				obj.setEmployeeID(stoi(userInput));
 				break;
 			}
 			else {
@@ -139,7 +141,21 @@ bool ManagerView::deleteManager() {
 		}
 	}
 
-	ManagerController::deleteManager(std::stoi(userInput));
+	system("cls");
+	std::cout << "------------------------------------------" + operation + " Manager-------------------------------------------------\n";
+	ManagerController::selectManager("employeeID", userInput);
+
+	return Utility::proceedFurther(operation);
+}
+
+bool ManagerView::deleteManager() {
+	Manager obj;
+
+	if (!getManagerIDInput(obj, "Delete")) {
+		return false;
+	}
+
+	ManagerController::deleteManagerByID(obj.getEmployeeID());
 
 	return Utility::repeatOperation("delete", "Manager");
 }

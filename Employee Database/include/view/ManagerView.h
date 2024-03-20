@@ -9,6 +9,7 @@ namespace EmployeeDB::View {
 		static void printManagerFields();
 		static void getInsertManagerInput(Manager& manager);
 		static bool insertManager();
+		static bool getManagerIDInput(Manager& obj, const std::string& operation);
 		static bool deleteManager();
 	};
 }

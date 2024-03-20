@@ -13,6 +13,7 @@ namespace EmployeeDB {
 		static bool validateDate(const std::string& date);
 		static bool validateGender(std::string& gender);
 		static bool validateEmployeeID(const std::string& employeeID);
+		static bool validateDepartmentID(const std::string& departmentID);
 	};
 }
 

@@ -118,21 +118,22 @@ bool DepartmentView::insertDepartment() {
 	return Utility::repeatOperation("insert", "Department");
 }
 
-bool DepartmentView::deleteDepartment() {
-	if (!Utility::proceedFurther("deletion")) {
-		return false;
-	}
-
+bool DepartmentView::getDepartmentIDInput(Department& obj, const std::string& operation) {
 	std::string userInput;
-	std::cout << "Please enter ID of department to delete : \n";
+
+	system("cls");
+	std::cout << "------------------------------------------" + operation + " Department-------------------------------------------------\n";
+	std::cout << "Please enter Department ID.\n";
 
 	while (true) {
+		std::cout << "Department ID* : ";
 		std::getline(std::cin, userInput);
 		if (userInput.size() == 0) {
-			std::cout << "Department id is mandatory...Please enter again!!" << '\n';
+			std::cout << "Department ID is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			if (std::stoi(userInput) > 0) {
+			if (Validator::validateEmployeeID(userInput)) {
+				obj.setDepartmentID(stoi(userInput));
 				break;
 			}
 			else {
@@ -141,7 +142,21 @@ bool DepartmentView::deleteDepartment() {
 		}
 	}
 
-	DepartmentController::deleteDepartment(std::stoi(userInput));
+	system("cls");
+	std::cout << "------------------------------------------" + operation + " Department-------------------------------------------------\n";
+	DepartmentController::selectDepartment("departmentID", userInput);
+
+	return Utility::proceedFurther(operation);
+}
+
+bool DepartmentView::deleteDepartment() {
+	Department obj;
+
+	if (!getDepartmentIDInput(obj, "Delete")) {
+		return false;
+	}
+
+	DepartmentController::deleteDepartmentByID(obj.getDepartmentID());
 
 	return Utility::repeatOperation("delete", "Department");
 }
