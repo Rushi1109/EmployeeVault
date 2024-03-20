@@ -38,7 +38,8 @@ bool ManagerController::selectManager(const std::string& attributeName, const st
 	std::string queryString = "SELECT * FROM ManagerView " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str());
+		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -47,7 +48,7 @@ bool ManagerController::selectManager(const std::string& attributeName, const st
 	return true;
 }
 
-bool ManagerController::deleteManager(int ID) {
+bool ManagerController::deleteManagerByID(int ID) {
 	std::string queryString = "DELETE FROM Manager WHERE managerID = " + std::to_string(ID) + ";";
 
 	try {

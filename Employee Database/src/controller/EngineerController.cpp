@@ -10,7 +10,7 @@ using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool EngineerController::insertEngineer(Engineer& obj) {
-	int departmentID = DepartmentController::selectDepartmentIDbyName("Engineer");
+	int departmentID = DepartmentController::getDepartmentIDbyName("Engineer");
 
 	if (departmentID == -1) {
 		std::cerr << "Engineer department not found.";
@@ -43,7 +43,8 @@ bool EngineerController::selectEngineer(const std::string& attributeName, const 
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Engineer " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str());
+		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -74,6 +75,10 @@ bool EngineerController::updateEngineer(Engineer& obj) {
 		}
 	}
 	return true;
+}
+
+bool EngineerController::deleteEngineerByID(int ID) {
+	return EmployeeController::deleteEmployee(ID);
 }
 
 std::string EngineerController::getUpdateQueryCondition(Engineer& obj) {

@@ -66,14 +66,9 @@ bool EmployeeController::checkEmployeeExistence(const std::string& employeeID) {
 	std::string queryString = "SELECT EmployeeID FROM Employee WHERE EmployeeID = " + employeeID + ";";
 
 	int callbackCount{ 0 };
-	auto validateManagerIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
-		int* count = static_cast<int*>(data);
-		(*count)++;
-		return 0;
-		};
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str(), validateManagerIDCallback, &callbackCount);
+		callbackCount = DBManager::instance().executeRowCountQuery(queryString.c_str());
 	}
 	catch (std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -99,7 +94,7 @@ int EmployeeController::getEmployeeIDbyEmail(const std::string& email) {
 		};
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str(), getEmployeeIDCallback, &employeeID);
+		DBManager::instance().executeCustomQuery(queryString.c_str(), getEmployeeIDCallback, &employeeID);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -122,7 +117,7 @@ int EmployeeController::getDepartmentIDbyEmployeeID(int employeeID) {
 		};
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str(), getDepartmentIDCallback, &departmentID);
+		DBManager::instance().executeCustomQuery(queryString.c_str(), getDepartmentIDCallback, &departmentID);
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';

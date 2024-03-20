@@ -11,7 +11,7 @@ using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool HRController::insertHR(HR& obj) {
-	int departmentID = DepartmentController::selectDepartmentIDbyName("HR");
+	int departmentID = DepartmentController::getDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
 		std::cerr << "HR department not found.";
@@ -46,7 +46,8 @@ bool HRController::selectHR(const std::string& attributeName, const std::string&
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN HR " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str());
+		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -77,6 +78,10 @@ bool HRController::updateHR(HR& obj) {
 		}
 	}
 	return true;
+}
+
+bool HRController::deleteHRByID(int ID) {
+	return EmployeeController::deleteEmployee(ID);
 }
 
 std::string HRController::getUpdateQueryCondition(HR& obj) {

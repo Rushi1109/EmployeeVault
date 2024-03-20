@@ -54,7 +54,10 @@ int DBManager::executeQuery(const char* queryString) {
 	return resultCode;
 }
 
-int DBManager::callback(void* arg, int argc, char** argv, char** azColName) {
+int DBManager::selectCallback(void* arg, int argc, char** argv, char** azColName) {
+	int* rowCount = static_cast<int*>(arg);
+	(*rowCount)++;
+
 	std::cout << "|--------------------|----------------------------------------|\n";
 	int i;
 	for (i = 0; i < argc; i++) {
@@ -65,7 +68,21 @@ int DBManager::callback(void* arg, int argc, char** argv, char** azColName) {
 	return 0;
 }
 
-int DBManager::executeSelectQuery(const char* queryString, int (*callback)(void*, int, char**, char**), void* arg) {
+int DBManager::executeSelectQuery(const char* queryString) {
+	int rowCount{ 0 };
+	resultCode = sqlite3_exec(db, queryString, selectCallback, &rowCount, &errMsg);
+
+	if (resultCode == SQLITE_OK) {
+		std::cout << "Successfully executed Query" << '\n';
+	}
+	else {
+		throw std::runtime_error{ errMsg };
+	}
+
+	return rowCount;
+}
+
+int DBManager::executeCustomQuery(const char* queryString, int (*callback)(void*, int, char**, char**), void* arg) {
 	resultCode = sqlite3_exec(db, queryString, callback, arg, &errMsg);
 
 	if (resultCode == SQLITE_OK) {
@@ -76,6 +93,25 @@ int DBManager::executeSelectQuery(const char* queryString, int (*callback)(void*
 	}
 
 	return resultCode;
+}
+
+int DBManager::executeRowCountQuery(const char* queryString) {
+	int rowCount{ 0 };
+	resultCode = sqlite3_exec(db, queryString, rowCountCallback, &rowCount, &errMsg);
+
+	if (resultCode == SQLITE_OK) {
+		std::cout << "Successfully executed Query" << '\n';
+	}
+	else {
+		throw std::runtime_error{ errMsg };
+	}
+	return rowCount;
+}
+
+int DBManager::rowCountCallback(void* arg, int argc, char** argv, char** azColName) {
+	int* rowCount = static_cast<int*>(arg);
+	(*rowCount)++;
+	return 0;
 }
 
 void DBManager::executeCascadeQuery() {

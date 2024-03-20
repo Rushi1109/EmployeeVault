@@ -11,7 +11,7 @@ using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool QAController::insertQA(QA& obj) {
-	int departmentID = DepartmentController::selectDepartmentIDbyName("QA");
+	int departmentID = DepartmentController::getDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
 		std::cerr << "QA department not found.";
@@ -46,7 +46,8 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";;
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str());
+		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -77,6 +78,10 @@ bool QAController::updateQA(QA& obj) {
 		}
 	}
 	return true;
+}
+
+bool QAController::deleteQAByID(int ID) {
+	return EmployeeController::deleteEmployee(ID);
 }
 
 std::string QAController::getUpdateQueryCondition(QA& obj) {

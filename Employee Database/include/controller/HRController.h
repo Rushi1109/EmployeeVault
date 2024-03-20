@@ -12,6 +12,7 @@ namespace EmployeeDB::Controller {
 		static bool insertHR(HR& hr);
 		static bool selectHR(const std::string& attributeName = "", const std::string& attributeValue = "");
 		static bool updateHR(HR& hr);
+		static bool deleteHRByID(int ID);
 	private:
 		static std::string getUpdateQueryCondition(HR& hr);
 	};

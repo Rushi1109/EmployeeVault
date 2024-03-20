@@ -10,7 +10,7 @@ using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool FinanceController::insertFinance(Finance& obj) {
-	int departmentID = DepartmentController::selectDepartmentIDbyName("Finance");
+	int departmentID = DepartmentController::getDepartmentIDbyName("Finance");
 
 	if (departmentID == -1) {
 		std::cerr << "Finance department not found.";
@@ -43,7 +43,8 @@ bool FinanceController::selectFinance(const std::string& attributeName, const st
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Finance " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
 
 	try {
-		DBManager::instance().executeSelectQuery(queryString.c_str());
+		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -74,6 +75,10 @@ bool FinanceController::updateFinance(Finance& obj) {
 		}
 	}
 	return true;
+}
+
+bool FinanceController::deleteFinanceByID(int ID) {
+	return EmployeeController::deleteEmployee(ID);
 }
 
 std::string FinanceController::getUpdateQueryCondition(Finance& obj) {
