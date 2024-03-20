@@ -166,8 +166,11 @@
     <ClCompile Include="src\view\DepartmentView.cpp" />
     <ClCompile Include="src\view\EmployeeView.cpp" />
     <ClCompile Include="src\view\EngineerView.cpp" />
+    <ClCompile Include="src\view\FinanceView.cpp" />
+    <ClCompile Include="src\view\HRView.cpp" />
     <ClCompile Include="src\view\MainView.cpp" />
     <ClCompile Include="src\view\ManagerView.cpp" />
+    <ClCompile Include="src\view\QAView.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Config.h" />
@@ -188,8 +191,12 @@
     <ClInclude Include="include\view\DepartmentView.h" />
     <ClInclude Include="include\view\EmployeeView.h" />
     <ClInclude Include="include\view\EngineerView.h" />
+    <ClInclude Include="include\view\FinanceView.h" />
+    <ClInclude Include="include\view\HRView.h" />
     <ClInclude Include="include\view\MainView.h" />
     <ClInclude Include="include\view\ManagerView.h" />
+    <ClInclude Include="include\view\QAView.h" />
+    <ClInclude Include="include\Views.h" />
     <ClInclude Include="lib\sqlite\sqlite3.h" />
     <ClInclude Include="lib\sqlite\sqlite3ext.h" />
     <ClInclude Include="include\model\Department.h" />

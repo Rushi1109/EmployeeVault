@@ -1,12 +1,9 @@
 #include <iostream>
-#include "MainView.h"
-#include "EmployeeView.h"
-#include "DepartmentView.h"
-#include "ManagerView.h"
-#include "EngineerView.h"
+#include "Views.h"
 #include "DBManager.h"
 
-using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView, EmployeeDB::View::EngineerView;
+using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView;
+using EmployeeDB::View::EngineerView, EmployeeDB::View::FinanceView, EmployeeDB::View::QAView, EmployeeDB::View::HRView;
 using EmployeeDB::DBManager;
 
 void MainView::mainMenuView() {
@@ -146,19 +143,19 @@ void MainView::insertMenuSelection(short int userInput) {
 		}
 		break;
 	case 3:
-		/*while (continueInsertion) {
+		while (continueInsertion) {
 			continueInsertion = FinanceView::insertFinance();
-		}*/
+		}
 		break;
 	case 4:
-		/*while (continueInsertion) {
+		while (continueInsertion) {
 			continueInsertion = HRView::insertHR();
-		}*/
+		}
 		break;
 	case 5:
-		/*while (continueInsertion) {
+		while (continueInsertion) {
 			continueInsertion = QAView::insertQA();
-		}*/
+		}
 		break;
 	case 6:
 		/*while (continueInsertion) {

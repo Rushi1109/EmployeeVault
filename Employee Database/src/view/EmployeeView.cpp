@@ -191,11 +191,16 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 			std::getline(std::cin, userInput);
 			userInput = userChoice + userInput;
 			try {
-				obj.setMentorID(std::stoi(userInput));
+				if (stoi(userInput) > 0) {
+					obj.setMentorID(stoi(userInput));
+					break;
+				}
+				else {
+					throw "Negative Number";
+				}
 			}
 			catch (...) {
-				std::cout << "Wrong input...Please enter again!!\n";
-				continue;
+				std::cerr << "Wrong input...Please enter Positive number!!\n";
 			}
 			break;
 		}
@@ -212,11 +217,16 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 			std::getline(std::cin, userInput);
 			userInput = userChoice + userInput;
 			try {
-				obj.setPerformanceMetric(std::stod(userInput));
+				if (stod(userInput) > 0.0) {
+					obj.setPerformanceMetric(stod(userInput));
+					break;
+				}
+				else {
+					throw "Negative Number";
+				}
 			}
 			catch (...) {
-				std::cout << "Wrong input...Please enter real number!!\n";
-				continue;
+				std::cerr << "Wrong input...Please enter Positive real number!!\n";
 			}
 			break;
 		}
@@ -233,11 +243,16 @@ void EmployeeView::getInsertEmployeeInput(Employee& obj) {
 			std::getline(std::cin, userInput);
 			userInput = userChoice + userInput;
 			try {
-				obj.setBonus(std::stod(userInput));
+				if (stod(userInput) > 0.0) {
+					obj.setBonus(stod(userInput));
+					break;
+				}
+				else {
+					throw "Negative Number";
+				}
 			}
 			catch (...) {
-				std::cout << "Wrong input...Please enter real number!!\n";
-				continue;
+				std::cerr << "Wrong input...Please enter Positive real number!!\n";
 			}
 			break;
 		}
