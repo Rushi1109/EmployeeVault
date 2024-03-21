@@ -114,8 +114,17 @@ int DBManager::rowCountCallback(void* arg, int argc, char** argv, char** azColNa
 	return 0;
 }
 
-void DBManager::executeCascadeQuery() {
+void DBManager::executeConfigQuery() {
 	std::string queryString = "PRAGMA foreign_keys = ON";
+
+	try {
+		instance().executeQuery(queryString.c_str());
+	}
+	catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+	}
+
+	queryString = "PRAGMA case_sensitive_like = ON;";
 
 	try {
 		instance().executeQuery(queryString.c_str());

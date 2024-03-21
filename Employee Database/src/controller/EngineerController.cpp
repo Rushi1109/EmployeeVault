@@ -4,16 +4,14 @@
 #include "DepartmentController.h"
 #include "DBManager.h"
 
-using EmployeeDB::Controller::EngineerController;
-using EmployeeDB::Controller::EmployeeController;
-using EmployeeDB::Controller::DepartmentController;
+using EmployeeDB::Controller::EngineerController, EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
 bool EngineerController::insertEngineer(Engineer& obj) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("Engineer");
 
 	if (departmentID == -1) {
-		std::cerr << "Engineer department not found.";
+		std::cerr << "Engineer department not found. Please insert a department named Engineer.\n";
 		return false;
 	}
 
@@ -22,6 +20,7 @@ bool EngineerController::insertEngineer(Engineer& obj) {
 	bool employeeResult = EmployeeController::insertEmployee(obj);
 
 	if (!employeeResult) {
+		std::cerr << "Engineer could not be inserted.\n";
 		return false;
 	}
 
@@ -31,9 +30,11 @@ bool EngineerController::insertEngineer(Engineer& obj) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
+		std::cout << "Successfully inserted an Engineer\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
+		std::cerr << "Engineer could not be inserted.\n";
 		return false;
 	}
 	return true;
@@ -58,6 +59,7 @@ bool EngineerController::updateEngineer(Engineer& obj) {
 	bool employeeResult = EmployeeController::updateEmployee(obj);
 
 	if (!employeeResult) {
+		std::cerr << "Engineer could not be updated.\n";
 		return false;
 	}
 
@@ -68,9 +70,11 @@ bool EngineerController::updateEngineer(Engineer& obj) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
+			std::cout << "Successfully updated an Engineer.\n";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
+			std::cerr << "Engineer could not be updated.\n";
 			return false;
 		}
 	}
@@ -78,7 +82,15 @@ bool EngineerController::updateEngineer(Engineer& obj) {
 }
 
 bool EngineerController::deleteEngineerByID(int ID) {
-	return EmployeeController::deleteEmployee(ID);
+	bool deleteResult = EmployeeController::deleteEmployeeByID(ID);
+
+	if (deleteResult) {
+		std::cout << "Successfully deleted an Engineer.\n";
+	}
+	else {
+		std::cerr << "Engineer could not be deleted.\n";
+	}
+	return deleteResult;
 }
 
 std::string EngineerController::getUpdateQueryCondition(Engineer& obj) {

@@ -26,7 +26,7 @@ namespace EmployeeDB::Model {
             employeeID{ 0 },
             departmentID{ 0 },
             mentorID{ 0 },
-            bonus{ 0 } {
+            bonus{ 0.0 } {
         }
 
         Employee(bool isUpdateObj) :
@@ -43,7 +43,7 @@ namespace EmployeeDB::Model {
             employeeID{ -1 },
             departmentID{ -1 },
             mentorID{ -1 },
-            bonus{ -1 } {
+            bonus{ -1.0 } {
         }
 
         int getEmployeeID() const {

@@ -15,9 +15,11 @@ bool DepartmentController::insertDepartment(const Department& d) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
+		std::cout << "Successfully inserted a Department.\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
+		std::cerr << "Department could not be inserted.\n";
 		return false;
 	}
 	return true;
@@ -28,9 +30,11 @@ bool DepartmentController::deleteDepartmentByID(int departmentID) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
+		std::cout << "Successfully deleted a Department.\n";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
+		std::cerr << "Department could not be deleted.\n";
 		return false;
 	}
 	return true;
@@ -81,9 +85,11 @@ bool DepartmentController::updateDepartment(Department& obj) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
+			std::cout << "Successfully updated a Department.\n";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
+			std::cerr << "Department could not be updated.\n";
 			return false;
 		}
 	}

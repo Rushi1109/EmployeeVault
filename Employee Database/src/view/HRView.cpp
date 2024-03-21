@@ -29,6 +29,8 @@ bool HRView::insertHR() {
 	while (true) {
 		std::cout << "hrSpecialization* : ";
 		std::getline(std::cin, userInput);
+		Utility::removeWhiteSpaces(userInput);
+
 		if (userInput.size() == 0) {
 			std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
 		}
@@ -92,6 +94,7 @@ bool HRView::updateHR() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
+		Utility::removeWhiteSpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -115,6 +118,8 @@ bool HRView::updateHR() {
 				while (true) {
 					std::cout << "hrSpecialization* : ";
 					std::getline(std::cin, inputLine);
+					Utility::removeWhiteSpaces(inputLine);
+
 					if (inputLine.size() == 0) {
 						std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
 					}

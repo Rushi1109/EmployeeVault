@@ -14,7 +14,7 @@ namespace EmployeeDB {
 		int executeSelectQuery(const char* query);
 		int executeCustomQuery(const char* query, int (*callback)(void*, int, char**, char**), void* arg);
 		int executeRowCountQuery(const char* queryString);
-		static void executeCascadeQuery();
+		static void executeConfigQuery();
 
 	private:
 		DBManager();

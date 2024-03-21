@@ -86,8 +86,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\Validator;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\Utility;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -125,8 +125,8 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database</AdditionalLibraryDirectories>
-      <AdditionalDependencies>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\Validator;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>D:\Work\C++ Training Projects\Project-2 Employee Database\bin-int\x64\Debug\Employee Database\Utility;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
