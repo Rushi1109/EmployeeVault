@@ -14,6 +14,7 @@ bool HRView::insertHR() {
 
 	system("cls");
 	std::cout << "------------------------------------------Insert HR-------------------------------------------------\n";
+	std::cout << "Fields with * are required fields\n";
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. hrSpecialization* : " << '\n';
 

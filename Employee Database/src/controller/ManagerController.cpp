@@ -62,6 +62,12 @@ bool ManagerController::deleteManagerByID(int ID) {
 };
 
 bool ManagerController::updateManager(Manager& obj) {
+	bool employeeResult = EmployeeController::updateEmployee(obj);
+
+	if (!employeeResult) {
+		return false;
+	}
+
 	std::string updateQueryCondition = getUpdateQueryCondition(obj);
 
 	if (updateQueryCondition.size() != 0) {

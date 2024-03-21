@@ -14,6 +14,7 @@ bool EngineerView::insertEngineer() {
 
 	system("cls");
 	std::cout << "------------------------------------------Insert Engineer-------------------------------------------------\n";
+	std::cout << "Fields with * are required fields\n";
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. technology* : " << '\n';
 
