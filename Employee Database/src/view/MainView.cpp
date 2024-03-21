@@ -216,16 +216,24 @@ void MainView::updateMenuSelection(short int userInput) {
 		}
 		break;
 	case 2:
-		//EngineerView::update();
+		while (continueUpdation) {
+			continueUpdation = EngineerView::updateEngineer();
+		}
 		break;
 	case 3:
-		//FinanceView::update();
+		while (continueUpdation) {
+			continueUpdation = FinanceView::updateFinance();
+		}
 		break;
 	case 4:
-		//HRView::update();
+		while (continueUpdation) {
+			continueUpdation = HRView::updateHR();
+		}
 		break;
 	case 5:
-		//QAView::update();
+		while (continueUpdation) {
+			continueUpdation = QAView::updateQA();
+		}
 		break;
 	case 6:
 		while (continueUpdation) {

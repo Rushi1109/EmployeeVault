@@ -8,8 +8,8 @@ namespace EmployeeDB::View {
 	class HRView {
 	public:
 		static bool insertHR();
-		static bool getHRIDInput(HR& obj, const std::string& operation);
 		static bool deleteHR();
+		static bool updateHR();
 	};
 }
 

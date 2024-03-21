@@ -111,3 +111,22 @@ std::string ManagerController::getUpdateQueryCondition(Manager& obj) {
 
 	return updateQueryCondition;
 }
+
+bool ManagerController::checkManagerExistence(const std::string& managerID) {
+	std::string queryString = "SELECT managerID FROM Manager WHERE managerID = " + managerID + ";";
+
+	int callbackCount{ 0 };
+
+	try {
+		callbackCount = DBManager::instance().executeRowCountQuery(queryString.c_str());
+	}
+	catch (std::exception& e) {
+		std::cerr << e.what() << '\n';
+	}
+
+	if (callbackCount == 0) {
+		return false;
+	}
+
+	return true;
+}

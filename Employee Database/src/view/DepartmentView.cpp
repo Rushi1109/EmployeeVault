@@ -132,7 +132,7 @@ bool DepartmentView::getDepartmentIDInput(Department& obj, const std::string& op
 			std::cout << "Department ID is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			if (Validator::validateEmployeeID(userInput)) {
+			if (Validator::validateDepartmentID(userInput)) {
 				obj.setDepartmentID(stoi(userInput));
 				break;
 			}

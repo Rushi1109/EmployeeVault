@@ -13,6 +13,7 @@ namespace EmployeeDB::Controller {
 		static bool selectManager(const std::string& attributeName = "", const std::string& attributeValue = "");
 		static bool deleteManagerByID(int managerID);
 		static bool updateManager(Manager& manager);
+		static bool checkManagerExistence(const std::string& managerID);
 	private:
 		static std::string getUpdateQueryCondition(Manager& manager);
 	};

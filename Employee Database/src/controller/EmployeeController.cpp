@@ -1,8 +1,9 @@
 #include <iostream>
 #include "EmployeeController.h"
+#include "DepartmentController.h"
 #include "DBManager.h"
 
-using EmployeeDB::Controller::EmployeeController;
+using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::DepartmentController;
 
 bool EmployeeController::insertEmployee(const Employee& obj) {
 	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)"
@@ -62,8 +63,17 @@ bool EmployeeController::updateEmployee(Employee& obj) {
 	return true;
 }
 
-bool EmployeeController::checkEmployeeExistence(const std::string& employeeID) {
-	std::string queryString = "SELECT EmployeeID FROM Employee WHERE EmployeeID = " + employeeID + ";";
+bool EmployeeController::checkEmployeeExistence(const std::string& employeeID, const std::string& departmentName) {
+	int departmentID{ -1 };
+
+	if (departmentName != "*") {
+		departmentID = DepartmentController::getDepartmentIDbyName(departmentName);
+		if (departmentID == -1) {
+			return false;
+		}
+	}
+
+	std::string queryString = "SELECT employeeID FROM Employee WHERE employeeID = " + employeeID + (departmentID == -1 ? "" : " AND departmentID = " + std::to_string(departmentID)) + ";";
 
 	int callbackCount{ 0 };
 

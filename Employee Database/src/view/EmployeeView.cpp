@@ -9,7 +9,6 @@ using EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::Validator;
 
 void EmployeeView::printEmployeeFields() {
-	std::cout << "Fields with * are required fields\n";
 	std::cout << "1. firstName* : " << '\n';
 	std::cout << "2. middleName : " << '\n';
 	std::cout << "3. lastName* : " << '\n';
@@ -444,5 +443,30 @@ void EmployeeView::getUpdateEmployeeInput(Employee& obj, int fieldNumber) {
 		}
 	}
 	break;
+	}
+}
+
+void EmployeeView::getEmployeeIDInput(Employee& employee, const std::string& operation, const std::string& entity) {
+	std::string userInput;
+
+	system("cls");
+	std::cout << "------------------------------------------" + operation + " " + entity + "-------------------------------------------------\n";
+	std::cout << "Please enter employeeID.\n";
+
+	while (true) {
+		std::cout << "employeeID* : ";
+		std::getline(std::cin, userInput);
+		if (userInput.size() == 0) {
+			std::cout << "employeeID is mandatory...Please enter again!!" << '\n';
+		}
+		else {
+			if (Validator::validateEmployeeID(userInput, entity)) {
+				employee.setEmployeeID(stoi(userInput));
+				break;
+			}
+			else {
+				std::cout << "Wrong input...Please enter positive integer number!!\n";
+			}
+		}
 	}
 }

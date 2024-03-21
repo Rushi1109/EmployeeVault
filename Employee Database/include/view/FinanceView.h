@@ -8,8 +8,8 @@ namespace EmployeeDB::View {
 	class FinanceView {
 	public:
 		static bool insertFinance();
-		static bool getFinanceIDInput(Finance& obj, const std::string& operation);
 		static bool deleteFinance();
+		static bool updateFinance();
 	};
 }
 

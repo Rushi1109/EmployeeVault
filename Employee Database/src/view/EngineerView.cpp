@@ -43,45 +43,106 @@ bool EngineerView::insertEngineer() {
 	return Utility::repeatOperation("insert", "Engineer");
 }
 
-bool EngineerView::getEngineerIDInput(Engineer& obj, const std::string& operation) {
-	std::string userInput;
-
-	system("cls");
-	std::cout << "------------------------------------------" + operation + " Engineer-------------------------------------------------\n";
-	std::cout << "Please enter Engineer ID.\n";
-
-	while (true) {
-		std::cout << "Engineer ID* : ";
-		std::getline(std::cin, userInput);
-		if (userInput.size() == 0) {
-			std::cout << "Engineer ID is mandatory...Please enter again!!" << '\n';
-		}
-		else {
-			if (Validator::validateEmployeeID(userInput)) {
-				obj.setEmployeeID(stoi(userInput));
-				break;
-			}
-			else {
-				std::cout << "Wrong input...Please enter positive integer number!!\n";
-			}
-		}
-	}
-
-	system("cls");
-	std::cout << "------------------------------------------" + operation + " Engineer-------------------------------------------------\n";
-	EngineerController::selectEngineer("employeeID", userInput);
-
-	return Utility::proceedFurther(operation);
-}
-
 bool EngineerView::deleteEngineer() {
 	Engineer obj;
 
-	if (!getEngineerIDInput(obj, "Delete")) {
+	EmployeeView::getEmployeeIDInput(obj, "Delete", "Engineer");
+
+	system("cls");
+	std::cout << "------------------------------------------Delete Engineer-------------------------------------------------\n";
+	EngineerController::selectEngineer("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+
+	if (!Utility::proceedFurther("Delete")) {
 		return false;
 	}
 
 	EngineerController::deleteEngineerByID(obj.getEmployeeID());
 
 	return Utility::repeatOperation("delete", "Engineer");
+}
+
+bool EngineerView::updateEngineer() {
+	Engineer obj{ true };
+
+	EmployeeView::getEmployeeIDInput(obj, "Update", "Engineer");
+
+	system("cls");
+	std::cout << "------------------------------------------Update Engineer-------------------------------------------------\n";
+	EngineerController::selectEngineer("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+	if (!Utility::proceedFurther("Update")) {
+		return false;
+	}
+
+	bool isInvalidInput{ false };
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------Update Engineer-------------------------------------------------\n";
+		std::cout << "Fields with * are required fields\n";
+		std::cout << "0. Exit" << '\n';
+		EmployeeView::printEmployeeFields();
+		std::cout << "13. technology* : " << '\n';
+		std::cout << "14. Go Back" << '\n';
+		std::cout << "Select the field you want to update, or select 0/14 for operations: \n";
+
+		if (isInvalidInput) {
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-14]\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+			if (userInput == 0) {
+				std::exit(0);
+			}
+			else if (userInput >= 1 && userInput <= 12) {
+				EmployeeView::getUpdateEmployeeInput(obj, userInput);
+				if (Utility::repeatOperation("update", "field")) {
+					continue;
+				}
+				else {
+					break;
+				}
+			}
+			else if (userInput == 13) {
+				while (true) {
+					std::cout << "technology* : ";
+					std::getline(std::cin, inputLine);
+					if (inputLine.size() == 0) {
+						std::cout << "Technology is mandatory...Please enter again!!" << '\n';
+					}
+					else {
+						obj.setTechnology(inputLine);
+						break;
+					}
+				}
+				if (Utility::repeatOperation("update", "field")) {
+					continue;
+				}
+				else {
+					break;
+				}
+			}
+			else if (userInput == 14) {
+				return false;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
+
+	EngineerController::updateEngineer(obj);
+
+	return Utility::repeatOperation("update", "Engineer");
 }

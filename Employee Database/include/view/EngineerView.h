@@ -8,8 +8,8 @@ namespace EmployeeDB::View {
 	class EngineerView {
 	public:
 		static bool insertEngineer();
-		static bool getEngineerIDInput(Engineer& obj, const std::string& operation);
 		static bool deleteEngineer();
+		static bool updateEngineer();
 	};
 }
 

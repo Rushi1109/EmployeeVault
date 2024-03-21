@@ -8,8 +8,8 @@ namespace EmployeeDB::View {
 	class QAView {
 	public:
 		static bool insertQA();
-		static bool getQAIDInput(QA& obj, const std::string& operation);
 		static bool deleteQA();
+		static bool updateQA();
 	};
 }
 
