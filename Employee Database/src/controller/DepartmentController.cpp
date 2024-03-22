@@ -41,7 +41,7 @@ bool DepartmentController::deleteDepartmentByID(int departmentID) {
 }
 
 bool DepartmentController::selectDepartment(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Department " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + ";";
+	std::string queryString = "SELECT * FROM Department " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
@@ -55,7 +55,7 @@ bool DepartmentController::selectDepartment(const std::string& attributeName, co
 };
 
 int DepartmentController::getDepartmentIDbyName(const std::string& departmentName) {
-	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\";";
+	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\" COLLATE NOCASE;";
 	int departmentID{ -1 };
 
 	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {

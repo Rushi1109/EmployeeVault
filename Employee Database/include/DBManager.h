@@ -12,6 +12,7 @@ namespace EmployeeDB {
 
 		int executeQuery(const char* query);
 		int executeSelectQuery(const char* query);
+		int executeSelectSalaryQuery(const char* queryString);
 		int executeCustomQuery(const char* query, int (*callback)(void*, int, char**, char**), void* arg);
 		int executeRowCountQuery(const char* queryString);
 		static void executeConfigQuery();
@@ -24,6 +25,7 @@ namespace EmployeeDB {
 		void closeConnection();
 
 		static int selectCallback(void* arg, int argc, char** argv, char** azColName);
+		static int selectSalaryCallback(void* arg, int argc, char** argv, char** azColName);
 		static int rowCountCallback(void* arg, int argc, char** argv, char** azColName);
 
 		sqlite3* db;

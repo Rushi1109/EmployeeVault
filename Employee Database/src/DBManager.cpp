@@ -1,10 +1,16 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <exception>
 #include "DBManager.h"
 #include "Config.h"
 #include "exception"
-#include <iostream>
-#include <iomanip>
+#include "Salary.h"
+#include "EmployeeController.h"
 
 using EmployeeDB::DBManager;
+using EmployeeDB::Model::Salary;
+using EmployeeDB::Controller::EmployeeController;
 
 DBManager& DBManager::instance() {
 	static DBManager DB;
@@ -82,6 +88,41 @@ int DBManager::executeSelectQuery(const char* queryString) {
 	return rowCount;
 }
 
+int DBManager::selectSalaryCallback(void* arg, int argc, char** argv, char** azColName) {
+	int* rowCount = static_cast<int*>(arg);
+	(*rowCount)++;
+
+	Salary obj;
+
+	std::cout << "|--------------------|----------------------------------------|\n";
+	int i;
+	for (i = 0; i < argc; i++) {
+		if (!strcmp(azColName[i], "employeeID")) {
+			obj.setEmployeeID(std::stoi(argv[i]));
+		}
+		std::cout << "|" << std::setw(20) << std::left << azColName[i] << "|" << std::setw(40) << std::left << (argv[i] ? argv[i] : "NULL") << "|\n";
+	}
+	EmployeeController::getSalaryDetails(obj);
+	double totalSalary = Employee::computeSalary(obj);
+	std::cout << "|" << std::setw(20) << std::left << "Total Salary" << "|" << std::setw(40) << std::left << totalSalary << "|\n";
+	std::cout << "|--------------------|----------------------------------------|\n";
+	std::cout << std::endl;
+	return 0;
+}
+
+int DBManager::executeSelectSalaryQuery(const char* queryString) {
+	int rowCount{ 0 };
+	resultCode = sqlite3_exec(db, queryString, selectSalaryCallback, &rowCount, &errMsg);
+
+	if (resultCode == SQLITE_OK) {
+		std::cout << "Successfully executed Query" << '\n';
+	}
+	else {
+		throw std::runtime_error{ errMsg };
+	}
+	return rowCount;
+}
+
 int DBManager::executeCustomQuery(const char* queryString, int (*callback)(void*, int, char**, char**), void* arg) {
 	resultCode = sqlite3_exec(db, queryString, callback, arg, &errMsg);
 
@@ -116,15 +157,6 @@ int DBManager::rowCountCallback(void* arg, int argc, char** argv, char** azColNa
 
 void DBManager::executeConfigQuery() {
 	std::string queryString = "PRAGMA foreign_keys = ON";
-
-	try {
-		instance().executeQuery(queryString.c_str());
-	}
-	catch (const std::exception& e) {
-		std::cerr << e.what() << '\n';
-	}
-
-	queryString = "PRAGMA case_sensitive_like = ON;";
 
 	try {
 		instance().executeQuery(queryString.c_str());

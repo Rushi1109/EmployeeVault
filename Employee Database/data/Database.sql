@@ -67,3 +67,7 @@ CREATE TABLE "HR" (
 CREATE VIEW ManagerView
 AS
 	SELECT Employee.*,Manager.teamSize,Manager.yearsOfExp,Manager.projectTitle,Manager.role FROM Employee INNER JOIN Manager ON Employee.employeeID = Manager.managerID;
+
+CREATE VIEW SalaryView
+AS
+	SELECT employeeID, departmentID, performanceMetric, bonus, baseSalary, allowance, deduction FROM Employee NATURAL JOIN Department;
