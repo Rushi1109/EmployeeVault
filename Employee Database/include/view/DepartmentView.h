@@ -6,14 +6,19 @@
 namespace EmployeeDB::View {
 	class DepartmentView {
 	public:
-		static void printDepartmentFields();
-		static void getInsertDepartmentInput(Department& department);
-
 		static bool insertDepartment();
-		static bool getDepartmentIDInput(Department& obj, const std::string& operation);
-		static bool deleteDepartment();
-		static void getUpdateDepartmentInput(Department& obj, int fieldNumber);
 		static bool updateDepartment();
+		static bool deleteDepartment();
+		static bool viewDepartment();
+
+	private:
+		static void printDepartmentFields();
+		static void printViewDepartmentFields();
+		static void getInsertDepartmentInput(Department& department);
+		static bool getDepartmentIDInput(Department& obj, const std::string& operation);
+		static void getUpdateDepartmentInput(Department& obj, int fieldNumber);
+		static void getViewDepartmentInput(Department& obj, int fieldNumber);
+		static void viewDepartmentConditional();
 	};
 }
 

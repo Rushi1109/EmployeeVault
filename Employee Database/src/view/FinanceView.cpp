@@ -29,7 +29,7 @@ bool FinanceView::insertFinance() {
 	while (true) {
 		std::cout << "accountingTool* : ";
 		std::getline(std::cin, userInput);
-		Utility::removeWhiteSpaces(userInput);
+		Utility::removeEmptySpaces(userInput);
 
 		if (userInput.size() == 0) {
 			std::cout << "accountingTool is mandatory...Please enter again!!" << '\n';
@@ -94,7 +94,7 @@ bool FinanceView::updateFinance() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -118,7 +118,7 @@ bool FinanceView::updateFinance() {
 				while (true) {
 					std::cout << "accountingTool* : ";
 					std::getline(std::cin, inputLine);
-					Utility::removeWhiteSpaces(inputLine);
+					Utility::removeEmptySpaces(inputLine);
 
 					if (inputLine.size() == 0) {
 						std::cout << "accountingTool is mandatory...Please enter again!!" << '\n';
@@ -150,4 +150,200 @@ bool FinanceView::updateFinance() {
 	FinanceController::updateFinance(obj);
 
 	return Utility::repeatOperation("update", "Finance");
+}
+
+bool FinanceView::viewFinance() {
+	bool isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------View Finance-------------------------------------------------\n";
+		std::cout << "0. Exit" << '\n';
+		std::cout << "1. View Finance based on a field" << '\n';
+		std::cout << "2. View all Finance" << '\n';
+		std::cout << "3. Go Back" << '\n';
+		std::cout << "Select the operation [0-3]: \n";
+
+		if (isInvalidInput) {
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+			if (userInput == 0) {
+				std::exit(0);
+			}
+			else if (userInput == 1) {
+				viewFinanceConditional();
+				break;
+			}
+			else if (userInput == 2) {
+				FinanceController::selectFinance();
+				break;
+			}
+			else if (userInput == 3) {
+				return false;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
+
+	return Utility::repeatOperation("view", "Finance");
+}
+
+void FinanceView::printViewFinanceFields() {
+	std::cout << "14. accountingTool* :" << '\n';
+}
+
+void FinanceView::getViewFinanceInput(Finance& finance, int fieldNumber) {
+	std::string userInput;
+
+	switch (fieldNumber) {
+	case 14:
+		while (true) {
+			std::cout << "accountingTool* : ";
+			std::getline(std::cin, userInput);
+			Utility::removeEmptySpaces(userInput);
+
+			if (userInput.size() == 0) {
+				std::cout << "Accounting Tool is mandatory...Please enter again!!" << '\n';
+			}
+			else {
+				finance.setAccountingTool(userInput);
+				break;
+			}
+		}
+		break;
+	}
+}
+
+void FinanceView::viewFinanceConditional() {
+	Finance finance;
+	bool isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------View Finance-------------------------------------------------\n";
+		std::cout << "0. Exit" << '\n';
+		EmployeeView::printViewEmployeeFields();
+		printViewFinanceFields();
+		std::cout << "15. Go back" << '\n';
+		std::cout << "Select the field by which you want to view a Finance, or select 0/15 for operations: \n";
+
+		if (isInvalidInput) {
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-15]\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+
+			if (userInput == 0) {
+				std::exit(0);
+			}
+			else if (userInput == 1) {
+				EmployeeView::getViewEmployeeInput(finance, 1);
+				FinanceController::selectFinance("employeeID", std::to_string(finance.getEmployeeID()));
+				break;
+			}
+			else if (userInput == 2) {
+				EmployeeView::getViewEmployeeInput(finance, 2);
+				FinanceController::selectFinance("firstName", finance.getFirstName());
+				break;
+			}
+			else if (userInput == 3) {
+				EmployeeView::getViewEmployeeInput(finance, 3);
+				FinanceController::selectFinance("middleName", finance.getMiddleName());
+				break;
+			}
+			else if (userInput == 4) {
+				EmployeeView::getViewEmployeeInput(finance, 4);
+				FinanceController::selectFinance("lastName", finance.getLastName());
+				break;
+			}
+			else if (userInput == 5) {
+				EmployeeView::getViewEmployeeInput(finance, 5);
+				FinanceController::selectFinance("dateOfBirth", finance.getDateOfBirth());
+				break;
+			}
+			else if (userInput == 6) {
+				EmployeeView::getViewEmployeeInput(finance, 6);
+				FinanceController::selectFinance("mobileNo", std::to_string(finance.getMobileNo()));
+				break;
+			}
+			else if (userInput == 7) {
+				EmployeeView::getViewEmployeeInput(finance, 7);
+				FinanceController::selectFinance("email", finance.getEmail());
+				break;
+			}
+			else if (userInput == 8) {
+				EmployeeView::getViewEmployeeInput(finance, 8);
+				FinanceController::selectFinance("address", finance.getAddress());
+				break;
+			}
+			else if (userInput == 9) {
+				EmployeeView::getViewEmployeeInput(finance, 9);
+				FinanceController::selectFinance("gender", EmployeeDB::Model::getGenderString(finance.getGender()));
+				break;
+			}
+			else if (userInput == 10) {
+				EmployeeView::getViewEmployeeInput(finance, 10);
+				FinanceController::selectFinance("dateOfJoining", finance.getDateOfJoining());
+				break;
+			}
+			else if (userInput == 11) {
+				EmployeeView::getViewEmployeeInput(finance, 11);
+				FinanceController::selectFinance("mentorID", std::to_string(finance.getMentorID()));
+				break;
+			}
+			else if (userInput == 12) {
+				EmployeeView::getViewEmployeeInput(finance, 12);
+				FinanceController::selectFinance("performanceMetric", std::to_string(finance.getPerformanceMetric()));
+				break;
+			}
+			else if (userInput == 13) {
+				EmployeeView::getViewEmployeeInput(finance, 13);
+				FinanceController::selectFinance("bonus", std::to_string(finance.getBonus()));
+				break;
+			}
+			else if (userInput == 14) {
+				getViewFinanceInput(finance, 14);
+				FinanceController::selectFinance("accountingTool", finance.getAccountingTool());
+				break;
+			}
+			else if (userInput == 15) {
+				return;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
 }

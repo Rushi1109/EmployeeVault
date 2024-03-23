@@ -10,7 +10,7 @@ using EmployeeDB::Controller::HRController;
 using EmployeeDB::Validator;
 
 bool HRView::insertHR() {
-	HR obj;
+	HR hr;
 
 	system("cls");
 	std::cout << "------------------------------------------Insert HR-------------------------------------------------\n";
@@ -22,55 +22,55 @@ bool HRView::insertHR() {
 		return false;
 	}
 
-	EmployeeView::getInsertEmployeeInput(obj);
+	EmployeeView::getInsertEmployeeInput(hr);
 
 	std::string userInput;
 
 	while (true) {
 		std::cout << "hrSpecialization* : ";
 		std::getline(std::cin, userInput);
-		Utility::removeWhiteSpaces(userInput);
+		Utility::removeEmptySpaces(userInput);
 
 		if (userInput.size() == 0) {
 			std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
 		}
 		else {
-			obj.setHRSpecialization(userInput);
+			hr.setHRSpecialization(userInput);
 			break;
 		}
 	}
 
-	HRController::insertHR(obj);
+	HRController::insertHR(hr);
 
 	return Utility::repeatOperation("insert", "HR");
 }
 
 bool HRView::deleteHR() {
-	HR obj;
+	HR hr;
 
-	EmployeeView::getEmployeeIDInput(obj, "Delete", "HR");
+	EmployeeView::getEmployeeIDInput(hr, "Delete", "HR");
 
 	system("cls");
 	std::cout << "-------------------------------------------Delete HR-------------------------------------------------\n";
-	HRController::selectHR("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+	HRController::selectHR("Employee.employeeID", std::to_string(hr.getEmployeeID()));
 
 	if (!Utility::proceedFurther("Delete")) {
 		return false;
 	}
 
-	HRController::deleteHRByID(obj.getEmployeeID());
+	HRController::deleteHRByID(hr.getEmployeeID());
 
 	return Utility::repeatOperation("delete", "HR");
 }
 
 bool HRView::updateHR() {
-	HR obj{ true };
+	HR hr{ true };
 
-	EmployeeView::getEmployeeIDInput(obj, "Update", "HR");
+	EmployeeView::getEmployeeIDInput(hr, "Update", "HR");
 
 	system("cls");
 	std::cout << "------------------------------------------Update HR-------------------------------------------------\n";
-	HRController::selectHR("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+	HRController::selectHR("Employee.employeeID", std::to_string(hr.getEmployeeID()));
 	if (!Utility::proceedFurther("Update")) {
 		return false;
 	}
@@ -94,7 +94,7 @@ bool HRView::updateHR() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -106,7 +106,7 @@ bool HRView::updateHR() {
 				std::exit(0);
 			}
 			else if (userInput >= 1 && userInput <= 12) {
-				EmployeeView::getUpdateEmployeeInput(obj, userInput);
+				EmployeeView::getUpdateEmployeeInput(hr, userInput);
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
 				}
@@ -118,13 +118,13 @@ bool HRView::updateHR() {
 				while (true) {
 					std::cout << "hrSpecialization* : ";
 					std::getline(std::cin, inputLine);
-					Utility::removeWhiteSpaces(inputLine);
+					Utility::removeEmptySpaces(inputLine);
 
 					if (inputLine.size() == 0) {
 						std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
 					}
 					else {
-						obj.setHRSpecialization(inputLine);
+						hr.setHRSpecialization(inputLine);
 						break;
 					}
 				}
@@ -147,7 +147,203 @@ bool HRView::updateHR() {
 		}
 	}
 
-	HRController::updateHR(obj);
+	HRController::updateHR(hr);
 
 	return Utility::repeatOperation("update", "HR");
+}
+
+bool HRView::viewHR() {
+	bool isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------View HR-------------------------------------------------\n";
+		std::cout << "0. Exit" << '\n';
+		std::cout << "1. View HR based on a field" << '\n';
+		std::cout << "2. View all HR" << '\n';
+		std::cout << "3. Go Back" << '\n';
+		std::cout << "Select the operation [0-3]: \n";
+
+		if (isInvalidInput) {
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+			if (userInput == 0) {
+				std::exit(0);
+			}
+			else if (userInput == 1) {
+				viewHRConditional();
+				break;
+			}
+			else if (userInput == 2) {
+				HRController::selectHR();
+				break;
+			}
+			else if (userInput == 3) {
+				return false;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
+
+	return Utility::repeatOperation("view", "HR");
+}
+
+void HRView::printViewHRFields() {
+	std::cout << "14. hrSpecialization* :" << '\n';
+}
+
+void HRView::getViewHRInput(HR& hr, int fieldNumber) {
+	std::string userInput;
+
+	switch (fieldNumber) {
+	case 14:
+		while (true) {
+			std::cout << "hrSpecialization* : ";
+			std::getline(std::cin, userInput);
+			Utility::removeEmptySpaces(userInput);
+
+			if (userInput.size() == 0) {
+				std::cout << "HR Specialization is mandatory...Please enter again!!" << '\n';
+			}
+			else {
+				hr.setHRSpecialization(userInput);
+				break;
+			}
+		}
+		break;
+	}
+}
+
+void HRView::viewHRConditional() {
+	HR hr;
+	bool isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------View HR-------------------------------------------------\n";
+		std::cout << "0. Exit" << '\n';
+		EmployeeView::printViewEmployeeFields();
+		printViewHRFields();
+		std::cout << "15. Go back" << '\n';
+		std::cout << "Select the field by which you want to view a HR, or select 0/15 for operations: \n";
+
+		if (isInvalidInput) {
+			std::cerr << "Wrong Input, Please enter an input in the range: [0-15]\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+
+			if (userInput == 0) {
+				std::exit(0);
+			}
+			else if (userInput == 1) {
+				EmployeeView::getViewEmployeeInput(hr, 1);
+				HRController::selectHR("employeeID", std::to_string(hr.getEmployeeID()));
+				break;
+			}
+			else if (userInput == 2) {
+				EmployeeView::getViewEmployeeInput(hr, 2);
+				HRController::selectHR("firstName", hr.getFirstName());
+				break;
+			}
+			else if (userInput == 3) {
+				EmployeeView::getViewEmployeeInput(hr, 3);
+				HRController::selectHR("middleName", hr.getMiddleName());
+				break;
+			}
+			else if (userInput == 4) {
+				EmployeeView::getViewEmployeeInput(hr, 4);
+				HRController::selectHR("lastName", hr.getLastName());
+				break;
+			}
+			else if (userInput == 5) {
+				EmployeeView::getViewEmployeeInput(hr, 5);
+				HRController::selectHR("dateOfBirth", hr.getDateOfBirth());
+				break;
+			}
+			else if (userInput == 6) {
+				EmployeeView::getViewEmployeeInput(hr, 6);
+				HRController::selectHR("mobileNo", std::to_string(hr.getMobileNo()));
+				break;
+			}
+			else if (userInput == 7) {
+				EmployeeView::getViewEmployeeInput(hr, 7);
+				HRController::selectHR("email", hr.getEmail());
+				break;
+			}
+			else if (userInput == 8) {
+				EmployeeView::getViewEmployeeInput(hr, 8);
+				HRController::selectHR("address", hr.getAddress());
+				break;
+			}
+			else if (userInput == 9) {
+				EmployeeView::getViewEmployeeInput(hr, 9);
+				HRController::selectHR("gender", EmployeeDB::Model::getGenderString(hr.getGender()));
+				break;
+			}
+			else if (userInput == 10) {
+				EmployeeView::getViewEmployeeInput(hr, 10);
+				HRController::selectHR("dateOfJoining", hr.getDateOfJoining());
+				break;
+			}
+			else if (userInput == 11) {
+				EmployeeView::getViewEmployeeInput(hr, 11);
+				HRController::selectHR("mentorID", std::to_string(hr.getMentorID()));
+				break;
+			}
+			else if (userInput == 12) {
+				EmployeeView::getViewEmployeeInput(hr, 12);
+				HRController::selectHR("performanceMetric", std::to_string(hr.getPerformanceMetric()));
+				break;
+			}
+			else if (userInput == 13) {
+				EmployeeView::getViewEmployeeInput(hr, 13);
+				HRController::selectHR("bonus", std::to_string(hr.getBonus()));
+				break;
+			}
+			else if (userInput == 14) {
+				getViewHRInput(hr, 14);
+				HRController::selectHR("hrSpecialization", hr.getHRSpecialization());
+				break;
+			}
+			else if (userInput == 15) {
+				return;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
 }

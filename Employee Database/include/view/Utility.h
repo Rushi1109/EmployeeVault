@@ -8,7 +8,7 @@ namespace EmployeeDB::View {
 	public:
 		static bool proceedFurther(const std::string& operation);
 		static bool repeatOperation(const std::string& operation, const std::string& Entity);
-		static std::string removeWhiteSpaces(std::string& str, const std::string& chars = "\t\n\v\f\r ");
+		static void removeEmptySpaces(std::string& str, const std::string& chars = "\t\n\v\f\r ");
 	};
 }
 

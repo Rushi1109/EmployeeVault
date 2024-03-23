@@ -10,6 +10,12 @@ namespace EmployeeDB::View {
 		static bool insertEngineer();
 		static bool deleteEngineer();
 		static bool updateEngineer();
+		static bool viewEngineer();
+
+	private:
+		static void printViewEngineerFields();
+		static void getViewEngineerInput(Engineer& engineer, int fieldNumber);
+		static void viewEngineerConditional();
 	};
 }
 

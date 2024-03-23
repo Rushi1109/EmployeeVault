@@ -8,7 +8,7 @@
 using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::HRController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool HRController::insertHR(HR& obj) {
+bool HRController::insertHR(HR& hr) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
@@ -16,20 +16,20 @@ bool HRController::insertHR(HR& obj) {
 		return false;
 	}
 
-	obj.setDepartmentID(departmentID);
+	hr.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(hr);
 
 	if (!employeeResult) {
 		std::cerr << "HR could not be inserted";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(hr.getEmail());
 
 	std::string queryString = "INSERT INTO HR (employeeID, hrSpecialization) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\"" + obj.getHRSpecialization() + "\");";
+		"\"" + hr.getHRSpecialization() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -44,7 +44,7 @@ bool HRController::insertHR(HR& obj) {
 }
 
 bool HRController::selectHR(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN HR " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN HR " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\" COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
@@ -57,19 +57,19 @@ bool HRController::selectHR(const std::string& attributeName, const std::string&
 	return true;
 }
 
-bool HRController::updateHR(HR& obj) {
+bool HRController::updateHR(HR& hr) {
 
-	bool employeeResult = EmployeeController::updateEmployee(obj);
+	bool employeeResult = EmployeeController::updateEmployee(hr);
 
 	if (!employeeResult) {
 		std::cerr << "HR could not be updated.\n";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+	std::string updateQueryCondition = getUpdateQueryCondition(hr);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE HR SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+		std::string queryString = "UPDATE HR SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(hr.getEmployeeID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -96,11 +96,11 @@ bool HRController::deleteHRByID(int ID) {
 	return deleteResult;
 }
 
-std::string HRController::getUpdateQueryCondition(HR& obj) {
+std::string HRController::getUpdateQueryCondition(HR& hr) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getHRSpecialization() != "#") {
-		updateQueryCondition = "hrSpecialization = \"" + obj.getHRSpecialization() + "\"";
+	if (hr.getHRSpecialization() != "#") {
+		updateQueryCondition = "hrSpecialization = \"" + hr.getHRSpecialization() + "\"";
 	}
 
 	return updateQueryCondition;

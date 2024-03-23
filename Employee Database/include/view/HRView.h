@@ -10,6 +10,12 @@ namespace EmployeeDB::View {
 		static bool insertHR();
 		static bool deleteHR();
 		static bool updateHR();
+		static bool viewHR();
+
+	private:
+		static void printViewHRFields();
+		static void getViewHRInput(HR& hr, int fieldNumber);
+		static void viewHRConditional();
 	};
 }
 

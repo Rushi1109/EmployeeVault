@@ -7,7 +7,7 @@
 using EmployeeDB::Controller::FinanceController, EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool FinanceController::insertFinance(Finance& obj) {
+bool FinanceController::insertFinance(Finance& finance) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("Finance");
 
 	if (departmentID == -1) {
@@ -15,18 +15,18 @@ bool FinanceController::insertFinance(Finance& obj) {
 		return false;
 	}
 
-	obj.setDepartmentID(departmentID);
+	finance.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(finance);
 
 	if (!employeeResult) {
 		std::cerr << "Financier could not be inserted.\n";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(finance.getEmail());
 
-	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + obj.getAccountingTool() + "\");";
+	std::string queryString = "INSERT INTO Finance (employeeID, accountingTool) VALUES (" + std::to_string(employeeID) + ", \"" + finance.getAccountingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -41,7 +41,7 @@ bool FinanceController::insertFinance(Finance& obj) {
 }
 
 bool FinanceController::selectFinance(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Finance " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Finance " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
@@ -54,19 +54,19 @@ bool FinanceController::selectFinance(const std::string& attributeName, const st
 	return true;
 }
 
-bool FinanceController::updateFinance(Finance& obj) {
+bool FinanceController::updateFinance(Finance& finance) {
 
-	bool employeeResult = EmployeeController::updateEmployee(obj);
+	bool employeeResult = EmployeeController::updateEmployee(finance);
 
 	if (!employeeResult) {
 		std::cerr << "Financier could not be updated.\n";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+	std::string updateQueryCondition = getUpdateQueryCondition(finance);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE Finance SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+		std::string queryString = "UPDATE Finance SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(finance.getEmployeeID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -93,11 +93,11 @@ bool FinanceController::deleteFinanceByID(int ID) {
 	return deleteResult;
 }
 
-std::string FinanceController::getUpdateQueryCondition(Finance& obj) {
+std::string FinanceController::getUpdateQueryCondition(Finance& finance) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getAccountingTool() != "#") {
-		updateQueryCondition = "accountingTool = \"" + obj.getAccountingTool() + "\"";
+	if (finance.getAccountingTool() != "#") {
+		updateQueryCondition = "accountingTool = \"" + finance.getAccountingTool() + "\"";
 	}
 
 	return updateQueryCondition;

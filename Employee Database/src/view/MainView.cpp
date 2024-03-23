@@ -22,7 +22,7 @@ void MainView::mainMenuView() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -105,7 +105,7 @@ void MainView::insertMenuView() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -184,7 +184,7 @@ void MainView::updateMenuView() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -263,7 +263,7 @@ void MainView::deleteMenuView() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -342,7 +342,7 @@ void MainView::viewMenuView() {
 		int userInput;
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		Utility::removeWhiteSpaces(inputLine);
+		Utility::removeEmptySpaces(inputLine);
 
 		if (inputLine.length() == 0) {
 			isInvalidInput = true;
@@ -367,26 +367,39 @@ void MainView::viewMenuView() {
 }
 
 void MainView::viewMenuSelection(short int userInput) {
+	bool continueViewing{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		//DepartmentView::select();
+		while (continueViewing) {
+			continueViewing = DepartmentView::viewDepartment();
+		}
 		break;
 	case 2:
-		//EngineerView::select();
+		while (continueViewing) {
+			continueViewing = EngineerView::viewEngineer();
+		}
 		break;
 	case 3:
-		//FinanceView::select();
+		while (continueViewing) {
+			continueViewing = FinanceView::viewFinance();
+		}
 		break;
 	case 4:
-		//HRView::select();
+		while (continueViewing) {
+			continueViewing = HRView::viewHR();
+		}
 		break;
 	case 5:
-		//QAView::select();
+		while (continueViewing) {
+			continueViewing = QAView::viewQA();
+		}
 		break;
 	case 6:
-		//ManagerView::select();
+		while (continueViewing) {
+			continueViewing = ManagerView::viewManager();
+		}
 		break;
 	}
 }

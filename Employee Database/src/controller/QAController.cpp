@@ -8,7 +8,7 @@
 using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::QAController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool QAController::insertQA(QA& obj) {
+bool QAController::insertQA(QA& qa) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
@@ -16,20 +16,20 @@ bool QAController::insertQA(QA& obj) {
 		return false;
 	}
 
-	obj.setDepartmentID(departmentID);
+	qa.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(qa);
 
 	if (!employeeResult) {
 		std::cerr << "QA could not be inserted.\n";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(qa.getEmail());
 
 	std::string queryString = "INSERT INTO QA (employeeID, testingTool) VALUES (" +
 		std::to_string(employeeID) + ", " +
-		"\"" + obj.getTestingTool() + "\");";
+		"\"" + qa.getTestingTool() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -44,7 +44,7 @@ bool QAController::insertQA(QA& obj) {
 }
 
 bool QAController::selectQA(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
@@ -57,19 +57,19 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 	return true;
 }
 
-bool QAController::updateQA(QA& obj) {
+bool QAController::updateQA(QA& qa) {
 
-	bool employeeResult = EmployeeController::updateEmployee(obj);
+	bool employeeResult = EmployeeController::updateEmployee(qa);
 
 	if (!employeeResult) {
 		std::cerr << "QA could not be updated.\n";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+	std::string updateQueryCondition = getUpdateQueryCondition(qa);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE QA SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+		std::string queryString = "UPDATE QA SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(qa.getEmployeeID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -96,11 +96,11 @@ bool QAController::deleteQAByID(int ID) {
 	return deleteResult;
 }
 
-std::string QAController::getUpdateQueryCondition(QA& obj) {
+std::string QAController::getUpdateQueryCondition(QA& qa) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getTestingTool() != "#") {
-		updateQueryCondition = "testingTool = \"" + obj.getTestingTool() + "\"";
+	if (qa.getTestingTool() != "#") {
+		updateQueryCondition = "testingTool = \"" + qa.getTestingTool() + "\"";
 	}
 
 	return updateQueryCondition;

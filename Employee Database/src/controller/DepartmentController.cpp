@@ -5,13 +5,13 @@
 using EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool DepartmentController::insertDepartment(const Department& d) {
+bool DepartmentController::insertDepartment(const Department& department) {
 	std::string queryString = "INSERT INTO Department (departmentName, baseSalary, allowance, deduction)"
 		+ std::string{ "VALUES (" } +
-		"\"" + d.getDepartmentName() + "\"" + ", " +
-		std::to_string(d.getBaseSalary()) + ","+
-		std::to_string(d.getAllowance()) + ","+
-		std::to_string(d.getDeduction()) + ");";
+		"\"" + department.getDepartmentName() + "\"" + ", " +
+		std::to_string(department.getBaseSalary()) + ","+
+		std::to_string(department.getAllowance()) + ","+
+		std::to_string(department.getDeduction()) + ");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -41,7 +41,7 @@ bool DepartmentController::deleteDepartmentByID(int departmentID) {
 }
 
 bool DepartmentController::selectDepartment(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Department " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM Department " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
@@ -77,11 +77,11 @@ int DepartmentController::getDepartmentIDbyName(const std::string& departmentNam
 	return departmentID;
 }
 
-bool DepartmentController::updateDepartment(Department& obj) {
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+bool DepartmentController::updateDepartment(Department& department) {
+	std::string updateQueryCondition = getUpdateQueryCondition(department);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE Department SET " + updateQueryCondition + " WHERE departmentID = " + std::to_string(obj.getDepartmentID()) + ";";
+		std::string queryString = "UPDATE Department SET " + updateQueryCondition + " WHERE departmentID = " + std::to_string(department.getDepartmentID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -96,29 +96,29 @@ bool DepartmentController::updateDepartment(Department& obj) {
 	return true;
 }
 
-std::string DepartmentController::getUpdateQueryCondition(Department& obj) {
+std::string DepartmentController::getUpdateQueryCondition(Department& department) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getDepartmentName() != "#") {
-		updateQueryCondition += "departmentName = \"" + obj.getDepartmentName() + "\"";
+	if (department.getDepartmentName() != "#") {
+		updateQueryCondition += "departmentName = \"" + department.getDepartmentName() + "\"";
 	}
-	if (obj.getBaseSalary() != -1.0) {
+	if (department.getBaseSalary() != -1.0) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "baseSalary = " + std::to_string(obj.getBaseSalary());
+		updateQueryCondition += "baseSalary = " + std::to_string(department.getBaseSalary());
 	}
-	if (obj.getAllowance() != -1.0) {
+	if (department.getAllowance() != -1.0) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "allowance = " + std::to_string(obj.getAllowance());
+		updateQueryCondition += "allowance = " + std::to_string(department.getAllowance());
 	}
-	if (obj.getDeduction() != -1.0) {
+	if (department.getDeduction() != -1.0) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "deduction = " + std::to_string(obj.getDeduction());
+		updateQueryCondition += "deduction = " + std::to_string(department.getDeduction());
 	}
 
 	return updateQueryCondition;

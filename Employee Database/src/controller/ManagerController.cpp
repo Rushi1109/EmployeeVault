@@ -6,23 +6,23 @@
 using EmployeeDB::Controller::ManagerController, EmployeeDB::Controller::EmployeeController;
 using EmployeeDB::DBManager;
 
-bool ManagerController::insertManager(Manager& obj) {
-	int departmentID = EmployeeController::getDepartmentIDbyEmployeeID(obj.getManagerID());
+bool ManagerController::insertManager(Manager& manager) {
+	int departmentID = EmployeeController::getDepartmentIDbyEmployeeID(manager.getManagerID());
 
 	if (departmentID == -1) {
 		std::cerr << "Department could not be found for provided employeeID";
 		return false;
 	}
 
-	obj.setDepartmentID(departmentID);
+	manager.setDepartmentID(departmentID);
 
 	std::string queryString = "INSERT INTO Manager (managerID, departmentID, teamSize, yearsOfExp, projectTitle, role) VALUES (" +
-		std::to_string(obj.getManagerID()) + ", " +
-		std::to_string(obj.getDepartmentID()) + ", " +
-		std::to_string(obj.getTeamSize()) + ", " +
-		std::to_string(obj.getYearsOfExperience()) + ", " +
-		(obj.getProjectTitle().size() == 0 ? "NULL" : "\"" + obj.getProjectTitle() + "\"") + "," +
-		(obj.getRole().size() == 0 ? "NULL" : "\"" + obj.getRole() + "\"") + "\");";
+		std::to_string(manager.getManagerID()) + ", " +
+		std::to_string(manager.getDepartmentID()) + ", " +
+		std::to_string(manager.getTeamSize()) + ", " +
+		std::to_string(manager.getYearsOfExperience()) + ", " +
+		(manager.getProjectTitle().size() == 0 ? "NULL" : "\"" + manager.getProjectTitle() + "\"") + "," +
+		(manager.getRole().size() == 0 ? "NULL" : "\"" + manager.getRole() + "\"") + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -37,7 +37,7 @@ bool ManagerController::insertManager(Manager& obj) {
 }
 
 bool ManagerController::selectManager(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM ManagerView " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM ManagerView " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
@@ -65,18 +65,18 @@ bool ManagerController::deleteManagerByID(int ID) {
 	return true;
 };
 
-bool ManagerController::updateManager(Manager& obj) {
-	bool employeeResult = EmployeeController::updateEmployee(obj);
+bool ManagerController::updateManager(Manager& manager) {
+	bool employeeResult = EmployeeController::updateEmployee(manager);
 
 	if (!employeeResult) {
 		std::cerr << "Manager could not be updated.\n";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+	std::string updateQueryCondition = getUpdateQueryCondition(manager);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE Manager SET " + updateQueryCondition + " WHERE managerID = " + std::to_string(obj.getManagerID()) + ";";
+		std::string queryString = "UPDATE Manager SET " + updateQueryCondition + " WHERE managerID = " + std::to_string(manager.getManagerID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -91,29 +91,29 @@ bool ManagerController::updateManager(Manager& obj) {
 	return true;
 }
 
-std::string ManagerController::getUpdateQueryCondition(Manager& obj) {
+std::string ManagerController::getUpdateQueryCondition(Manager& manager) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getTeamSize() != -1) {
-		updateQueryCondition += "teamSize = " + std::to_string(obj.getTeamSize());
+	if (manager.getTeamSize() != -1) {
+		updateQueryCondition += "teamSize = " + std::to_string(manager.getTeamSize());
 	}
-	if (obj.getYearsOfExperience() != -1.0) {
+	if (manager.getYearsOfExperience() != -1.0) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "yearsOfExp = " + std::to_string(obj.getYearsOfExperience());
+		updateQueryCondition += "yearsOfExp = " + std::to_string(manager.getYearsOfExperience());
 	}
-	if (obj.getProjectTitle() != "#") {
+	if (manager.getProjectTitle() != "#") {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "projectTitle = \"" + obj.getProjectTitle() + "\"";
+		updateQueryCondition += "projectTitle = \"" + manager.getProjectTitle() + "\"";
 	}
-	if (obj.getRole() != "#") {
+	if (manager.getRole() != "#") {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "role = \"" + obj.getRole() + "\"";
+		updateQueryCondition += "role = \"" + manager.getRole() + "\"";
 	}
 
 	return updateQueryCondition;

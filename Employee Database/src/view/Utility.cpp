@@ -13,7 +13,7 @@ bool Utility::proceedFurther(const std::string& operation) {
 
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		removeWhiteSpaces(inputLine);
+		removeEmptySpaces(inputLine);
 
 		if (inputLine.size() == 1 && (inputLine[0] == 'y' || inputLine[0] == 'Y')) {
 			return true;
@@ -40,7 +40,7 @@ bool Utility::repeatOperation(const std::string& operation, const std::string& E
 
 		std::string inputLine;
 		std::getline(std::cin, inputLine);
-		removeWhiteSpaces(inputLine);
+		removeEmptySpaces(inputLine);
 
 		if (inputLine.size() == 1 && (inputLine[0] == 'y' || inputLine[0] == 'Y')) {
 			return true;
@@ -57,9 +57,9 @@ bool Utility::repeatOperation(const std::string& operation, const std::string& E
 	return false;
 }
 
-std::string Utility::removeWhiteSpaces(std::string& str, const std::string& chars) {
+void Utility::removeEmptySpaces(std::string& str, const std::string& chars) {
 	if (str.size() == 0) {
-		return str;
+		return;
 	}
 	else {
 		str.erase(str.find_last_not_of(chars) + 1);
@@ -86,6 +86,5 @@ std::string Utility::removeWhiteSpaces(std::string& str, const std::string& char
 			++i;
 		}
 		str = std::move(out_str);
-		return str;
 	}
 }

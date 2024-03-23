@@ -10,6 +10,12 @@ namespace EmployeeDB::View {
 		static bool insertFinance();
 		static bool deleteFinance();
 		static bool updateFinance();
+		static bool viewFinance();
+
+	private:
+		static void printViewFinanceFields();
+		static void getViewFinanceInput(Finance& finance, int fieldNumber);
+		static void viewFinanceConditional();
 	};
 }
 

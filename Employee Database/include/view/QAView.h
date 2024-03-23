@@ -10,6 +10,12 @@ namespace EmployeeDB::View {
 		static bool insertQA();
 		static bool deleteQA();
 		static bool updateQA();
+		static bool viewQA();
+
+	private:
+		static void printViewQAFields();
+		static void getViewQAInput(QA& qa, int fieldNumber);
+		static void viewQAConditional();
 	};
 }
 

@@ -7,7 +7,7 @@
 using EmployeeDB::Controller::EngineerController, EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::DepartmentController;
 using EmployeeDB::DBManager;
 
-bool EngineerController::insertEngineer(Engineer& obj) {
+bool EngineerController::insertEngineer(Engineer& engineer) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("Engineer");
 
 	if (departmentID == -1) {
@@ -15,18 +15,18 @@ bool EngineerController::insertEngineer(Engineer& obj) {
 		return false;
 	}
 
-	obj.setDepartmentID(departmentID);
+	engineer.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(obj);
+	bool employeeResult = EmployeeController::insertEmployee(engineer);
 
 	if (!employeeResult) {
 		std::cerr << "Engineer could not be inserted.\n";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(obj.getEmail());
+	int employeeID = EmployeeController::getEmployeeIDbyEmail(engineer.getEmail());
 
-	std::string queryString = "INSERT INTO Engineer (employeeID, technology) VALUES (" + std::to_string(employeeID) + ", \"" + obj.getTechnology() + "\");";
+	std::string queryString = "INSERT INTO Engineer (employeeID, technology) VALUES (" + std::to_string(employeeID) + ", \"" + engineer.getTechnology() + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -41,7 +41,7 @@ bool EngineerController::insertEngineer(Engineer& obj) {
 }
 
 bool EngineerController::selectEngineer(const std::string& attributeName, const std::string& attributeValue) {
-	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Engineer " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"" : "") + " COLLATE NOCASE;";
+	std::string queryString = "SELECT * FROM Employee NATURAL JOIN Engineer " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
@@ -54,19 +54,19 @@ bool EngineerController::selectEngineer(const std::string& attributeName, const 
 	return true;
 }
 
-bool EngineerController::updateEngineer(Engineer& obj) {
+bool EngineerController::updateEngineer(Engineer& engineer) {
 
-	bool employeeResult = EmployeeController::updateEmployee(obj);
+	bool employeeResult = EmployeeController::updateEmployee(engineer);
 
 	if (!employeeResult) {
 		std::cerr << "Engineer could not be updated.\n";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(obj);
+	std::string updateQueryCondition = getUpdateQueryCondition(engineer);
 
 	if (updateQueryCondition.size() != 0) {
-		std::string queryString = "UPDATE Engineer SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(obj.getEmployeeID()) + ";";
+		std::string queryString = "UPDATE Engineer SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(engineer.getEmployeeID()) + ";";
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
@@ -93,11 +93,11 @@ bool EngineerController::deleteEngineerByID(int ID) {
 	return deleteResult;
 }
 
-std::string EngineerController::getUpdateQueryCondition(Engineer& obj) {
+std::string EngineerController::getUpdateQueryCondition(Engineer& engineer) {
 	std::string updateQueryCondition{ "" };
 
-	if (obj.getTechnology() != "#") {
-		updateQueryCondition = "technology = \"" + obj.getTechnology() + "\"";
+	if (engineer.getTechnology() != "#") {
+		updateQueryCondition = "technology = \"" + engineer.getTechnology() + "\"";
 	}
 
 	return updateQueryCondition;
