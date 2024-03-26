@@ -1,8 +1,6 @@
 #include <iostream>
-#include "MainView.h"
-
-using EmployeeDB::View::MainView;
+#include "EmployeeDB.h"
 
 int main() {
-	MainView::mainMenuView();
+	EmployeeDB::run();
 }

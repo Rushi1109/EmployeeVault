@@ -83,12 +83,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(SolutionDir)$(ProjectName)\include\view\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(SolutionDir)$(ProjectName)\include\view\;$(SolutionDir)$(ProjectName)\lib\logpulse\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(SolutionDir)$(ProjectName)\include\view\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)$(ProjectName)\lib\sqlite\;$(SolutionDir)$(ProjectName)\include\model\;$(SolutionDir)$(ProjectName)\include\controller\;$(SolutionDir)$(ProjectName)\include\;$(SolutionDir)$(ProjectName)\include\view\;$(SolutionDir)$(ProjectName)\lib\logpulse\;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="lib\logpulse\Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lib\sqlite\shell.c" />
     <ClCompile Include="lib\sqlite\sqlite3.c" />
@@ -162,6 +163,7 @@
     <ClCompile Include="src\controller\ManagerController.cpp" />
     <ClCompile Include="src\controller\QAController.cpp" />
     <ClCompile Include="src\DBManager.cpp" />
+    <ClCompile Include="src\EmployeeDB.cpp" />
     <ClCompile Include="src\Validator.cpp" />
     <ClCompile Include="src\view\DepartmentView.cpp" />
     <ClCompile Include="src\view\EmployeeView.cpp" />
@@ -182,7 +184,9 @@
     <ClInclude Include="include\controller\HRController.h" />
     <ClInclude Include="include\controller\ManagerController.h" />
     <ClInclude Include="include\controller\QAController.h" />
+    <ClInclude Include="include\DBLogger.h" />
     <ClInclude Include="include\DBManager.h" />
+    <ClInclude Include="include\EmployeeDB.h" />
     <ClInclude Include="include\model\Engineer.h" />
     <ClInclude Include="include\model\Finance.h" />
     <ClInclude Include="include\model\HR.h" />
@@ -200,11 +204,26 @@
     <ClInclude Include="include\view\QAView.h" />
     <ClInclude Include="include\Views.h" />
     <ClInclude Include="include\view\Utility.h" />
+    <ClInclude Include="lib\logpulse\Log.h" />
+    <ClInclude Include="lib\logpulse\LogPulse.h" />
+    <ClInclude Include="lib\logpulse\Registry.h" />
+    <ClInclude Include="lib\logpulse\Timer.h" />
     <ClInclude Include="lib\sqlite\sqlite3.h" />
     <ClInclude Include="lib\sqlite\sqlite3ext.h" />
     <ClInclude Include="include\model\Department.h" />
     <ClInclude Include="include\model\Employee.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\gmock.1.11.0\build\native\gmock.targets" Condition="Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\gmock.1.11.0\build\native\gmock.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\gmock.1.11.0\build\native\gmock.targets'))" />
+  </Target>
 </Project>

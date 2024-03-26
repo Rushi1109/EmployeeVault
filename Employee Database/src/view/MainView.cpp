@@ -7,8 +7,6 @@ using EmployeeDB::View::EngineerView, EmployeeDB::View::FinanceView, EmployeeDB:
 using EmployeeDB::DBManager;
 
 void MainView::mainMenuView() {
-	DBManager::executeConfigQuery();
-
 	bool isInvalidInput{ false };
 
 	while (true) {
