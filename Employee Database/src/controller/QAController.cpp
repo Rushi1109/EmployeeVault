@@ -81,6 +81,9 @@ bool QAController::updateQA(QA& qa) {
 			return false;
 		}
 	}
+	else {
+		std::cout << "Successfully updated a QA.\n";
+	}
 	return true;
 }
 

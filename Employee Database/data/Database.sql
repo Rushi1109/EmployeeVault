@@ -19,10 +19,10 @@ CREATE TABLE "Employee" (
 	"gender"	TEXT NOT NULL,
 	"dateOfJoining"	TEXT NOT NULL,
 	"departmentID"	INTEGER NOT NULL,
-	"mentorID"	INTEGER NOT NULL,
+	"mentorID"	INTEGER,
 	"performanceMetric"	REAL,
 	"bonus"	REAL,
-	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE SET NULL,
+	FOREIGN KEY("departmentID") REFERENCES "Department"("departmentID") ON DELETE CASCADE,
 	FOREIGN KEY("mentorID") REFERENCES "Employee"("employeeID") ON DELETE SET NULL,
 	UNIQUE("employeeID"),
 	PRIMARY KEY("employeeID" AUTOINCREMENT)

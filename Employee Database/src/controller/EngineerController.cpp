@@ -57,7 +57,7 @@ bool EngineerController::selectEngineer(const std::string& attributeName, const 
 bool EngineerController::updateEngineer(Engineer& engineer) {
 
 	bool employeeResult = EmployeeController::updateEmployee(engineer);
-
+	
 	if (!employeeResult) {
 		std::cerr << "Engineer could not be updated.\n";
 		return false;
@@ -77,6 +77,9 @@ bool EngineerController::updateEngineer(Engineer& engineer) {
 			std::cerr << "Engineer could not be updated.\n";
 			return false;
 		}
+	}
+	else{
+		std::cout << "Successfully updated an Engineer.\n";
 	}
 	return true;
 }

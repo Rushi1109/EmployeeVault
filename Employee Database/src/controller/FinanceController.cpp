@@ -78,6 +78,9 @@ bool FinanceController::updateFinance(Finance& finance) {
 			return false;
 		}
 	}
+	else {
+		std::cout << "Successfully updated a financier.\n";
+	}
 	return true;
 }
 

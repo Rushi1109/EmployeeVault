@@ -15,3 +15,41 @@
 26/03/24 13:09:07 : [DBLogger] [Info]: Success :  Opened database file 
 26/03/24 13:09:07 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
 26/03/24 13:09:10 : [DBLogger] [Info]: Success :  Closed database file 
+26/03/24 14:16:27 : [DBLogger] [Info]: Success :  Opened database file 
+26/03/24 14:16:27 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+26/03/24 14:16:30 : [DBLogger] [Info]: Success :  Closed database file 
+26/03/24 14:16:45 : [DBLogger] [Info]: Success :  Opened database file 
+26/03/24 14:16:45 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+26/03/24 14:16:47 : [DBLogger] [Info]: Success :  Closed database file 
+26/03/24 14:17:54 : [DBLogger] [Info]: Success :  Opened database file 
+26/03/24 14:17:54 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+26/03/24 14:18:07 : [DBLogger] [Info]: Success :  SELECT departmentID FROM Department WHERE departmentName="Engineer" COLLATE NOCASE; 
+26/03/24 14:18:07 : [DBLogger] [Info]: Success :  SELECT employeeID FROM Employee WHERE employeeID = 1 AND departmentID = 1; 
+26/03/24 14:18:07 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 1; 
+26/03/24 14:18:07 : [DBLogger] [Info]: Success :  SELECT * FROM Employee NATURAL JOIN Engineer WHERE Employee.employeeID = "1"  COLLATE NOCASE; 
+26/03/24 14:18:47 : [DBLogger] [Info]: Success :  UPDATE Employee SET mobileNo = 7283902430, address = "88, V.K." WHERE employeeID = 1; 
+26/03/24 15:38:37 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:39:00 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:54:19 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:55:26 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:56:35 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:56:49 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:58:15 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:59:35 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 15:59:44 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:04:12 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:04:20 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:07:53 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:08:01 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:08:11 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:09:51 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:10:24 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:10:57 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:12:17 : [DBLogger] [Info]: Success :  Opened database file 
+26/03/24 16:12:17 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+26/03/24 16:12:23 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 1; 
+26/03/24 16:12:23 : [DBLogger] [Info]: Success :  SELECT * FROM Employee NATURAL JOIN Engineer WHERE employeeID = "1"  COLLATE NOCASE; 
+26/03/24 16:14:29 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:15:15 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:34:44 : [DBLogger] [Info]: Failed :  unable to open database file 
+26/03/24 16:47:49 : [DBLogger] [Info]: Failed :  unable to open database file 

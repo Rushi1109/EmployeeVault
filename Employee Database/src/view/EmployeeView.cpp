@@ -18,7 +18,7 @@ void EmployeeView::printEmployeeFields() {
 	std::cout << "7. address* :" << '\n';
 	std::cout << "8. gender* :" << '\n';
 	std::cout << "9. dateOfJoining* :" << '\n';
-	std::cout << "10. mentorID* :" << '\n';
+	std::cout << "10. mentorID :" << '\n';
 	std::cout << "11. performanceMetric :" << '\n';
 	std::cout << "12. bonus :" << '\n';
 }
@@ -189,28 +189,27 @@ void EmployeeView::getInsertEmployeeInput(Employee& employee) {
 		}
 	}
 
-	while (true) {
-		std::cout << "mentorID* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
+	{
+		while (true) {
+			std::cout << "mentorID : ";
+			std::getline(std::cin, userInput);
+			Utility::removeEmptySpaces(userInput);
 
-		if (userInput.size() == 0) {
-			std::cout << "mentorID is mandatory...Please enter again!!" << '\n';
-		}
-		else {
+			if (userInput.size() == 0) {
+				break;
+			}
 			try {
 				if (stoi(userInput) > 0) {
 					employee.setMentorID(stoi(userInput));
+					break;
 				}
 				else {
-					throw "Negative number entered!";
+					throw "Negative number  entered!";
 				}
 			}
 			catch (...) {
-				std::cout << "Wrong input...Please enter again!!\n";
-				continue;
+				std::cerr << "Wrong input...Please enter Positive real number!!\n";
 			}
-			break;
 		}
 	}
 

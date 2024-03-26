@@ -80,13 +80,16 @@ bool ManagerController::updateManager(Manager& manager) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
-			std::cerr << "Successfully updated a Manager.\n";
+			std::cout << "Successfully updated a Manager.\n";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
 			std::cerr << "Manager could not be updated.\n";
 			return false;
 		}
+	}
+	else {
+		std::cout << "Successfully updated a Manager.\n";
 	}
 	return true;
 }
