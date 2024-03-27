@@ -12,7 +12,7 @@ bool QAController::insertQA(QA& qa) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
-		std::cerr << "QA department not found. Please insert a department named QA.\n";
+		std::cerr << "\033[0;31m" << "QA department not found. Please insert a department named QA.\n" << "\033[0m";
 		return false;
 	}
 
@@ -21,7 +21,7 @@ bool QAController::insertQA(QA& qa) {
 	bool employeeResult = EmployeeController::insertEmployee(qa);
 
 	if (!employeeResult) {
-		std::cerr << "QA could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "QA could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 
@@ -33,11 +33,11 @@ bool QAController::insertQA(QA& qa) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
-		std::cout << "Successfully inserted a QA.\n";
+		std::cout << "\033[0;32m" << "Successfully inserted a QA.\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		std::cerr << "QA could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "QA could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 	return true;
@@ -48,7 +48,7 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
-		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
+		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -62,7 +62,7 @@ bool QAController::updateQA(QA& qa) {
 	bool employeeResult = EmployeeController::updateEmployee(qa);
 
 	if (!employeeResult) {
-		std::cerr << "QA could not be updated.\n";
+		std::cerr << "\033[0;31m" << "QA could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
@@ -73,16 +73,16 @@ bool QAController::updateQA(QA& qa) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
-			std::cout << "Successfully updated a QA.\n";
+			std::cout << "\033[0;32m" << "Successfully updated a QA.\n" << "\033[0m";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
-			std::cerr << "QA could not be updated.\n";
+			std::cerr << "\033[0;31m" << "QA could not be updated.\n" << "\033[0m";
 			return false;
 		}
 	}
 	else {
-		std::cout << "Successfully updated a QA.\n";
+		std::cout << "\033[0;32m" << "Successfully updated a QA.\n" << "\033[0m";
 	}
 	return true;
 }
@@ -91,10 +91,10 @@ bool QAController::deleteQAByID(int ID) {
 	int deleteResult = EmployeeController::deleteEmployeeByID(ID);
 
 	if (deleteResult) {
-		std::cout << "Successfully deleted a QA.\n";
+		std::cout << "\033[0;32m" << "Successfully deleted a QA.\n" << "\033[0m";
 	}
 	else {
-		std::cerr << "QA could not be deleted.\n";
+		std::cerr << "\033[0;31m" << "QA could not be deleted.\n" << "\033[0m";
 	}
 	return deleteResult;
 }

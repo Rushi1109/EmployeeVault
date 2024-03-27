@@ -13,7 +13,7 @@ bool FinanceView::insertFinance() {
 	Finance obj;
 
 	system("cls");
-	std::cout << "------------------------------------------Insert Finance-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Insert Finance" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "Fields with * are required fields\n";
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. accountingTool* : " << '\n';
@@ -32,7 +32,7 @@ bool FinanceView::insertFinance() {
 		Utility::removeEmptySpaces(userInput);
 
 		if (userInput.size() == 0) {
-			std::cout << "accountingTool is mandatory...Please enter again!!" << '\n';
+			std::cout << "\033[0;31m" << "accountingTool is mandatory...Please enter again!!" << '\n' << "\033[0m";
 		}
 		else {
 			obj.setAccountingTool(userInput);
@@ -51,7 +51,7 @@ bool FinanceView::deleteFinance() {
 	EmployeeView::getEmployeeIDInput(obj, "Delete", "Finance");
 
 	system("cls");
-	std::cout << "-------------------------------------------Delete Finance-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Delete Finance" << "\033[0m" << "-------------------------------------------------\n";
 	FinanceController::selectFinance("Employee.employeeID", std::to_string(obj.getEmployeeID()));
 
 	if (!Utility::proceedFurther("Delete")) {
@@ -69,7 +69,7 @@ bool FinanceView::updateFinance() {
 	EmployeeView::getEmployeeIDInput(obj, "Update", "Finance");
 
 	system("cls");
-	std::cout << "------------------------------------------Update Finance-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Update Finance" << "\033[0m" << "-------------------------------------------------\n";
 	FinanceController::selectFinance("Employee.employeeID", std::to_string(obj.getEmployeeID()));
 	if (!Utility::proceedFurther("Update")) {
 		return false;
@@ -84,10 +84,10 @@ bool FinanceView::updateFinance() {
 		EmployeeView::printEmployeeFields();
 		std::cout << "13. accountingTool* : " << '\n';
 		std::cout << "14. Go Back" << '\n';
-		std::cout << "Select the field you want to update, or select 0/14 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field you want to update, or select 0/14 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-14]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-14]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -121,7 +121,7 @@ bool FinanceView::updateFinance() {
 					Utility::removeEmptySpaces(inputLine);
 
 					if (inputLine.size() == 0) {
-						std::cout << "accountingTool is mandatory...Please enter again!!" << '\n';
+						std::cout << "\033[0;31m" << "accountingTool is mandatory...Please enter again!!" << '\n' << "\033[0m";
 					}
 					else {
 						obj.setAccountingTool(inputLine);
@@ -157,15 +157,15 @@ bool FinanceView::viewFinance() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View Finance-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View Finance" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		std::cout << "1. View Finance based on a field" << '\n';
 		std::cout << "2. View all Finance" << '\n';
 		std::cout << "3. Go Back" << '\n';
-		std::cout << "Select the operation [0-3]: \n";
+		std::cout << "\033[0;33m" << "Select the operation [0-3]: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-3]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -221,7 +221,7 @@ void FinanceView::getViewFinanceInput(Finance& finance, int fieldNumber) {
 			Utility::removeEmptySpaces(userInput);
 
 			if (userInput.size() == 0) {
-				std::cout << "Accounting Tool is mandatory...Please enter again!!" << '\n';
+				std::cout << "\033[0;31m" << "Accounting Tool is mandatory...Please enter again!!" << '\n' << "\033[0m";
 			}
 			else {
 				finance.setAccountingTool(userInput);
@@ -238,15 +238,15 @@ void FinanceView::viewFinanceConditional() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View Finance-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View Finance" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		EmployeeView::printViewEmployeeFields();
 		printViewFinanceFields();
 		std::cout << "15. Go back" << '\n';
-		std::cout << "Select the field by which you want to view a Finance, or select 0/15 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field by which you want to view a Finance, or select 0/15 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-15]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-15]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 

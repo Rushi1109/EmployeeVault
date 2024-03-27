@@ -33,7 +33,7 @@ void DBManager::openConnection() {
 		DBLogger::logger.info("Success : ", "Opened database file");
 	}
 	else {
-		DBLogger::logger.info("Failed : ", sqlite3_errmsg(db));
+		DBLogger::logger.error("Failed : ", sqlite3_errmsg(db));
 		throw std::runtime_error(sqlite3_errmsg(db));
 	}
 }
@@ -45,7 +45,7 @@ void DBManager::closeConnection() {
 		DBLogger::logger.info("Success : ", "Closed database file");
 	}
 	else {
-		DBLogger::logger.info("Failed : ", sqlite3_errmsg(db));
+		DBLogger::logger.error("Failed : ", sqlite3_errmsg(db));
 		throw std::runtime_error(sqlite3_errmsg(db));
 	}
 }
@@ -57,7 +57,7 @@ int DBManager::executeQuery(const char* queryString) {
 		DBLogger::logger.info("Success : ", queryString);
 	}
 	else {
-		DBLogger::logger.info("Failed : ", queryString);
+		DBLogger::logger.error("Failed : ", queryString);
 		throw std::runtime_error{ errMsg };
 	}
 
@@ -86,7 +86,7 @@ int DBManager::executeSelectQuery(const char* queryString) {
 		DBLogger::logger.info("Success : ", queryString);
 	}
 	else {
-		DBLogger::logger.info("Failed : ", queryString);
+		DBLogger::logger.error("Failed : ", queryString);
 		throw std::runtime_error{ errMsg };
 	}
 
@@ -123,7 +123,7 @@ int DBManager::executeSelectSalaryQuery(const char* queryString) {
 		DBLogger::logger.info("Success : ", queryString);
 	}
 	else {
-		DBLogger::logger.info("Failed : ", queryString);
+		DBLogger::logger.error("Failed : ", queryString);
 		throw std::runtime_error{ errMsg };
 	}
 	return rowCount;
@@ -136,7 +136,7 @@ int DBManager::executeCustomQuery(const char* queryString, int (*callback)(void*
 		DBLogger::logger.info("Success : ", queryString);
 	}
 	else {
-		DBLogger::logger.info("Failed : ", queryString);
+		DBLogger::logger.error("Failed : ", queryString);
 		throw std::runtime_error{ errMsg };
 	}
 
@@ -151,7 +151,7 @@ int DBManager::executeRowCountQuery(const char* queryString) {
 		DBLogger::logger.info("Success : ", queryString);
 	}
 	else {
-		DBLogger::logger.info("Failed : ", queryString);
+		DBLogger::logger.error("Failed : ", queryString);
 		throw std::runtime_error{ errMsg };
 	}
 	return rowCount;

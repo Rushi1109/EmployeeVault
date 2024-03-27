@@ -8,7 +8,7 @@ bool Utility::proceedFurther(const std::string& operation) {
 
 	while (true) {
 		if (!isInvalidInput) {
-			std::cout << "Do you want to proceed with " + operation + "? [y/n] : ";
+			std::cout << "\033[0;33m" << "Do you want to proceed with " + operation + "? [y/n] : " << "\033[0m";
 		}
 
 		std::string inputLine;
@@ -22,7 +22,7 @@ bool Utility::proceedFurther(const std::string& operation) {
 			return false;
 		}
 		else {
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter character [y/n] : " << "\033[0m";
 			isInvalidInput = true;
 		}
 	}
@@ -35,7 +35,7 @@ bool Utility::repeatOperation(const std::string& operation, const std::string& E
 
 	while (true) {
 		if (!isInvalidInput) {
-			std::cout << "Do you want to "+ operation + " another " + Entity + " ? [y / n] : ";
+			std::cout << "\033[0;33m" << "Do you want to "+ operation + " another " + Entity + " ? [y / n] : " << "\033[0m";
 		}
 
 		std::string inputLine;
@@ -49,7 +49,7 @@ bool Utility::repeatOperation(const std::string& operation, const std::string& E
 			return false;
 		}
 		else {
-			std::cerr << "Wrong Input, Please enter character [y/n] : ";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter character [y/n] : " << "\033[0m";
 			isInvalidInput = true;
 		}
 	}

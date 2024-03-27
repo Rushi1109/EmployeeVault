@@ -13,7 +13,7 @@ void MainView::mainMenuView() {
 		printMainMenu();
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-5]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-5]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -43,14 +43,14 @@ void MainView::mainMenuView() {
 
 void MainView::printMainMenu() {
 	system("cls");
-	std::cout << "------------------------------------------Welcome to Employee Database-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Welcome to Employee Database" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "0. Exit\n";
 	std::cout << "1. Create Table\n";
 	std::cout << "2. Insert Data\n";
 	std::cout << "3. Update Data\n";
 	std::cout << "4. Delete Data\n";
 	std::cout << "5. View Data\n";
-	std::cout << "Please select an operation to perform:\n";
+	std::cout << "\033[0;33m" << "Please select an operation to perform:\n" << "\033[0m";
 }
 
 void MainView::mainMenuSelection(short int userInput) {
@@ -91,12 +91,12 @@ void MainView::insertMenuView() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------Insert Menu-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "Insert Menu" << "\033[0m" << "------------------------------------------------- \n";
 		printTableMenu();
-		std::cout << "Please select an entity to insert:\n";
+		std::cout << "\033[0;33m" << "Please select an entity to insert:\n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-7]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-7]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -170,12 +170,12 @@ void MainView::updateMenuView() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------Update Menu-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "Update Menu" << "\033[0m" << "------------------------------------------------- \n";
 		printTableMenu();
-		std::cout << "Please select an entity to update:\n";
+		std::cout << "\033[0;33m" << "Please select an entity to update:\n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-7]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-7]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -249,12 +249,12 @@ void MainView::deleteMenuView() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------Delete Menu-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "Delete Menu" << "\033[0m" << "------------------------------------------------- \n";
 		printTableMenu();
-		std::cout << "Please select an entity to delete:\n";
+		std::cout << "\033[0;33m" << "Please select an entity to delete:\n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-7]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-7]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -328,12 +328,12 @@ void MainView::viewMenuView() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View Menu-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View Menu" << "\033[0m" << "------------------------------------------------- \n";
 		printTableMenu();
-		std::cout << "Please select an entity to view:\n";
+		std::cout << "\033[0;33m" << "Please select an entity to view:\n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-7]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-7]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 

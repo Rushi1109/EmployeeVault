@@ -13,7 +13,7 @@ bool HRView::insertHR() {
 	HR hr;
 
 	system("cls");
-	std::cout << "------------------------------------------Insert HR-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Insert HR" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "Fields with * are required fields\n";
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. hrSpecialization* : " << '\n';
@@ -32,7 +32,7 @@ bool HRView::insertHR() {
 		Utility::removeEmptySpaces(userInput);
 
 		if (userInput.size() == 0) {
-			std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
+			std::cout << "\033[0;31m" << "hrSpecialization is mandatory...Please enter again!!" << '\n' << "\033[0m";
 		}
 		else {
 			hr.setHRSpecialization(userInput);
@@ -51,7 +51,7 @@ bool HRView::deleteHR() {
 	EmployeeView::getEmployeeIDInput(hr, "Delete", "HR");
 
 	system("cls");
-	std::cout << "-------------------------------------------Delete HR-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Delete HR" << "\033[0m" << "-------------------------------------------------\n";
 	HRController::selectHR("Employee.employeeID", std::to_string(hr.getEmployeeID()));
 
 	if (!Utility::proceedFurther("Delete")) {
@@ -69,7 +69,7 @@ bool HRView::updateHR() {
 	EmployeeView::getEmployeeIDInput(hr, "Update", "HR");
 
 	system("cls");
-	std::cout << "------------------------------------------Update HR-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Update HR" << "\033[0m" << "-------------------------------------------------\n";
 	HRController::selectHR("Employee.employeeID", std::to_string(hr.getEmployeeID()));
 	if (!Utility::proceedFurther("Update")) {
 		return false;
@@ -84,10 +84,10 @@ bool HRView::updateHR() {
 		EmployeeView::printEmployeeFields();
 		std::cout << "13. hrSpecialization* : " << '\n';
 		std::cout << "14. Go Back" << '\n';
-		std::cout << "Select the field you want to update, or select 0/14 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field you want to update, or select 0/14 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-14]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-14]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -157,15 +157,15 @@ bool HRView::viewHR() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View HR-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View HR" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		std::cout << "1. View HR based on a field" << '\n';
 		std::cout << "2. View all HR" << '\n';
 		std::cout << "3. Go Back" << '\n';
-		std::cout << "Select the operation [0-3]: \n";
+		std::cout << "\033[0;33m" << "Select the operation [0-3]: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-3]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -221,7 +221,7 @@ void HRView::getViewHRInput(HR& hr, int fieldNumber) {
 			Utility::removeEmptySpaces(userInput);
 
 			if (userInput.size() == 0) {
-				std::cout << "HR Specialization is mandatory...Please enter again!!" << '\n';
+				std::cout << "\033[0;31m" << "HR Specialization is mandatory...Please enter again!!" << '\n' << "\033[0m";
 			}
 			else {
 				hr.setHRSpecialization(userInput);
@@ -238,15 +238,15 @@ void HRView::viewHRConditional() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View HR-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View HR" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		EmployeeView::printViewEmployeeFields();
 		printViewHRFields();
 		std::cout << "15. Go back" << '\n';
-		std::cout << "Select the field by which you want to view a HR, or select 0/15 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field by which you want to view a HR, or select 0/15 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-15]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-15]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 

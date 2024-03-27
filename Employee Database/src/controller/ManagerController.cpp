@@ -10,7 +10,7 @@ bool ManagerController::insertManager(Manager& manager) {
 	int departmentID = EmployeeController::getDepartmentIDbyEmployeeID(manager.getManagerID());
 
 	if (departmentID == -1) {
-		std::cerr << "Department could not be found for provided employeeID";
+		std::cerr << "\033[0;31m" << "Department could not be found for provided employeeID.\n" << "\033[0m";
 		return false;
 	}
 
@@ -26,11 +26,11 @@ bool ManagerController::insertManager(Manager& manager) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
-		std::cout << "Successfully inserted a Manager.\n";
+		std::cout << "\033[0;32m" << "Successfully inserted a Manager.\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		std::cerr << "Manager could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "Manager could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 	return true;
@@ -41,7 +41,7 @@ bool ManagerController::selectManager(const std::string& attributeName, const st
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
-		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
+		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -55,11 +55,11 @@ bool ManagerController::deleteManagerByID(int ID) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
-		std::cout << "Successfully deleted a Manager.\n";
+		std::cout << "\033[0;32m" << "Successfully deleted a Manager.\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		std::cerr << "Manager could not be deleted.\n";
+		std::cerr << "\033[0;31m" << "Manager could not be deleted.\n" << "\033[0m";
 		return false;
 	}
 	return true;
@@ -69,7 +69,7 @@ bool ManagerController::updateManager(Manager& manager) {
 	bool employeeResult = EmployeeController::updateEmployee(manager);
 
 	if (!employeeResult) {
-		std::cerr << "Manager could not be updated.\n";
+		std::cerr << "\033[0;31m" << "Manager could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
@@ -80,16 +80,16 @@ bool ManagerController::updateManager(Manager& manager) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
-			std::cout << "Successfully updated a Manager.\n";
+			std::cout << "\033[0;32m" << "Successfully updated a Manager.\n" << "\033[0m";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
-			std::cerr << "Manager could not be updated.\n";
+			std::cerr << "\033[0;31m" << "Manager could not be updated.\n" << "\033[0m";
 			return false;
 		}
 	}
 	else {
-		std::cout << "Successfully updated a Manager.\n";
+		std::cout << "\033[0;32m" << "Successfully updated a Manager.\n" << "\033[0m";
 	}
 	return true;
 }

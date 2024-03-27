@@ -11,7 +11,7 @@ bool EngineerController::insertEngineer(Engineer& engineer) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("Engineer");
 
 	if (departmentID == -1) {
-		std::cerr << "Engineer department not found. Please insert a department named Engineer.\n";
+		std::cerr << "\033[0;31m" << "Engineer department not found.Please insert a department named Engineer.\n" << "\033[0m";
 		return false;
 	}
 
@@ -20,7 +20,7 @@ bool EngineerController::insertEngineer(Engineer& engineer) {
 	bool employeeResult = EmployeeController::insertEmployee(engineer);
 
 	if (!employeeResult) {
-		std::cerr << "Engineer could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "Engineer could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 
@@ -30,11 +30,11 @@ bool EngineerController::insertEngineer(Engineer& engineer) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
-		std::cout << "Successfully inserted an Engineer\n";
+		std::cout << "\033[0;32m" << "Successfully inserted an Engineer.\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		std::cerr << "Engineer could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "Engineer could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 	return true;
@@ -45,7 +45,7 @@ bool EngineerController::selectEngineer(const std::string& attributeName, const 
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
-		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
+		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -59,7 +59,7 @@ bool EngineerController::updateEngineer(Engineer& engineer) {
 	bool employeeResult = EmployeeController::updateEmployee(engineer);
 	
 	if (!employeeResult) {
-		std::cerr << "Engineer could not be updated.\n";
+		std::cerr << "\033[0;31m" << "Engineer could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
@@ -70,16 +70,16 @@ bool EngineerController::updateEngineer(Engineer& engineer) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
-			std::cout << "Successfully updated an Engineer.\n";
+			std::cout << "\033[0;32m" << "Successfully updated an Engineer.\n" << "\033[0m";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
-			std::cerr << "Engineer could not be updated.\n";
+			std::cerr << "\033[0;31m" << "Engineer could not be updated.\n" << "\033[0m";
 			return false;
 		}
 	}
 	else{
-		std::cout << "Successfully updated an Engineer.\n";
+		std::cout << "\033[0;32m" << "Successfully updated an Engineer.\n" << "\033[0m";
 	}
 	return true;
 }
@@ -88,10 +88,10 @@ bool EngineerController::deleteEngineerByID(int ID) {
 	bool deleteResult = EmployeeController::deleteEmployeeByID(ID);
 
 	if (deleteResult) {
-		std::cout << "Successfully deleted an Engineer.\n";
+		std::cout << "\033[0;32m" << "Successfully deleted an Engineer.\n" << "\033[0m";
 	}
 	else {
-		std::cerr << "Engineer could not be deleted.\n";
+		std::cerr << "\033[0;31m" << "Engineer could not be deleted.\n" << "\033[0m";
 	}
 	return deleteResult;
 }

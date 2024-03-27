@@ -13,7 +13,7 @@ bool EngineerView::insertEngineer() {
 	Engineer engineer;
 
 	system("cls");
-	std::cout << "------------------------------------------Insert Engineer-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Insert Engineer" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "Fields with * are required fields\n";
 	EmployeeView::printEmployeeFields();
 	std::cout << "13. technology* : " << '\n';
@@ -32,7 +32,7 @@ bool EngineerView::insertEngineer() {
 		Utility::removeEmptySpaces(userInput);
 
 		if (userInput.size() == 0) {
-			std::cout << "Technology is mandatory...Please enter again!!" << '\n';
+			std::cout << "\033[0;31m" << "Technology is mandatory...Please enter again!!" << '\n' << "\033[0m";
 		}
 		else {
 			engineer.setTechnology(userInput);
@@ -51,7 +51,7 @@ bool EngineerView::deleteEngineer() {
 	EmployeeView::getEmployeeIDInput(engineer, "Delete", "Engineer");
 
 	system("cls");
-	std::cout << "------------------------------------------Delete Engineer-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Delete Engineer" << "\033[0m" << "-------------------------------------------------\n";
 	EngineerController::selectEngineer("Employee.employeeID", std::to_string(engineer.getEmployeeID()));
 
 	if (!Utility::proceedFurther("Delete")) {
@@ -69,7 +69,7 @@ bool EngineerView::updateEngineer() {
 	EmployeeView::getEmployeeIDInput(engineer, "Update", "Engineer");
 
 	system("cls");
-	std::cout << "------------------------------------------Update Engineer-------------------------------------------------\n";
+	std::cout << "------------------------------------------" << "\033[0;36m" << "Update Engineer" << "\033[0m" << "-------------------------------------------------\n";
 	EngineerController::selectEngineer("Employee.employeeID", std::to_string(engineer.getEmployeeID()));
 	if (!Utility::proceedFurther("Update")) {
 		return false;
@@ -84,10 +84,10 @@ bool EngineerView::updateEngineer() {
 		EmployeeView::printEmployeeFields();
 		std::cout << "13. technology* : " << '\n';
 		std::cout << "14. Go Back" << '\n';
-		std::cout << "Select the field you want to update, or select 0/14 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field you want to update, or select 0/14 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-14]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-14]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -157,15 +157,15 @@ bool EngineerView::viewEngineer() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View Engineer-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View Engineer" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		std::cout << "1. View Engineer based on a field" << '\n';
 		std::cout << "2. View all Engineer" << '\n';
 		std::cout << "3. Go Back" << '\n';
-		std::cout << "Select the operation [0-3]: \n";
+		std::cout << "\033[0;33m" << "Select the operation [0-3]: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-3]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-3]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -221,7 +221,7 @@ void EngineerView::getViewEngineerInput(Engineer& engineer, int fieldNumber) {
 			Utility::removeEmptySpaces(userInput);
 
 			if (userInput.size() == 0) {
-				std::cout << "Technology is mandatory...Please enter again!!" << '\n';
+				std::cout << "\033[0;31m" << "Technology is mandatory...Please enter again!!" << '\n' << "\033[0m";
 			}
 			else {
 				engineer.setTechnology(userInput);
@@ -238,15 +238,15 @@ void EngineerView::viewEngineerConditional() {
 
 	while (true) {
 		system("cls");
-		std::cout << "------------------------------------------View engineer-------------------------------------------------\n";
+		std::cout << "------------------------------------------" << "\033[0;36m" << "View Engineer" << "\033[0m" << "-------------------------------------------------\n";
 		std::cout << "0. Exit" << '\n';
 		EmployeeView::printViewEmployeeFields();
 		printViewEngineerFields();
 		std::cout << "15. Go back" << '\n';
-		std::cout << "Select the field by which you want to view a engineer, or select 0/15 for operations: \n";
+		std::cout << "\033[0;33m" << "Select the field by which you want to view a engineer, or select 0/15 for operations: \n" << "\033[0m";
 
 		if (isInvalidInput) {
-			std::cerr << "Wrong Input, Please enter an input in the range: [0-15]\n";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-15]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 

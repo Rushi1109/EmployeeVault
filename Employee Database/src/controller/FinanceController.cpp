@@ -11,7 +11,7 @@ bool FinanceController::insertFinance(Finance& finance) {
 	int departmentID = DepartmentController::getDepartmentIDbyName("Finance");
 
 	if (departmentID == -1) {
-		std::cerr << "Finance department not found. Please insert a department named Finance.\n";
+		std::cerr << "\033[0;31m" << "Finance department not found. Please insert a department named Finance.\n" << "\033[0m";
 		return false;
 	}
 
@@ -20,7 +20,7 @@ bool FinanceController::insertFinance(Finance& finance) {
 	bool employeeResult = EmployeeController::insertEmployee(finance);
 
 	if (!employeeResult) {
-		std::cerr << "Financier could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "Financier could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 
@@ -30,11 +30,11 @@ bool FinanceController::insertFinance(Finance& finance) {
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
-		std::cout << "Successfully inserted a Financier.\n";
+		std::cout << "\033[0;32m" << "Successfully inserted a Financier.\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
-		std::cerr << "Financier could not be inserted.\n";
+		std::cerr << "\033[0;31m" << "Financier could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 	return true;
@@ -45,7 +45,7 @@ bool FinanceController::selectFinance(const std::string& attributeName, const st
 
 	try {
 		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
-		std::cout << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found < ----------\n";
+		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';
@@ -59,7 +59,7 @@ bool FinanceController::updateFinance(Finance& finance) {
 	bool employeeResult = EmployeeController::updateEmployee(finance);
 
 	if (!employeeResult) {
-		std::cerr << "Financier could not be updated.\n";
+		std::cerr << "\033[0;31m" << "Financier could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
@@ -70,16 +70,16 @@ bool FinanceController::updateFinance(Finance& finance) {
 
 		try {
 			DBManager::instance().executeQuery(queryString.c_str());
-			std::cout << "Successfully updated a financier.\n";
+			std::cout << "\033[0;32m" << "Successfully updated a financier.\n" << "\033[0m";
 		}
 		catch (const std::exception& e) {
 			std::cerr << e.what() << '\n';
-			std::cerr << "Financier could not be updated.\n";
+			std::cerr << "\033[0;31m" << "Financier could not be updated.\n" << "\033[0m";
 			return false;
 		}
 	}
 	else {
-		std::cout << "Successfully updated a financier.\n";
+		std::cout << "\033[0;32m" << "Successfully updated a financier.\n" << "\033[0m";
 	}
 	return true;
 }
@@ -88,10 +88,10 @@ bool FinanceController::deleteFinanceByID(int ID) {
 	bool deleteResult = EmployeeController::deleteEmployeeByID(ID);
 
 	if (deleteResult) {
-		std::cout << "Successfully deleted a Financier.\n";
+		std::cout << "\033[0;32m" << "Successfully deleted a Financier.\n" << "\033[0m";
 	}
 	else {
-		std::cerr << "Financier could not be deleted.\n";
+		std::cerr << "\033[0;31m" << "Financier could not be deleted.\n" << "\033[0m";
 	}
 	return deleteResult;
 }
