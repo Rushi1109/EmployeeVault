@@ -254,3 +254,21 @@
 28/03/24 14:56:25 : [DBLogger] [Info]: Success :  SELECT departmentID FROM Department WHERE departmentID = 1; 
 28/03/24 14:56:25 : [DBLogger] [Info]: Success :  SELECT departmentID FROM Department WHERE departmentID = 40; 
 28/03/24 14:56:25 : [DBLogger] [Info]: Success :  Closed database file 
+28/03/24 16:08:29 : [DBLogger] [Info]: Success :  Opened database file 
+28/03/24 16:08:29 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+28/03/24 16:08:54 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentName = "qa"  COLLATE NOCASE; 
+28/03/24 16:10:13 : [DBLogger] [Info]: Success :  Opened database file 
+28/03/24 16:10:13 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+28/03/24 16:10:27 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "4"  COLLATE NOCASE; 
+28/03/24 16:11:32 : [DBLogger] [Info]: Success :  Opened database file 
+28/03/24 16:11:32 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+28/03/24 16:11:46 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE baseSalary = "65000.000000"  COLLATE NOCASE; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  Opened database file 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Employee; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Engineer; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Finance; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+28/03/24 22:47:54 : [DBLogger] [Info]: Success :  Closed database file 
