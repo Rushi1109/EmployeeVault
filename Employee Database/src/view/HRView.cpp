@@ -75,7 +75,7 @@ bool HRView::updateHR() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------Update HR-------------------------------------------------\n";
@@ -153,7 +153,7 @@ bool HRView::updateHR() {
 }
 
 bool HRView::viewHR() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -184,7 +184,9 @@ bool HRView::viewHR() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewHRConditional();
+				if (!viewHRConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {
@@ -232,9 +234,9 @@ void HRView::getViewHRInput(HR& hr, int fieldNumber) {
 	}
 }
 
-void HRView::viewHRConditional() {
+bool HRView::viewHRConditional() {
 	HR hr;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -336,7 +338,7 @@ void HRView::viewHRConditional() {
 				break;
 			}
 			else if (userInput == 15) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;

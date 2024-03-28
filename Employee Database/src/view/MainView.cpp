@@ -7,7 +7,7 @@ using EmployeeDB::View::EngineerView, EmployeeDB::View::FinanceView, EmployeeDB:
 using EmployeeDB::DBManager;
 
 void MainView::mainMenuView() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		printMainMenu();
@@ -87,7 +87,7 @@ void MainView::printTableMenu() {
 }
 
 void MainView::insertMenuView() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -128,7 +128,7 @@ void MainView::insertMenuView() {
 }
 
 void MainView::insertMenuSelection(short int userInput) {
-	bool continueInsertion{ true };
+	auto continueInsertion{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
@@ -166,7 +166,7 @@ void MainView::insertMenuSelection(short int userInput) {
 }
 
 void MainView::updateMenuView() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -207,7 +207,7 @@ void MainView::updateMenuView() {
 }
 
 void MainView::updateMenuSelection(short int userInput) {
-	bool continueUpdation{ true };
+	auto continueUpdation{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
@@ -245,7 +245,7 @@ void MainView::updateMenuSelection(short int userInput) {
 }
 
 void MainView::deleteMenuView() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -286,7 +286,7 @@ void MainView::deleteMenuView() {
 }
 
 void MainView::deleteMenuSelection(short int userInput) {
-	bool continueDeletion{ true };
+	auto continueDeletion{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);
@@ -324,7 +324,7 @@ void MainView::deleteMenuSelection(short int userInput) {
 }
 
 void MainView::viewMenuView() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -365,7 +365,7 @@ void MainView::viewMenuView() {
 }
 
 void MainView::viewMenuSelection(short int userInput) {
-	bool continueViewing{ true };
+	auto continueViewing{ true };
 	switch (userInput) {
 	case 0:
 		std::exit(0);

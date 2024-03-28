@@ -24,7 +24,7 @@ bool Validator::validateGender(std::string& gender) {
 }
 
 bool Validator::validateEmployeeID(const std::string& employeeID, const std::string& departmentName) {
-	bool regexResult = std::regex_match(employeeID, std::regex("(^[0-9]+$)"));
+	auto regexResult = std::regex_match(employeeID, std::regex("(^[0-9]+$)"));
 
 	if (!regexResult) {
 		return false;
@@ -34,7 +34,7 @@ bool Validator::validateEmployeeID(const std::string& employeeID, const std::str
 }
 
 bool Validator::validateManagerID(const std::string& managerID) {
-	bool regexResult = std::regex_match(managerID, std::regex("(^[0-9]+$)"));
+	auto regexResult = std::regex_match(managerID, std::regex("(^[0-9]+$)"));
 
 	if (!regexResult) {
 		return false;
@@ -44,7 +44,7 @@ bool Validator::validateManagerID(const std::string& managerID) {
 }
 
 bool Validator::validateDepartmentID(const std::string& departmentID) {
-	bool regexResult = std::regex_match(departmentID, std::regex("(^[0-9]+$)"));
+	auto regexResult = std::regex_match(departmentID, std::regex("(^[0-9]+$)"));
 
 	if (!regexResult) {
 		return false;

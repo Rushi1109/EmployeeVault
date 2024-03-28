@@ -75,7 +75,7 @@ namespace EmployeeDB::Model {
     };
 
     inline double Salary::computeSalary() const {
-        double totalSalary{ 0.0 };
+        auto totalSalary{ 0.0 };
 
         totalSalary += this->getBaseSalary();
         totalSalary += this->getAllowance();

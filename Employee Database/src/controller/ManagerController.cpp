@@ -7,7 +7,7 @@ using EmployeeDB::Controller::ManagerController, EmployeeDB::Controller::Employe
 using EmployeeDB::DBManager;
 
 bool ManagerController::insertManager(Manager& manager) {
-	int departmentID = EmployeeController::getDepartmentIDbyEmployeeID(manager.getManagerID());
+	auto departmentID = EmployeeController::getDepartmentIDbyEmployeeID(manager.getManagerID());
 
 	if (departmentID == -1) {
 		std::cerr << "\033[0;31m" << "Department could not be found for provided employeeID.\n" << "\033[0m";
@@ -40,7 +40,7 @@ bool ManagerController::selectManager(const std::string& attributeName, const st
 	std::string queryString = "SELECT * FROM ManagerView " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
-		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
+		auto rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
 		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
@@ -66,14 +66,14 @@ bool ManagerController::deleteManagerByID(int ID) {
 };
 
 bool ManagerController::updateManager(Manager& manager) {
-	bool employeeResult = EmployeeController::updateEmployee(manager);
+	auto employeeResult = EmployeeController::updateEmployee(manager);
 
 	if (!employeeResult) {
 		std::cerr << "\033[0;31m" << "Manager could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(manager);
+	auto updateQueryCondition = getUpdateQueryCondition(manager);
 
 	if (updateQueryCondition.size() != 0) {
 		std::string queryString = "UPDATE Manager SET " + updateQueryCondition + " WHERE managerID = " + std::to_string(manager.getManagerID()) + ";";
@@ -125,7 +125,7 @@ std::string ManagerController::getUpdateQueryCondition(Manager& manager) {
 bool ManagerController::checkManagerExistence(const std::string& managerID) {
 	std::string queryString = "SELECT managerID FROM Manager WHERE managerID = " + managerID + ";";
 
-	int callbackCount{ 0 };
+	auto callbackCount{ 0 };
 
 	try {
 		callbackCount = DBManager::instance().executeRowCountQuery(queryString.c_str());

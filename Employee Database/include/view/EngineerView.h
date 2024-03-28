@@ -15,7 +15,7 @@ namespace EmployeeDB::View {
 	private:
 		static void printViewEngineerFields();
 		static void getViewEngineerInput(Engineer& engineer, int fieldNumber);
-		static void viewEngineerConditional();
+		static bool viewEngineerConditional();
 	};
 }
 

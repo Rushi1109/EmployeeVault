@@ -9,7 +9,7 @@ using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::HRCont
 using EmployeeDB::DBManager;
 
 bool HRController::insertHR(HR& hr) {
-	int departmentID = DepartmentController::getDepartmentIDbyName("HR");
+	auto departmentID = DepartmentController::getDepartmentIDbyName("HR");
 
 	if (departmentID == -1) {
 		std::cerr << "\033[0;31m" << "HR department not found. Please insert a department named HR.\n" << "\033[0m";
@@ -18,14 +18,14 @@ bool HRController::insertHR(HR& hr) {
 
 	hr.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(hr);
+	auto employeeResult = EmployeeController::insertEmployee(hr);
 
 	if (!employeeResult) {
 		std::cerr << "\033[0;31m" << "HR could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(hr.getEmail());
+	auto employeeID = EmployeeController::getEmployeeIDbyEmail(hr.getEmail());
 
 	std::string queryString = "INSERT INTO HR (employeeID, hrSpecialization) VALUES (" +
 		std::to_string(employeeID) + ", " +
@@ -47,7 +47,7 @@ bool HRController::selectHR(const std::string& attributeName, const std::string&
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN HR " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\" COLLATE NOCASE" : "") + ";";
 
 	try {
-		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
+		auto rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
 		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
@@ -59,14 +59,14 @@ bool HRController::selectHR(const std::string& attributeName, const std::string&
 
 bool HRController::updateHR(HR& hr) {
 
-	bool employeeResult = EmployeeController::updateEmployee(hr);
+	auto employeeResult = EmployeeController::updateEmployee(hr);
 
 	if (!employeeResult) {
 		std::cerr << "\033[0;31m" << "HR could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(hr);
+	auto updateQueryCondition = getUpdateQueryCondition(hr);
 
 	if (updateQueryCondition.size() != 0) {
 		std::string queryString = "UPDATE HR SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(hr.getEmployeeID()) + ";";
@@ -88,7 +88,7 @@ bool HRController::updateHR(HR& hr) {
 }
 
 bool HRController::deleteHRByID(int ID) {
-	int deleteResult = EmployeeController::deleteEmployeeByID(ID);
+	auto deleteResult = EmployeeController::deleteEmployeeByID(ID);
 
 	if (deleteResult) {
 		std::cout << "\033[0;32m" << "Successfully deleted an HR.\n" << "\033[0m";

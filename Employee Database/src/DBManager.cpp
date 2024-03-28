@@ -79,7 +79,7 @@ int DBManager::selectCallback(void* arg, int argc, char** argv, char** azColName
 }
 
 int DBManager::executeSelectQuery(const char* queryString) {
-	int rowCount{ 0 };
+	auto rowCount{ 0 };
 	resultCode = sqlite3_exec(db, queryString, selectCallback, &rowCount, &errMsg);
 
 	if (resultCode == SQLITE_OK) {
@@ -116,7 +116,7 @@ int DBManager::selectSalaryCallback(void* arg, int argc, char** argv, char** azC
 }
 
 int DBManager::executeSelectSalaryQuery(const char* queryString) {
-	int rowCount{ 0 };
+	auto rowCount{ 0 };
 	resultCode = sqlite3_exec(db, queryString, selectSalaryCallback, &rowCount, &errMsg);
 
 	if (resultCode == SQLITE_OK) {
@@ -144,7 +144,7 @@ int DBManager::executeCustomQuery(const char* queryString, int (*callback)(void*
 }
 
 int DBManager::executeRowCountQuery(const char* queryString) {
-	int rowCount{ 0 };
+	auto rowCount{ 0 };
 	resultCode = sqlite3_exec(db, queryString, rowCountCallback, &rowCount, &errMsg);
 
 	if (resultCode == SQLITE_OK) {

@@ -4,7 +4,7 @@
 using EmployeeDB::View::Utility;
 
 bool Utility::proceedFurther(const std::string& operation) {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		if (!isInvalidInput) {
@@ -31,7 +31,7 @@ bool Utility::proceedFurther(const std::string& operation) {
 }
 
 bool Utility::repeatOperation(const std::string& operation, const std::string& Entity) {
-	bool isInvalidInput = false;
+	auto isInvalidInput = false;
 
 	while (true) {
 		if (!isInvalidInput) {
@@ -66,8 +66,8 @@ void Utility::removeEmptySpaces(std::string& str, const std::string& chars) {
 		str.erase(0, str.find_first_not_of(chars));
 
 		std::string out_str;
-		bool pre_space = false;
-		int i = 0;
+		auto pre_space{ false };
+		auto i{ 0 };
 		while (i < str.size())
 		{
 			if (str.at(i) != ' ')

@@ -289,7 +289,7 @@ bool DepartmentView::updateDepartment() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------" << "\033[0;36m" << "Update Department" << "\033[0m" << "-------------------------------------------------\n";
@@ -473,9 +473,9 @@ void DepartmentView::getViewDepartmentInput(Department& department, int fieldNum
 	}
 }
 
-void DepartmentView::viewDepartmentConditional() {
+bool DepartmentView::viewDepartmentConditional() {
 	Department department;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -530,7 +530,7 @@ void DepartmentView::viewDepartmentConditional() {
 				break;
 			}
 			else if (userInput == 6) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;
@@ -543,7 +543,7 @@ void DepartmentView::viewDepartmentConditional() {
 }
 
 bool DepartmentView::viewDepartment() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -574,7 +574,9 @@ bool DepartmentView::viewDepartment() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewDepartmentConditional();
+				if (!viewDepartmentConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {

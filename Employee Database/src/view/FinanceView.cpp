@@ -75,7 +75,7 @@ bool FinanceView::updateFinance() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------Update Finance-------------------------------------------------\n";
@@ -153,7 +153,7 @@ bool FinanceView::updateFinance() {
 }
 
 bool FinanceView::viewFinance() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -184,7 +184,9 @@ bool FinanceView::viewFinance() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewFinanceConditional();
+				if (!viewFinanceConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {
@@ -232,9 +234,9 @@ void FinanceView::getViewFinanceInput(Finance& finance, int fieldNumber) {
 	}
 }
 
-void FinanceView::viewFinanceConditional() {
+bool FinanceView::viewFinanceConditional() {
 	Finance finance;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -336,7 +338,7 @@ void FinanceView::viewFinanceConditional() {
 				break;
 			}
 			else if (userInput == 15) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;

@@ -75,7 +75,7 @@ bool EngineerView::updateEngineer() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------Update Engineer-------------------------------------------------\n";
@@ -153,7 +153,7 @@ bool EngineerView::updateEngineer() {
 }
 
 bool EngineerView::viewEngineer() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -184,7 +184,9 @@ bool EngineerView::viewEngineer() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewEngineerConditional();
+				if (!viewEngineerConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {
@@ -232,9 +234,9 @@ void EngineerView::getViewEngineerInput(Engineer& engineer, int fieldNumber) {
 	}
 }
 
-void EngineerView::viewEngineerConditional() {
+bool EngineerView::viewEngineerConditional() {
 	Engineer engineer;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -336,7 +338,7 @@ void EngineerView::viewEngineerConditional() {
 				break;
 			}
 			else if (userInput == 15) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;

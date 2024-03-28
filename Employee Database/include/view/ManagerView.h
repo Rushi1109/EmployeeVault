@@ -18,7 +18,7 @@ namespace EmployeeDB::View {
 		static void printUpdateManagerFields();
 		static void getUpdateManagerInput(Manager& manager, int fieldNumber);
 		static void getViewManagerInput(Manager& manager, int fieldNumber);
-		static void viewManagerConditional();
+		static bool viewManagerConditional();
 	};
 }
 

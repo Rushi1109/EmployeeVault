@@ -280,7 +280,7 @@ bool ManagerView::updateManager() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------" << "\033[0;36m" << "Update Manager" << "\033[0m" << "-------------------------------------------------\n";
@@ -460,9 +460,9 @@ void ManagerView::getViewManagerInput(Manager& manager, int fieldNumber) {
 	}
 }
 
-void ManagerView::viewManagerConditional() {
+bool ManagerView::viewManagerConditional() {
 	Manager manager;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -584,7 +584,7 @@ void ManagerView::viewManagerConditional() {
 				break;
 			}
 			else if (userInput == 19) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;
@@ -597,7 +597,7 @@ void ManagerView::viewManagerConditional() {
 }
 
 bool ManagerView::viewManager() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -628,7 +628,9 @@ bool ManagerView::viewManager() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewManagerConditional();
+				if (!viewManagerConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {

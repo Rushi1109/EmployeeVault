@@ -9,7 +9,7 @@ using EmployeeDB::Controller::EmployeeController, EmployeeDB::Controller::QACont
 using EmployeeDB::DBManager;
 
 bool QAController::insertQA(QA& qa) {
-	int departmentID = DepartmentController::getDepartmentIDbyName("QA");
+	auto departmentID = DepartmentController::getDepartmentIDbyName("QA");
 
 	if (departmentID == -1) {
 		std::cerr << "\033[0;31m" << "QA department not found. Please insert a department named QA.\n" << "\033[0m";
@@ -18,14 +18,14 @@ bool QAController::insertQA(QA& qa) {
 
 	qa.setDepartmentID(departmentID);
 
-	bool employeeResult = EmployeeController::insertEmployee(qa);
+	auto employeeResult = EmployeeController::insertEmployee(qa);
 
 	if (!employeeResult) {
 		std::cerr << "\033[0;31m" << "QA could not be inserted.\n" << "\033[0m";
 		return false;
 	}
 
-	int employeeID = EmployeeController::getEmployeeIDbyEmail(qa.getEmail());
+	auto employeeID = EmployeeController::getEmployeeIDbyEmail(qa.getEmail());
 
 	std::string queryString = "INSERT INTO QA (employeeID, testingTool) VALUES (" +
 		std::to_string(employeeID) + ", " +
@@ -47,7 +47,7 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 	std::string queryString = "SELECT * FROM Employee NATURAL JOIN QA " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
-		int rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
+		auto rowCount = DBManager::instance().executeSelectSalaryQuery(queryString.c_str());
 		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
@@ -59,14 +59,14 @@ bool QAController::selectQA(const std::string& attributeName, const std::string&
 
 bool QAController::updateQA(QA& qa) {
 
-	bool employeeResult = EmployeeController::updateEmployee(qa);
+	auto employeeResult = EmployeeController::updateEmployee(qa);
 
 	if (!employeeResult) {
 		std::cerr << "\033[0;31m" << "QA could not be updated.\n" << "\033[0m";
 		return false;
 	}
 
-	std::string updateQueryCondition = getUpdateQueryCondition(qa);
+	auto updateQueryCondition = getUpdateQueryCondition(qa);
 
 	if (updateQueryCondition.size() != 0) {
 		std::string queryString = "UPDATE QA SET " + updateQueryCondition + " WHERE employeeID = " + std::to_string(qa.getEmployeeID()) + ";";
@@ -88,7 +88,7 @@ bool QAController::updateQA(QA& qa) {
 }
 
 bool QAController::deleteQAByID(int ID) {
-	int deleteResult = EmployeeController::deleteEmployeeByID(ID);
+	auto deleteResult = EmployeeController::deleteEmployeeByID(ID);
 
 	if (deleteResult) {
 		std::cout << "\033[0;32m" << "Successfully deleted a QA.\n" << "\033[0m";

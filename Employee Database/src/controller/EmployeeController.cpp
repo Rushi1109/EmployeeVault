@@ -64,7 +64,7 @@ bool EmployeeController::updateEmployee(Employee& employee) {
 }
 
 bool EmployeeController::checkEmployeeExistence(const std::string& employeeID, const std::string& departmentName) {
-	int departmentID{ -1 };
+	auto departmentID{ -1 };
 
 	if (departmentName != "*") {
 		departmentID = DepartmentController::getDepartmentIDbyName(departmentName);
@@ -75,7 +75,7 @@ bool EmployeeController::checkEmployeeExistence(const std::string& employeeID, c
 
 	std::string queryString = "SELECT employeeID FROM Employee WHERE employeeID = " + employeeID + (departmentID == -1 ? "" : " AND departmentID = " + std::to_string(departmentID)) + ";";
 
-	int callbackCount{ 0 };
+	auto callbackCount{ 0 };
 
 	try {
 		callbackCount = DBManager::instance().executeRowCountQuery(queryString.c_str());
@@ -93,7 +93,7 @@ bool EmployeeController::checkEmployeeExistence(const std::string& employeeID, c
 
 int EmployeeController::getEmployeeIDbyEmail(const std::string& email) {
 	std::string queryString = "SELECT employeeID FROM Employee WHERE email=\"" + email + "\" COLLATE NOCASE;";
-	int employeeID{ -1 };
+	auto employeeID{ -1 };
 
 	auto getEmployeeIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* eID = static_cast<int*>(data);
@@ -116,7 +116,7 @@ int EmployeeController::getEmployeeIDbyEmail(const std::string& email) {
 
 int EmployeeController::getDepartmentIDbyEmployeeID(int employeeID) {
 	std::string queryString = "SELECT departmentID FROM Employee WHERE employeeID = " + std::to_string(employeeID) + ";";
-	int departmentID{ -1 };
+	auto departmentID{ -1 };
 
 	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* eID = static_cast<int*>(data);

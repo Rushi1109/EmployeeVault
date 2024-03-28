@@ -15,7 +15,7 @@ namespace EmployeeDB::View {
 	private:
 		static void printViewFinanceFields();
 		static void getViewFinanceInput(Finance& finance, int fieldNumber);
-		static void viewFinanceConditional();
+		static bool viewFinanceConditional();
 	};
 }
 

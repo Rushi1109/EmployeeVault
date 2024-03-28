@@ -1,6 +1,7 @@
 #ifndef __Manager_h__
 #define __Manager_h__
 
+#include <optional>
 #include "Employee.h"
 
 namespace EmployeeDB::Model {
@@ -58,7 +59,7 @@ namespace EmployeeDB::Model {
         }
 
         const std::string& getProjectTitle() const {
-            return projectTitle;
+            return projectTitle.value_or("");
         }
 
         void setProjectTitle(const std::string& title) {
@@ -66,7 +67,7 @@ namespace EmployeeDB::Model {
         }
 
         const std::string& getRole() const {
-            return role;
+            return role.value_or("");
         }
 
         void setRole(const std::string& rl) {
@@ -78,8 +79,8 @@ namespace EmployeeDB::Model {
         int departmentID;
         int teamSize;
         double yearsOfExperience;
-        std::string projectTitle;
-        std::string role;
+        std::optional<std::string> projectTitle;
+        std::optional<std::string> role;
     };
 }
 

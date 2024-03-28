@@ -196,7 +196,7 @@ namespace EmployeeDB::Model {
     }
 
     inline Gender getGenderFromString(std::string& genderString) {
-        Gender gender{ Gender::Male };
+        auto gender{ Gender::Male };
 
         std::transform(genderString.begin(), genderString.end(), genderString.begin(), ::tolower);
         if (genderString == "male") {

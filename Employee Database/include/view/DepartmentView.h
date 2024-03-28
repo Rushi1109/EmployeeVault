@@ -18,7 +18,7 @@ namespace EmployeeDB::View {
 		static bool getDepartmentIDInput(Department& obj, const std::string& operation);
 		static void getUpdateDepartmentInput(Department& obj, int fieldNumber);
 		static void getViewDepartmentInput(Department& obj, int fieldNumber);
-		static void viewDepartmentConditional();
+		static bool viewDepartmentConditional();
 	};
 }
 

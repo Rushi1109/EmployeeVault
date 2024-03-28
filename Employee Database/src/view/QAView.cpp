@@ -75,7 +75,7 @@ bool QAView::updateQA() {
 		return false;
 	}
 
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 	while (true) {
 		system("cls");
 		std::cout << "------------------------------------------Update QA-------------------------------------------------\n";
@@ -153,7 +153,7 @@ bool QAView::updateQA() {
 }
 
 bool QAView::viewQA() {
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -184,7 +184,9 @@ bool QAView::viewQA() {
 				std::exit(0);
 			}
 			else if (userInput == 1) {
-				viewQAConditional();
+				if (!viewQAConditional()) {
+					return true;
+				}
 				break;
 			}
 			else if (userInput == 2) {
@@ -232,9 +234,9 @@ void QAView::getViewQAInput(QA& qa, int fieldNumber) {
 	}
 }
 
-void QAView::viewQAConditional() {
+bool QAView::viewQAConditional() {
 	QA qa;
-	bool isInvalidInput{ false };
+	auto isInvalidInput{ false };
 
 	while (true) {
 		system("cls");
@@ -336,7 +338,7 @@ void QAView::viewQAConditional() {
 				break;
 			}
 			else if (userInput == 15) {
-				return;
+				return false;
 			}
 			else {
 				isInvalidInput = true;

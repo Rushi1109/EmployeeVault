@@ -44,7 +44,7 @@ bool DepartmentController::selectDepartment(const std::string& attributeName, co
 	std::string queryString = "SELECT * FROM Department " + ((attributeName.size() != 0) ? "WHERE " + attributeName + " = \"" + attributeValue + "\"  COLLATE NOCASE" : "") + ";";
 
 	try {
-		int rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
+		auto rowCount = DBManager::instance().executeSelectQuery(queryString.c_str());
 		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
@@ -56,7 +56,7 @@ bool DepartmentController::selectDepartment(const std::string& attributeName, co
 
 int DepartmentController::getDepartmentIDbyName(const std::string& departmentName) {
 	std::string queryString = "SELECT departmentID FROM Department WHERE departmentName=\"" + departmentName + "\" COLLATE NOCASE;";
-	int departmentID{ -1 };
+	auto departmentID{ -1 };
 
 	auto getDepartmentIDCallback = [](void* data, int argc, char** argv, char** azColName) -> int {
 		int* dID = static_cast<int*>(data);
@@ -127,7 +127,7 @@ std::string DepartmentController::getUpdateQueryCondition(Department& department
 bool DepartmentController::checkDepartmentExistence(const std::string& departmentID) {
 	std::string queryString = "SELECT departmentID FROM Department WHERE departmentID = " + departmentID + ";";
 
-	int callbackCount{ 0 };
+	auto callbackCount{ 0 };
 	try {
 		callbackCount = DBManager::instance().executeRowCountQuery(queryString.c_str());
 	}
