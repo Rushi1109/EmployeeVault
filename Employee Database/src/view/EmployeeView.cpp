@@ -81,7 +81,7 @@ void EmployeeView::getInsertEmployeeInput(Employee& employee) {
 	}
 
 	{
-		std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : \n";
+		std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
 		while (true) {
 			std::getline(std::cin, userInput);
 			Utility::removeEmptySpaces(userInput);

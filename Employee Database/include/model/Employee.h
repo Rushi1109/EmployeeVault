@@ -70,7 +70,7 @@ namespace EmployeeDB::Model {
         }
 
         const std::string& getMiddleName() const {
-            return name.middleName.value();
+            return name.middleName.value_or("");
         }
 
         void setMiddleName(const std::string& middleName) {
@@ -86,7 +86,7 @@ namespace EmployeeDB::Model {
         }
 
         const std::string& getDateOfBirth() const {
-            return dateOfBirth;
+            return dateOfBirth.value_or("");
         }
 
         void setDateOfBirth(const std::string& dob) {
@@ -142,7 +142,7 @@ namespace EmployeeDB::Model {
         }
 
         int getMentorID() const {
-            return mentorID;
+            return mentorID.value_or(0);
         }
 
         void setMentorID(int id) {
@@ -150,7 +150,7 @@ namespace EmployeeDB::Model {
         }
 
         double getPerformanceMetric() const {
-            return performanceMetric;
+            return performanceMetric.value_or(0.0);
         }
 
         void setPerformanceMetric(double metric) {
@@ -158,40 +158,27 @@ namespace EmployeeDB::Model {
         }
 
         double getBonus() const {
-            return bonus;
+            return bonus.value_or(0.0);
         }
 
         void setBonus(double b) {
             bonus = b;
         }
 
-        static inline double computeSalary(Salary& obj);
     private:
         int	employeeID;
         Name name;
-        std::string dateOfBirth;
+        std::optional<std::string> dateOfBirth;
         long long mobileNo;
         std::string email;
         std::string address;
         Gender gender;
         std::string dateOfJoining;
         int departmentID;
-        int mentorID;
-        double performanceMetric;
-        double bonus;
+        std::optional<int> mentorID;
+        std::optional<double> performanceMetric;
+        std::optional<double> bonus;
     };
-
-    inline double Employee::computeSalary(Salary& obj) {
-        double totalSalary{ 0.0 };
-
-        totalSalary += obj.getBaseSalary();
-        totalSalary += obj.getAllowance();
-        totalSalary -= obj.getDeduction();
-        totalSalary += obj.getBonus();
-        totalSalary += (obj.getBaseSalary() * (obj.getPerformanceMetric() / 100));
-
-        return totalSalary;
-    }
 
     inline std::string getGenderString(Gender g) {
         std::string tempStr{ "Male" };

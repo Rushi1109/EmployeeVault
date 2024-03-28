@@ -15,7 +15,7 @@ namespace EmployeeDB::Controller {
 		static int getDepartmentIDbyName(const std::string& departmentName);
 		static bool updateDepartment(Department& department);
 		static bool checkDepartmentExistence(const std::string& departmentID);
-	private:
+	protected:
 		static std::string getUpdateQueryCondition(Department& department);
 	};
 }

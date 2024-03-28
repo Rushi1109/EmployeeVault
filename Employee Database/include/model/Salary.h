@@ -63,6 +63,7 @@ namespace EmployeeDB::Model {
             deduction = amount;
         }
 
+        double computeSalary() const;
     private:
         int employeeID;
         int departmentID;
@@ -72,6 +73,18 @@ namespace EmployeeDB::Model {
         double allowance;
         double deduction;
     };
+
+    inline double Salary::computeSalary() const {
+        double totalSalary{ 0.0 };
+
+        totalSalary += this->getBaseSalary();
+        totalSalary += this->getAllowance();
+        totalSalary -= this->getDeduction();
+        totalSalary += this->getBonus();
+        totalSalary += (this->getBaseSalary() * (this->getPerformanceMetric() / 100));
+
+        return totalSalary;
+    }
 }
 
 #endif

@@ -108,7 +108,7 @@ int DBManager::selectSalaryCallback(void* arg, int argc, char** argv, char** azC
 		std::cout << "|" << std::setw(20) << std::left << azColName[i] << "|" << std::setw(40) << std::left << (argv[i] ? argv[i] : "NULL") << "|\n";
 	}
 	EmployeeController::getSalaryDetails(obj);
-	double totalSalary = Employee::computeSalary(obj);
+	double totalSalary = obj.computeSalary();
 	std::cout << "|" << std::setw(20) << std::left << "Total Salary" << "|" << std::setw(40) << std::left << totalSalary << "|\n";
 	std::cout << "|--------------------|----------------------------------------|\n";
 	std::cout << std::endl;

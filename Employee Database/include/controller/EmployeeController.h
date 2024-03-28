@@ -17,7 +17,7 @@ namespace EmployeeDB::Controller {
 		static int getEmployeeIDbyEmail(const std::string& email);
 		static int getDepartmentIDbyEmployeeID(int employeeID);
 		static bool getSalaryDetails(Salary& obj);
-	private:
+	protected:
 		static std::string getUpdateQueryCondition(Employee& employee);
 	};
 }

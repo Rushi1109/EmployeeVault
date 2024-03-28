@@ -13,7 +13,7 @@ namespace EmployeeDB::Controller {
 		static bool selectEngineer(const std::string& attributeName = "", const std::string& attributeValue = "");
 		static bool updateEngineer(Engineer& engineer);
 		static bool deleteEngineerByID(int ID);
-	private:
+	protected:
 		static std::string getUpdateQueryCondition(Engineer& engineer);
 	};
 }
