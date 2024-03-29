@@ -2,7 +2,7 @@
 #include "Views.h"
 #include "DBManager.h"
 
-using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView;
+using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView, EmployeeDB::View::ExportView;
 using EmployeeDB::View::EngineerView, EmployeeDB::View::FinanceView, EmployeeDB::View::QAView, EmployeeDB::View::HRView;
 using EmployeeDB::DBManager;
 
@@ -13,7 +13,7 @@ void MainView::mainMenuView() {
 		printMainMenu();
 
 		if (isInvalidInput) {
-			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-5]\n" << "\033[0m";
+			std::cerr << "\033[0;31m" << "Wrong Input, Please enter an input in the range: [0-6]\n" << "\033[0m";
 			isInvalidInput = false;
 		}
 
@@ -28,7 +28,7 @@ void MainView::mainMenuView() {
 		}
 		try {
 			userInput = stoi(inputLine);
-			if (userInput >= 0 && userInput <= 5) {
+			if (userInput >= 0 && userInput <= 6) {
 				mainMenuSelection(userInput);
 			}
 			else {
@@ -50,6 +50,7 @@ void MainView::printMainMenu() {
 	std::cout << "3. Update Data\n";
 	std::cout << "4. Delete Data\n";
 	std::cout << "5. View Data\n";
+	std::cout << "6. Export Data\n";
 	std::cout << "\033[0;33m" << "Please select an operation to perform:\n" << "\033[0m";
 }
 
@@ -72,7 +73,11 @@ void MainView::mainMenuSelection(short int userInput) {
 	case 5:
 		viewMenuView();
 		break;
+	case 6:
+		exportMenuView();
+		break;
 	}
+	
 };
 
 void MainView::printTableMenu() {
@@ -400,4 +405,90 @@ void MainView::viewMenuSelection(short int userInput) {
 		}
 		break;
 	}
+}
+
+void MainView::printExportTableMenu() {
+	std::cout << "0. Exit\n";
+	std::cout << "1. Department\n";
+	std::cout << "2. Engineer\n";
+	std::cout << "3. Finance\n";
+	std::cout << "4. HR\n";
+	std::cout << "5. QA\n";
+	std::cout << "6. Manager\n";
+	std::cout << "7. Backup Database(Export All)\n";
+	std::cout << "8. Main Menu\n";
+}
+
+void MainView::exportMenuView() {
+	auto isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------" << "\033[36m" << "Export Menu" << "\033[0m" << "-------------------------------------------------\n";
+		printExportTableMenu();
+		std::cout << "\033[33m" << "Please select an entity to export:" << "\033[0m\n";
+
+		if (isInvalidInput) {
+			std::cerr << "\033[33m" << "Wrong Input, Please enter an input in the range: [0-8]" << "\033[0m\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+			if (userInput >= 0 && userInput <= 7) {
+				if (!exportMenuSelection(userInput)) {
+					return;
+				};
+			}
+			else if (userInput == 8) {
+				return;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
+}
+
+bool MainView::exportMenuSelection(short int userInput) {
+	auto continueExporting{ true };
+	switch (userInput) {
+	case 0:
+		std::exit(0);
+	case 1:
+		continueExporting = ExportView::exportToCSV("Department");
+		break;
+	case 2:
+		continueExporting = ExportView::exportToCSV("Engineer");
+		break;
+	case 3:
+		continueExporting = ExportView::exportToCSV("Finance");
+		break;
+	case 4:
+		continueExporting = ExportView::exportToCSV("HR");
+		break;
+	case 5:
+		continueExporting = ExportView::exportToCSV("QA");
+		break;
+	case 6:
+		continueExporting = ExportView::exportToCSV("Manager");
+		break;
+	case 7:
+		continueExporting = ExportView::exportAll();
+		break;
+	}
+
+	return continueExporting;
 }

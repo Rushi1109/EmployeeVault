@@ -22,6 +22,11 @@ namespace EmployeeDB::View {
 
 		static void viewMenuView();
 		static void viewMenuSelection(short int userInput);
+
+		static void printExportTableMenu();
+
+		static void exportMenuView();
+		static bool exportMenuSelection(short int userInput);
 	};
 }
 

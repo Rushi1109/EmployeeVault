@@ -10,5 +10,6 @@
 #include "QAView.h"
 #include "HRView.h"
 #include "Utility.h"
+#include "ExportView.h"
 
 #endif
