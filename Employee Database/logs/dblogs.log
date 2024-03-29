@@ -272,3 +272,28 @@
 28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
 28/03/24 22:47:54 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
 28/03/24 22:47:54 : [DBLogger] [Info]: Success :  Closed database file 
+29/03/24 15:57:59 : [DBLogger] [Info]: Success :  Opened database file 
+29/03/24 15:57:59 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+29/03/24 15:58:15 : [DBLogger] [Info]: Success :  Closed database file 
+29/03/24 15:58:19 : [DBLogger] [Info]: Success :  Opened database file 
+29/03/24 15:58:19 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM Employee; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM Engineer; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM Finance; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
+29/03/24 15:58:44 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM Employee; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM Engineer; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM Finance; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
+29/03/24 15:59:01 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+29/03/24 15:59:16 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+29/03/24 16:00:12 : [DBLogger] [Info]: Success :  Opened database file 
+29/03/24 16:00:12 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+29/03/24 16:01:12 : [DBLogger] [Error]: Failed :  CREATE TABLE "Abhi" ("id" int not null unique primary key, "name" text not nu;;); 
+29/03/24 16:02:11 : [DBLogger] [Info]: Success :  CREATE TABLE "Abhi" ("id" int not null unique primary key, "name" text not null, FOREIGN KEY ("id") REFERENCES "Employee"("employeeID") on delete set null); 
+29/03/24 16:02:50 : [DBLogger] [Info]: Success :  DROP TABLE Abhi 

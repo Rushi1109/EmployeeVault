@@ -2,7 +2,7 @@
 #include "Views.h"
 #include "DBManager.h"
 
-using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView, EmployeeDB::View::ExportView;
+using EmployeeDB::View::MainView, EmployeeDB::View::EmployeeView, EmployeeDB::View::DepartmentView, EmployeeDB::View::ManagerView, EmployeeDB::View::ExportView, EmployeeDB::View::TableView;
 using EmployeeDB::View::EngineerView, EmployeeDB::View::FinanceView, EmployeeDB::View::QAView, EmployeeDB::View::HRView;
 using EmployeeDB::DBManager;
 
@@ -45,7 +45,7 @@ void MainView::printMainMenu() {
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << "Welcome to Employee Database" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "0. Exit\n";
-	std::cout << "1. Create Table\n";
+	std::cout << "1. Table Operations\n";
 	std::cout << "2. Insert Data\n";
 	std::cout << "3. Update Data\n";
 	std::cout << "4. Delete Data\n";
@@ -54,12 +54,12 @@ void MainView::printMainMenu() {
 	std::cout << "\033[0;33m" << "Please select an operation to perform:\n" << "\033[0m";
 }
 
-void MainView::mainMenuSelection(short int userInput) {
+void MainView::mainMenuSelection(int userInput) {
 	switch (userInput) {
 	case 0:
 		std::exit(0);
 	case 1:
-		//createTableView();
+		tableMenuView();
 		break;
 	case 2:
 		insertMenuView();
@@ -89,6 +89,68 @@ void MainView::printTableMenu() {
 	std::cout << "5. QA\n";
 	std::cout << "6. Manager\n";
 	std::cout << "7. Main Menu\n";
+}
+
+void MainView::tableMenuView() {
+	auto isInvalidInput{ false };
+
+	while (true) {
+		system("cls");
+		std::cout << "------------------------------------------" << "\033[36m" << "Table Menu" << "\033[0m" << "-------------------------------------------------\n";
+		std::cout << "0. Exit\n";
+		std::cout << "1. Create Table\n";
+		std::cout << "2. Delete Table\n";
+		std::cout << "3. Main Menu\n";
+		std::cout << "\033[33m" << "Please select an operation to perform: " << "\033[0m\n";
+
+		if (isInvalidInput) {
+			std::cerr << "\033[33m" << "Wrong Input, Please enter an input in the range: [0-3]" << "\033[0m\n";
+			isInvalidInput = false;
+		}
+
+		int userInput;
+		std::string inputLine;
+		std::getline(std::cin, inputLine);
+		Utility::removeEmptySpaces(inputLine);
+
+		if (inputLine.length() == 0) {
+			isInvalidInput = true;
+			continue;
+		}
+		try {
+			userInput = stoi(inputLine);
+			if (userInput >= 0 && userInput <= 2) {
+				tableMenuSelection(userInput);
+			}
+			else if (userInput == 3) {
+				return;
+			}
+			else {
+				isInvalidInput = true;
+			}
+		}
+		catch (...) {
+			isInvalidInput = true;
+		}
+	}
+}
+
+void MainView::tableMenuSelection(int userInput) {
+	auto continueOperation{ true };
+	switch (userInput) {
+	case 0:
+		std::exit(0);
+	case 1:
+		while (continueOperation) {
+			continueOperation = TableView::createTableView();
+		}
+		break;
+	case 2:
+		while (continueOperation) {
+			continueOperation = TableView::deleteTableView();
+		}
+		break;
+	}
 }
 
 void MainView::insertMenuView() {
@@ -132,7 +194,7 @@ void MainView::insertMenuView() {
 	}
 }
 
-void MainView::insertMenuSelection(short int userInput) {
+void MainView::insertMenuSelection(int userInput) {
 	auto continueInsertion{ true };
 	switch (userInput) {
 	case 0:
@@ -211,7 +273,7 @@ void MainView::updateMenuView() {
 	}
 }
 
-void MainView::updateMenuSelection(short int userInput) {
+void MainView::updateMenuSelection(int userInput) {
 	auto continueUpdation{ true };
 	switch (userInput) {
 	case 0:
@@ -290,7 +352,7 @@ void MainView::deleteMenuView() {
 	}
 }
 
-void MainView::deleteMenuSelection(short int userInput) {
+void MainView::deleteMenuSelection(int userInput) {
 	auto continueDeletion{ true };
 	switch (userInput) {
 	case 0:
@@ -369,7 +431,7 @@ void MainView::viewMenuView() {
 	}
 }
 
-void MainView::viewMenuSelection(short int userInput) {
+void MainView::viewMenuSelection(int userInput) {
 	auto continueViewing{ true };
 	switch (userInput) {
 	case 0:
@@ -462,7 +524,7 @@ void MainView::exportMenuView() {
 	}
 }
 
-bool MainView::exportMenuSelection(short int userInput) {
+bool MainView::exportMenuSelection(int userInput) {
 	auto continueExporting{ true };
 	switch (userInput) {
 	case 0:

@@ -1,9 +1,12 @@
 #include <iostream>
-#include <map>
+#include <array>
+#include <vector>
 #include "Table.h"
 #include "TableView.h"
+#include "TableController.h"
 #include "Utility.h"
 
+using EmployeeDB::Controller::TableController;
 using EmployeeDB::View::TableView;
 using EmployeeDB::Model::Table;
 
@@ -15,22 +18,39 @@ bool TableView::createTableView() {
 	std::cout << "Fields with * are required fields" << '\n';
 
 	while (true) {
-		std::string userInput;
+		std::string tableName;
 		std::cout << "Table name* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
+		std::getline(std::cin, tableName);
+		Utility::removeEmptySpaces(tableName);
 
-		if (userInput.size() == 0) {
+		if (tableName.size() == 0) {
 			std::cout << "\033[0;31m" << "Table Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
 		}
 		else {
-			table.setTableName(userInput);
+			table.setTableName(tableName);
 			break;
 		}
 	}
 
-	std::vector<std::array<std::string, 3>> attributesVector(10);
+	std::vector<std::array<std::string, 3>> attributesVector;
+	attributesVector.reserve(10);
 
+	getColumnsInput(attributesVector);
+	
+	std::vector<std::array<std::string, 4>> foreignKeysVector;
+	foreignKeysVector.reserve(4);
+
+	getForeignKeysInput(foreignKeysVector);
+
+	table.setAttributesVector(attributesVector);
+	table.setForeignKeysVector(std::move(foreignKeysVector));
+
+	TableController::createTable(table);
+
+	return Utility::repeatOperation("Create", "table");
+}
+
+void TableView::getColumnsInput(std::vector<std::array<std::string, 3>>& columnsVector) {
 	while (true) {
 		std::string columnName;
 		while (true) {
@@ -60,22 +80,22 @@ bool TableView::createTableView() {
 			}
 		}
 
-		std::string columnConstrains{""};
+		std::string columnConstrains{ "" };
 		{
 			std::cout << "Column constrains : ";
 			std::getline(std::cin, columnConstrains);
 			Utility::removeEmptySpaces(columnConstrains);
 		}
 
-		attributesVector.emplace_back(columnName, columnType, columnConstrains);
+		columnsVector.emplace_back(std::move(std::array<std::string, 3>{columnName, columnType, columnConstrains}));
 
 		if (!Utility::repeatOperation("add", "column")) {
 			break;
 		}
 	}
-	
-	std::vector<std::array<std::string, 4>> foreignKeysVector;
+}
 
+void TableView::getForeignKeysInput(std::vector<std::array<std::string, 4>>& foreignKeysVector) {
 	auto foreignKeyInsertion{ true };
 	if (!Utility::proceedFurther("foreign key insertion")) {
 		foreignKeyInsertion = false;
@@ -131,17 +151,37 @@ bool TableView::createTableView() {
 			Utility::removeEmptySpaces(columnConstrains);
 		}
 
-		foreignKeysVector.emplace_back(columnName, parentTableName, parentTableFieldName, columnConstrains);
+		foreignKeysVector.emplace_back(std::move(std::array<std::string, 4>{columnName, parentTableName, parentTableFieldName, columnConstrains}));
 
 		if (!Utility::repeatOperation("add", "foreign key")) {
 			foreignKeyInsertion = false;
 		}
 	}
+}
 
-	table.setAttributesVector(attributesVector);
-	table.setForeignKeysVector(std::move(foreignKeysVector));
+bool TableView::deleteTableView() {
+	Table table;
 
-	// TableController::createTable(Table)
+	system("cls");
+	std::cout << "------------------------------------------" << "\033[36m" << "Delete Table" << "\033[0m" << "-------------------------------------------------\n";
+	std::cout << "\033[33m" << "Enter the name of the Table you want to delete." << "\033[0m\n";
 
-	return true;
+	std::string tableName;
+	while (true) {
+		std::cout << "Table name* : ";
+		std::getline(std::cin, tableName);
+		Utility::removeEmptySpaces(tableName);
+
+		if (tableName.size() == 0) {
+			std::cout << "\033[33m" << "Table Name is mandatory...Please enter again!!" << "\033[0m\n";
+		}
+		else {
+			table.setTableName(tableName);
+			break;
+		}
+	}
+
+	TableController::deleteTable(tableName);
+
+	return Utility::repeatOperation("Delete", "Table");
 }

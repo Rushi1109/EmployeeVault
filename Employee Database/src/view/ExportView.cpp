@@ -11,7 +11,7 @@ using EmployeeDB::Controller::ExportController;
 bool ExportView::exportToCSV(const std::string& entity) {
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[36m" << "Export " << entity << "\033[0m" << "-------------------------------------------------\n";
-	std::cout << "\033[33m" << "Enter filename for exporting " << entity << "Table(do not add .csv extension)\n" << "\033[0m\n";
+	std::cout << "\033[33m" << "Enter filename for exporting " << entity << "Table to csv.\n" << "\033[0m\n";
 
 	std::string userInput;
 	while (true) {
