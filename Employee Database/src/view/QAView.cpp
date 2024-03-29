@@ -279,7 +279,7 @@ bool QAView::viewQAConditional() {
 			}
 			else if (userInput == 3) {
 				EmployeeView::getViewEmployeeInput(qa, 3);
-				QAController::selectQA("middleName", qa.getMiddleName());
+				QAController::selectQA("middleName", qa.getMiddleName().value());
 				break;
 			}
 			else if (userInput == 4) {
@@ -289,7 +289,7 @@ bool QAView::viewQAConditional() {
 			}
 			else if (userInput == 5) {
 				EmployeeView::getViewEmployeeInput(qa, 5);
-				QAController::selectQA("dateOfBirth", qa.getDateOfBirth());
+				QAController::selectQA("dateOfBirth", qa.getDateOfBirth().value());
 				break;
 			}
 			else if (userInput == 6) {
@@ -319,17 +319,17 @@ bool QAView::viewQAConditional() {
 			}
 			else if (userInput == 11) {
 				EmployeeView::getViewEmployeeInput(qa, 11);
-				QAController::selectQA("mentorID", std::to_string(qa.getMentorID()));
+				QAController::selectQA("mentorID", std::to_string(qa.getMentorID().value()));
 				break;
 			}
 			else if (userInput == 12) {
 				EmployeeView::getViewEmployeeInput(qa, 12);
-				QAController::selectQA("performanceMetric", std::to_string(qa.getPerformanceMetric()));
+				QAController::selectQA("performanceMetric", std::to_string(qa.getPerformanceMetric().value()));
 				break;
 			}
 			else if (userInput == 13) {
 				EmployeeView::getViewEmployeeInput(qa, 13);
-				QAController::selectQA("bonus", std::to_string(qa.getBonus()));
+				QAController::selectQA("bonus", std::to_string(qa.getBonus().value()));
 				break;
 			}
 			else if (userInput == 14) {
@@ -348,4 +348,5 @@ bool QAView::viewQAConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }

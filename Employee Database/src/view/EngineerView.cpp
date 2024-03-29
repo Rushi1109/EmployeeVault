@@ -279,7 +279,7 @@ bool EngineerView::viewEngineerConditional() {
 			}
 			else if (userInput == 3) {
 				EmployeeView::getViewEmployeeInput(engineer, 3);
-				EngineerController::selectEngineer("middleName", engineer.getMiddleName());
+				EngineerController::selectEngineer("middleName", engineer.getMiddleName().value());
 				break;
 			}
 			else if (userInput == 4) {
@@ -289,7 +289,7 @@ bool EngineerView::viewEngineerConditional() {
 			}
 			else if (userInput == 5) {
 				EmployeeView::getViewEmployeeInput(engineer, 5);
-				EngineerController::selectEngineer("dateOfBirth", engineer.getDateOfBirth());
+				EngineerController::selectEngineer("dateOfBirth", engineer.getDateOfBirth().value());
 				break;
 			}
 			else if (userInput == 6) {
@@ -319,17 +319,17 @@ bool EngineerView::viewEngineerConditional() {
 			}
 			else if (userInput == 11) {
 				EmployeeView::getViewEmployeeInput(engineer, 11);
-				EngineerController::selectEngineer("mentorID", std::to_string(engineer.getMentorID()));
+				EngineerController::selectEngineer("mentorID", std::to_string(engineer.getMentorID().value()));
 				break;
 			}
 			else if (userInput == 12) {
 				EmployeeView::getViewEmployeeInput(engineer, 12);
-				EngineerController::selectEngineer("performanceMetric", std::to_string(engineer.getPerformanceMetric()));
+				EngineerController::selectEngineer("performanceMetric", std::to_string(engineer.getPerformanceMetric().value()));
 				break;
 			}
 			else if (userInput == 13) {
 				EmployeeView::getViewEmployeeInput(engineer, 13);
-				EngineerController::selectEngineer("bonus", std::to_string(engineer.getBonus()));
+				EngineerController::selectEngineer("bonus", std::to_string(engineer.getBonus().value()));
 				break;
 			}
 			else if (userInput == 14) {
@@ -348,4 +348,5 @@ bool EngineerView::viewEngineerConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }

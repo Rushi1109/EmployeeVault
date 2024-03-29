@@ -9,7 +9,7 @@ namespace EmployeeDB::Model {
         QA() : testingTool{ "" } {}
         QA(bool isUpdateObj) : Employee{ isUpdateObj }, testingTool{ "#" } {}
 
-        const std::string& getTestingTool() const {
+        const std::string getTestingTool() const {
             return testingTool;
         }
 

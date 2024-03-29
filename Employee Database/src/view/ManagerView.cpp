@@ -367,7 +367,7 @@ void ManagerView::getViewManagerInput(Manager& manager, int fieldNumber) {
 						throw "Negative number entered!";
 					}
 				}
-				catch (std::exception& e) {
+				catch (...) {
 					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
 					continue;
 				}
@@ -393,7 +393,7 @@ void ManagerView::getViewManagerInput(Manager& manager, int fieldNumber) {
 						throw "Negative number entered!";
 					}
 				}
-				catch (std::exception& e) {
+				catch (...) {
 					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
 					continue;
 				}
@@ -419,7 +419,7 @@ void ManagerView::getViewManagerInput(Manager& manager, int fieldNumber) {
 						throw "Negative number entered!";
 					}
 				}
-				catch (std::exception& e) {
+				catch (...) {
 					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
 					continue;
 				}
@@ -505,7 +505,7 @@ bool ManagerView::viewManagerConditional() {
 			}
 			else if (userInput == 3) {
 				EmployeeView::getViewEmployeeInput(manager, 3);
-				ManagerController::selectManager("middleName", manager.getMiddleName());
+				ManagerController::selectManager("middleName", manager.getMiddleName().value());
 				break;
 			}
 			else if (userInput == 4) {
@@ -515,7 +515,7 @@ bool ManagerView::viewManagerConditional() {
 			}
 			else if (userInput == 5) {
 				EmployeeView::getViewEmployeeInput(manager, 5);
-				ManagerController::selectManager("dateOfBirth", manager.getDateOfBirth());
+				ManagerController::selectManager("dateOfBirth", manager.getDateOfBirth().value());
 				break;
 			}
 			else if (userInput == 6) {
@@ -545,17 +545,17 @@ bool ManagerView::viewManagerConditional() {
 			}
 			else if (userInput == 11) {
 				EmployeeView::getViewEmployeeInput(manager, 11);
-				ManagerController::selectManager("mentorID", std::to_string(manager.getMentorID()));
+				ManagerController::selectManager("mentorID", std::to_string(manager.getMentorID().value()));
 				break;
 			}
 			else if (userInput == 12) {
 				EmployeeView::getViewEmployeeInput(manager, 12);
-				ManagerController::selectManager("performanceMetric", std::to_string(manager.getPerformanceMetric()));
+				ManagerController::selectManager("performanceMetric", std::to_string(manager.getPerformanceMetric().value()));
 				break;
 			}
 			else if (userInput == 13) {
 				EmployeeView::getViewEmployeeInput(manager, 13);
-				ManagerController::selectManager("bonus", std::to_string(manager.getBonus()));
+				ManagerController::selectManager("bonus", std::to_string(manager.getBonus().value()));
 				break;
 			}
 			else if (userInput == 14) {
@@ -575,12 +575,12 @@ bool ManagerView::viewManagerConditional() {
 			}
 			else if (userInput == 17) {
 				getViewManagerInput(manager, 17);
-				ManagerController::selectManager("projectTitle", manager.getProjectTitle());
+				ManagerController::selectManager("projectTitle", manager.getProjectTitle().value());
 				break;
 			}
 			else if (userInput == 18) {
 				getViewManagerInput(manager, 18);
-				ManagerController::selectManager("role", manager.getRole());
+				ManagerController::selectManager("role", manager.getRole().value());
 				break;
 			}
 			else if (userInput == 19) {
@@ -594,6 +594,7 @@ bool ManagerView::viewManagerConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }
 
 bool ManagerView::viewManager() {

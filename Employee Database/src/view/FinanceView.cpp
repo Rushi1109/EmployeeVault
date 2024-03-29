@@ -279,7 +279,7 @@ bool FinanceView::viewFinanceConditional() {
 			}
 			else if (userInput == 3) {
 				EmployeeView::getViewEmployeeInput(finance, 3);
-				FinanceController::selectFinance("middleName", finance.getMiddleName());
+				FinanceController::selectFinance("middleName", finance.getMiddleName().value());
 				break;
 			}
 			else if (userInput == 4) {
@@ -289,7 +289,7 @@ bool FinanceView::viewFinanceConditional() {
 			}
 			else if (userInput == 5) {
 				EmployeeView::getViewEmployeeInput(finance, 5);
-				FinanceController::selectFinance("dateOfBirth", finance.getDateOfBirth());
+				FinanceController::selectFinance("dateOfBirth", finance.getDateOfBirth().value());
 				break;
 			}
 			else if (userInput == 6) {
@@ -319,17 +319,17 @@ bool FinanceView::viewFinanceConditional() {
 			}
 			else if (userInput == 11) {
 				EmployeeView::getViewEmployeeInput(finance, 11);
-				FinanceController::selectFinance("mentorID", std::to_string(finance.getMentorID()));
+				FinanceController::selectFinance("mentorID", std::to_string(finance.getMentorID().value()));
 				break;
 			}
 			else if (userInput == 12) {
 				EmployeeView::getViewEmployeeInput(finance, 12);
-				FinanceController::selectFinance("performanceMetric", std::to_string(finance.getPerformanceMetric()));
+				FinanceController::selectFinance("performanceMetric", std::to_string(finance.getPerformanceMetric().value()));
 				break;
 			}
 			else if (userInput == 13) {
 				EmployeeView::getViewEmployeeInput(finance, 13);
-				FinanceController::selectFinance("bonus", std::to_string(finance.getBonus()));
+				FinanceController::selectFinance("bonus", std::to_string(finance.getBonus().value()));
 				break;
 			}
 			else if (userInput == 14) {
@@ -348,4 +348,5 @@ bool FinanceView::viewFinanceConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }

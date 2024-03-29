@@ -10,7 +10,7 @@ namespace EmployeeDB::Model {
         HR() : hrSpecialization{ "" } {}
         HR(bool isUpdateObj) : Employee{ isUpdateObj }, hrSpecialization{ "#" } {}
 
-        const std::string& getHRSpecialization() const {
+        const std::string getHRSpecialization() const {
             return hrSpecialization;
         }
 

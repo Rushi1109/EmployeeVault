@@ -31,7 +31,7 @@ namespace EmployeeDB::Model {
             departmentID = id;
         }
 
-        const std::string& getDepartmentName() const {
+        const std::string getDepartmentName() const {
             return departmentName;
         }
 

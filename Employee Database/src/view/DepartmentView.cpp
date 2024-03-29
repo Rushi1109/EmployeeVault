@@ -540,6 +540,7 @@ bool DepartmentView::viewDepartmentConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }
 
 bool DepartmentView::viewDepartment() {

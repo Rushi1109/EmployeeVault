@@ -9,18 +9,18 @@ bool EmployeeController::insertEmployee(const Employee& employee) {
 	std::string queryString = "INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)"
 		+ std::string{ "VALUES (" } +
 		"\"" + employee.getFirstName() + "\"" + ", " +
-		(employee.getMiddleName().size() == 0 ? "NULL" : "\"" + employee.getMiddleName() + "\"") + ", " +
+		(!employee.getMiddleName().has_value() ? "NULL" : "\"" + employee.getMiddleName().value() + "\"") + ", " +
 		"\"" + employee.getLastName() + "\"" + ", " +
-		(employee.getDateOfBirth().size() == 0 ? "NULL" : "\"" + employee.getDateOfBirth() + "\"") + ", " + 
+		(!employee.getDateOfBirth().has_value() ? "NULL" : "\"" + employee.getDateOfBirth().value() + "\"") + ", " +
 		std::to_string(employee.getMobileNo()) + ", " +
 		"\"" + employee.getEmail() + "\"" + ", " +
 		"\"" + employee.getAddress() + "\"" + ", " +
 		"\"" + EmployeeDB::Model::getGenderString(employee.getGender()) + "\"" + ", " +
 		"\"" + employee.getDateOfJoining() + "\"" + ", " +
 		std::to_string(employee.getDepartmentID()) + ", " +
-		(employee.getMentorID() == 0 ? "NULL" : std::to_string(employee.getMentorID())) + ", " +
-		(employee.getPerformanceMetric() == 0.0 ? "NULL" : std::to_string(employee.getPerformanceMetric())) + ", " +
-		(employee.getBonus() == 0.0 ? "NULL" : std::to_string(employee.getBonus())) + ");";
+		(!employee.getMentorID().has_value() ? "NULL" : std::to_string(employee.getMentorID().value())) + ", " +
+		(!employee.getPerformanceMetric().has_value() ? "NULL" : std::to_string(employee.getPerformanceMetric().value())) + ", " +
+		(!employee.getBonus().has_value() ? "NULL" : std::to_string(employee.getBonus().value())) + ");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -142,11 +142,11 @@ std::string EmployeeController::getUpdateQueryCondition(Employee& employee) {
 	if (employee.getFirstName() != "#") {
 		updateQueryCondition += "firstName = \"" + employee.getFirstName() + "\"";
 	}
-	if (employee.getMiddleName() != "#") {
+	if (employee.getMiddleName().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "middleName = \"" + employee.getMiddleName() + "\"";
+		updateQueryCondition += "middleName = \"" + employee.getMiddleName().value() + "\"";
 	}
 	if (employee.getLastName() != "#") {
 		if (updateQueryCondition.size() != 0) {
@@ -154,11 +154,11 @@ std::string EmployeeController::getUpdateQueryCondition(Employee& employee) {
 		}
 		updateQueryCondition += "lastName = \"" + employee.getLastName() + "\"";
 	}
-	if (employee.getDateOfBirth() != "#") {
+	if (employee.getDateOfBirth().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "dateOfBirth = \"" + employee.getDateOfBirth() + "\"";
+		updateQueryCondition += "dateOfBirth = \"" + employee.getDateOfBirth().value() + "\"";
 	}
 	if (employee.getMobileNo() != -1) {
 		if (updateQueryCondition.size() != 0) {
@@ -190,23 +190,23 @@ std::string EmployeeController::getUpdateQueryCondition(Employee& employee) {
 		}
 		updateQueryCondition += "dateOfJoining = \"" + employee.getDateOfJoining() + "\"";
 	}
-	if (employee.getMentorID() != -1) {
+	if (employee.getMentorID().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "mentorID = " + std::to_string(employee.getMentorID());
+		updateQueryCondition += "mentorID = " + std::to_string(employee.getMentorID().value());
 	}
-	if (employee.getPerformanceMetric() != -1.0) {
+	if (employee.getPerformanceMetric().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "performanceMetric = " + std::to_string(employee.getPerformanceMetric());
+		updateQueryCondition += "performanceMetric = " + std::to_string(employee.getPerformanceMetric().value());
 	}
-	if (employee.getBonus() != -1.0) {
+	if (employee.getBonus().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "bonus = " + std::to_string(employee.getBonus());
+		updateQueryCondition += "bonus = " + std::to_string(employee.getBonus().value());
 	}
 
 	return updateQueryCondition;

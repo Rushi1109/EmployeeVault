@@ -13,8 +13,8 @@ namespace EmployeeDB::Model {
             departmentID{ 0 },
             teamSize{ 0 },
             yearsOfExperience{0}, 
-            projectTitle{""}, 
-            role{""} {
+            projectTitle{ std::nullopt }, 
+            role{ std::nullopt } {
         }
 
         Manager(bool isUpdateObj) : Employee(isUpdateObj),
@@ -22,8 +22,8 @@ namespace EmployeeDB::Model {
             departmentID{ 0 },
             teamSize{ 0 },
             yearsOfExperience{ 0 },
-            projectTitle{ "#" },
-            role{ "#" } {
+            projectTitle{ std::nullopt },
+            role{ std::nullopt } {
         }
 
         int getManagerID() const {
@@ -58,16 +58,16 @@ namespace EmployeeDB::Model {
             yearsOfExperience = years;
         }
 
-        const std::string& getProjectTitle() const {
-            return projectTitle.value_or("");
+        const std::optional<std::string> getProjectTitle() const {
+            return projectTitle;
         }
 
         void setProjectTitle(const std::string& title) {
             projectTitle = title;
         }
 
-        const std::string& getRole() const {
-            return role.value_or("");
+        const std::optional<std::string> getRole() const {
+            return role;
         }
 
         void setRole(const std::string& rl) {

@@ -523,7 +523,7 @@ void EmployeeView::getViewEmployeeInput(Employee& employee, int fieldNumber) {
 						throw "Negative number entered!";
 					}
 				}
-				catch (std::exception& e) {
+				catch (...) {
 					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
 					continue;
 				}

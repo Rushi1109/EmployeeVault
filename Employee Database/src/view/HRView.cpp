@@ -279,7 +279,7 @@ bool HRView::viewHRConditional() {
 			}
 			else if (userInput == 3) {
 				EmployeeView::getViewEmployeeInput(hr, 3);
-				HRController::selectHR("middleName", hr.getMiddleName());
+				HRController::selectHR("middleName", hr.getMiddleName().value());
 				break;
 			}
 			else if (userInput == 4) {
@@ -289,7 +289,7 @@ bool HRView::viewHRConditional() {
 			}
 			else if (userInput == 5) {
 				EmployeeView::getViewEmployeeInput(hr, 5);
-				HRController::selectHR("dateOfBirth", hr.getDateOfBirth());
+				HRController::selectHR("dateOfBirth", hr.getDateOfBirth().value());
 				break;
 			}
 			else if (userInput == 6) {
@@ -319,17 +319,17 @@ bool HRView::viewHRConditional() {
 			}
 			else if (userInput == 11) {
 				EmployeeView::getViewEmployeeInput(hr, 11);
-				HRController::selectHR("mentorID", std::to_string(hr.getMentorID()));
+				HRController::selectHR("mentorID", std::to_string(hr.getMentorID().value()));
 				break;
 			}
 			else if (userInput == 12) {
 				EmployeeView::getViewEmployeeInput(hr, 12);
-				HRController::selectHR("performanceMetric", std::to_string(hr.getPerformanceMetric()));
+				HRController::selectHR("performanceMetric", std::to_string(hr.getPerformanceMetric().value()));
 				break;
 			}
 			else if (userInput == 13) {
 				EmployeeView::getViewEmployeeInput(hr, 13);
-				HRController::selectHR("bonus", std::to_string(hr.getBonus()));
+				HRController::selectHR("bonus", std::to_string(hr.getBonus().value()));
 				break;
 			}
 			else if (userInput == 14) {
@@ -348,4 +348,5 @@ bool HRView::viewHRConditional() {
 			isInvalidInput = true;
 		}
 	}
+	return true;
 }

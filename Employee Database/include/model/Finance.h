@@ -9,7 +9,7 @@ namespace EmployeeDB::Model {
         Finance() : accountingTool{ "" } {}
         Finance(bool isUpdateObj) : Employee{ isUpdateObj }, accountingTool{ "#" } {}
 
-        const std::string& getAccountingTool() const {
+        const std::string getAccountingTool() const {
             return accountingTool;
         }
 

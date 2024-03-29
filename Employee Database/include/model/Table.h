@@ -8,7 +8,7 @@
 namespace EmployeeDB::Model {
     class Table {
     public:
-        const std::string& getTableName() const {
+        const std::string getTableName() const {
             return tableName;
         }
         void setTableName(const std::string& name) {

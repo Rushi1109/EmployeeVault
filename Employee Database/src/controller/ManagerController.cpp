@@ -21,8 +21,8 @@ bool ManagerController::insertManager(Manager& manager) {
 		std::to_string(manager.getDepartmentID()) + ", " +
 		std::to_string(manager.getTeamSize()) + ", " +
 		std::to_string(manager.getYearsOfExperience()) + ", " +
-		(manager.getProjectTitle().size() == 0 ? "NULL" : "\"" + manager.getProjectTitle() + "\"") + "," +
-		(manager.getRole().size() == 0 ? "NULL" : "\"" + manager.getRole() + "\"") + "\");";
+		(!manager.getProjectTitle().has_value() ? "NULL" : "\"" + manager.getProjectTitle().value() + "\"") + "," +
+		(!manager.getRole().has_value() ? "NULL" : "\"" + manager.getRole().value() + "\"") + "\");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
@@ -106,17 +106,17 @@ std::string ManagerController::getUpdateQueryCondition(Manager& manager) {
 		}
 		updateQueryCondition += "yearsOfExp = " + std::to_string(manager.getYearsOfExperience());
 	}
-	if (manager.getProjectTitle() != "#") {
+	if (manager.getProjectTitle().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "projectTitle = \"" + manager.getProjectTitle() + "\"";
+		updateQueryCondition += "projectTitle = \"" + manager.getProjectTitle().value() + "\"";
 	}
-	if (manager.getRole() != "#") {
+	if (manager.getRole().has_value()) {
 		if (updateQueryCondition.size() != 0) {
 			updateQueryCondition += ", ";
 		}
-		updateQueryCondition += "role = \"" + manager.getRole() + "\"";
+		updateQueryCondition += "role = \"" + manager.getRole().value() + "\"";
 	}
 
 	return updateQueryCondition;
