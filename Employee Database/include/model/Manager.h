@@ -62,7 +62,7 @@ namespace EmployeeDB::Model {
             return projectTitle;
         }
 
-        void setProjectTitle(const std::string& title) {
+        void setProjectTitle(const std::optional<std::string>& title) {
             projectTitle = title;
         }
 
@@ -70,7 +70,7 @@ namespace EmployeeDB::Model {
             return role;
         }
 
-        void setRole(const std::string& rl) {
+        void setRole(const std::optional<std::string>& rl) {
             role = rl;
         }
 

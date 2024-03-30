@@ -24,20 +24,9 @@ bool HRView::insertHR() {
 
 	EmployeeView::getInsertEmployeeInput(hr);
 
-	std::string userInput;
-
-	while (true) {
-		std::cout << "hrSpecialization* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "hrSpecialization is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			hr.setHRSpecialization(userInput);
-			break;
-		}
+	{
+		auto hrSpecialization = Utility::getUserInputString("hrSpecialization");
+		hr.setHRSpecialization(hrSpecialization.value());
 	}
 
 	HRController::insertHR(hr);
@@ -115,18 +104,9 @@ bool HRView::updateHR() {
 				}
 			}
 			else if (userInput == 13) {
-				while (true) {
-					std::cout << "hrSpecialization* : ";
-					std::getline(std::cin, inputLine);
-					Utility::removeEmptySpaces(inputLine);
-
-					if (inputLine.size() == 0) {
-						std::cout << "hrSpecialization is mandatory...Please enter again!!" << '\n';
-					}
-					else {
-						hr.setHRSpecialization(inputLine);
-						break;
-					}
+				{
+					auto hrSpecialization = Utility::getUserInputString("hrSpecialization");
+					hr.setHRSpecialization(hrSpecialization.value());
 				}
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
@@ -216,19 +196,10 @@ void HRView::getViewHRInput(HR& hr, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 14:
-		while (true) {
-			std::cout << "hrSpecialization* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "HR Specialization is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				hr.setHRSpecialization(userInput);
-				break;
-			}
+		case 14:
+		{
+			auto hrSpecialization = Utility::getUserInputString("hrSpecialization");
+			hr.setHRSpecialization(hrSpecialization.value());
 		}
 		break;
 	}

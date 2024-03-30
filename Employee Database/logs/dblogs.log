@@ -313,3 +313,29 @@
 29/03/24 17:05:34 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
 29/03/24 17:05:41 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 20; 
 29/03/24 17:05:41 : [DBLogger] [Info]: Success :  SELECT * FROM Employee NATURAL JOIN HR WHERE employeeID = "20" COLLATE NOCASE; 
+30/03/24 15:27:00 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 15:27:00 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 15:32:04 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 15:32:04 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 16:09:24 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 16:09:24 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 22:54:54 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 22:54:54 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 22:56:46 : [DBLogger] [Info]: Success :  SELECT * FROM Department ; 
+30/03/24 22:57:47 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 22:57:47 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 23:02:59 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 23:02:59 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 23:03:35 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 23:03:35 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 23:10:20 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 23:10:20 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 23:10:32 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "1"  COLLATE NOCASE; 
+30/03/24 23:10:54 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "7"  COLLATE NOCASE; 
+30/03/24 23:11:26 : [DBLogger] [Info]: Success :  UPDATE Department SET departmentName = "Noob" WHERE departmentID = 7; 
+30/03/24 23:13:37 : [DBLogger] [Info]: Success :  Opened database file 
+30/03/24 23:13:37 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+30/03/24 23:13:46 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "1"  COLLATE NOCASE; 
+30/03/24 23:14:12 : [DBLogger] [Info]: Success :  UPDATE Department SET baseSalary = 70000.000000 WHERE departmentID = 1; 
+30/03/24 23:14:18 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "7"  COLLATE NOCASE; 
+30/03/24 23:14:39 : [DBLogger] [Info]: Success :  UPDATE Department SET departmentName = "Noob dept" WHERE departmentID = 7; 

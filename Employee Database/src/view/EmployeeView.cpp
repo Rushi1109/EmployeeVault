@@ -40,761 +40,255 @@ void EmployeeView::printViewEmployeeFields() {
 }
 
 void EmployeeView::getInsertEmployeeInput(Employee& employee) {
-	std::string userInput;
-
-	while (true) {
-		std::cout << "firstName* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "First Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			employee.setFirstName(userInput);
-			break;
-		}
+	{
+		auto firstName = Utility::getUserInputString("firstName");
+		employee.setFirstName(firstName.value());
 	}
 
 	{
-		std::cout << "middleName : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() != 0) {
-			employee.setMiddleName(userInput);
-		}
-	}
-
-	while (true) {
-		std::cout << "lastName* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "Last Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			employee.setLastName(userInput);
-			break;
-		}
+		auto middleName = Utility::getUserInputString("middleName", 0, false);
+		employee.setMiddleName(middleName);
 	}
 
 	{
-		std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-		while (true) {
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				break;
-			}
-			if (Validator::validateDate(userInput)) {
-				employee.setDateOfBirth(userInput);
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : \n" << "\033[0m";
-			}
-		}
-	}
-
-	while (true) {
-		std::cout << "mobileNo* (Starting from [6-9]) : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "mobileNo is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateMobile(userInput)) {
-				employee.setMobileNo(std::stoll(userInput));
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Wrong mobileNo...Please enter again!!\n" << "\033[0m";
-			}
-		}
-	}
-
-	while (true) {
-		std::cout << "email* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "email is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateEmail(userInput)) {
-				employee.setEmail(userInput);
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Wrong email...Please enter again!!\n" << "\033[0m";
-			}
-		}
-	}
-
-	while (true) {
-		std::cout << "address* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "Address is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			employee.setAddress(userInput);
-			break;
-		}
-	}
-
-	while (true) {
-		std::cout << "gender* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "Gender is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateGender(userInput)) {
-				employee.setGender(EmployeeDB::Model::getGenderFromString(userInput));
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-			}
-		}
-	}
-
-	while (true) {
-		std::cout << "dateOfJoining* [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : \n";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "dateOfJoining is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateDate(userInput)) {
-				employee.setDateOfJoining(userInput);
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : \n" << "\033[0m";
-			}
-		}
+		auto lastName = Utility::getUserInputString("lastName");
+		employee.setLastName(lastName.value());
 	}
 
 	{
-		while (true) {
-			std::cout << "mentorID : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				break;
-			}
-			try {
-				if (stoi(userInput) > 0) {
-					employee.setMentorID(stoi(userInput));
-					break;
-				}
-				else {
-					throw "Negative number  entered!";
-				}
-			}
-			catch (...) {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter Positive real number!!\n" << "\033[0m";
-			}
-		}
+		auto dateOfBirth = Utility::getUserInputDate("dateOfBirth", Validator::validateDate, false);
+		employee.setDateOfBirth(dateOfBirth);
 	}
 
 	{
-		while (true) {
-			std::cout << "performanceMetric : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				break;
-			}
-			try {
-				if (stod(userInput) >= 0.0) {
-					employee.setPerformanceMetric(stod(userInput));
-					break;
-				}
-				else {
-					throw "Negative number  entered!";
-				}
-			}
-			catch (...) {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter Positive real number!!\n" << "\033[0m";
-			}
-		}
+		auto mobileNo = Utility::getUserInputLL("mobileNo");
+		employee.setMobileNo(mobileNo.value());
 	}
 
 	{
-		while (true) {
-			std::cout << "bonus : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
+		auto email = Utility::getUserInputString("email", Validator::validateEmail);
+		employee.setEmail(email.value());
+	}
 
-			if (userInput.size() == 0) {
-				break;
-			}
-			try {
-				if (stod(userInput) >= 0.0) {
-					employee.setBonus(stod(userInput));
-					break;
-				}
-				else {
-					throw "Negative number  entered!";
-				}
-			}
-			catch (...) {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter Positive real number!!\n" << "\033[0m";
-			}
-		}
+	{
+		auto address = Utility::getUserInputString("address");
+		employee.setAddress(address.value());
+	}
+
+	{
+		auto gender = Utility::getUserInputString("gender", Validator::validateGender);
+		employee.setGender(Model::getGenderFromString(gender.value()));
+	}
+
+	{
+		auto dateOfJoining = Utility::getUserInputDate("dateOfJoining", Validator::validateDate);
+		employee.setDateOfJoining(dateOfJoining.value());
+	}
+
+	{
+		auto mentorID = Utility::getUserInputInt("mentorID", 0, false);
+		employee.setMentorID(mentorID);
+	}
+
+	{
+		auto performanceMetric = Utility::getUserInputDouble("performanceMetric", false);
+		employee.setPerformanceMetric(performanceMetric);
+	}
+
+	{
+		auto bonus = Utility::getUserInputDouble("bonus", false);
+		employee.setBonus(bonus);
 	}
 }
 
 void EmployeeView::getUpdateEmployeeInput(Employee& employee, int fieldNumber) {
-	std::string userInput;
-
 	switch (fieldNumber) {
-	case 1:
-		while (true) {
-			std::cout << "firstName* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "First Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setFirstName(userInput);
-				break;
-			}
+		case 1:
+		{
+			auto firstName = Utility::getUserInputString("firstName");
+			employee.setFirstName(firstName.value());
 		}
 		break;
-	case 2:
-	{
-		std::cout << "middleName : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
 
-		if (userInput.size() != 0) {
-			employee.setMiddleName(userInput);
-		}
-	}
-	break;
-	case 3:
-		while (true) {
-			std::cout << "lastName* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Last Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setLastName(userInput);
-				break;
-			}
+		case 2:
+		{
+			auto middleName = Utility::getUserInputString("middleName", 0, false);
+			employee.setMiddleName(middleName);
 		}
 		break;
-	case 4:
-	{
-		std::cout << "dateOfBirth [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-		while (true) {
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				break;
-			}
-			if (Validator::validateDate(userInput)) {
-				employee.setDateOfBirth(userInput);
-				break;
-			}
-			else {
-				std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : " << "\033[0m";
-			}
-		}
-	}
-	break;
-	case 5:
-		while (true) {
-			std::cout << "mobileNo* (Starting from [6-9]) : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "mobileNo is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateMobile(userInput)) {
-					employee.setMobileNo(std::stoll(userInput));
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong mobileNo...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		case 3:
+		{
+			auto lastName = Utility::getUserInputString("lastName");
+			employee.setLastName(lastName.value());
 		}
 		break;
-	case 6:
-		while (true) {
-			std::cout << "email* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "email is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateEmail(userInput)) {
-					employee.setEmail(userInput);
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong email...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		case 4:
+		{
+			auto dateOfBirth = Utility::getUserInputDate("dateOfBirth", Validator::validateDate, false);
+			employee.setDateOfBirth(dateOfBirth);
 		}
 		break;
-	case 7:
-		while (true) {
-			std::cout << "address* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Address is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setAddress(userInput);
-				break;
-			}
+		case 5:
+		{
+			auto mobileNo = Utility::getUserInputLL("mobileNo");
+			employee.setMobileNo(mobileNo.value());
 		}
 		break;
+
+		case 6:
+		{
+			auto email = Utility::getUserInputString("email", Validator::validateEmail);
+			employee.setEmail(email.value());
+		}
+		break;
+
+		case 7:
+		{
+			auto address = Utility::getUserInputString("address");
+			employee.setAddress(address.value());
+		}
+		break;
+
 	case 8:
-		while (true) {
-			std::cout << "gender* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Gender is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateGender(userInput)) {
-					employee.setGender(EmployeeDB::Model::getGenderFromString(userInput));
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		{
+			auto gender = Utility::getUserInputString("gender", Validator::validateGender);
+			employee.setGender(Model::getGenderFromString(gender.value()));
 		}
 		break;
-	case 9:
-		while (true) {
-			std::cout << "dateOfJoining* [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "dateOfJoining is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateDate(userInput)) {
-					employee.setDateOfJoining(userInput);
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : " << "\033[0m";
-				}
-			}
+		case 9:
+		{
+			auto dateOfJoining = Utility::getUserInputDate("dateOfJoining", Validator::validateDate);
+			employee.setDateOfJoining(dateOfJoining.value());
 		}
 		break;
-	case 10:
-		while (true) {
-			std::cout << "mentorID* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "mentorID is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stoi(userInput) > 0) {
-						employee.setMentorID(stoi(userInput));
-					}
-					else {
-						throw "Negative number  entered!";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 10:
+		{
+			auto mentorID = Utility::getUserInputInt("mentorID");
+			employee.setMentorID(mentorID);
 		}
 		break;
-	case 11:
-	{
-		while (true) {
-			std::cout << "performanceMetric : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				break;
-			}
-			try {
-				if (stod(userInput) >= 0.0) {
-					employee.setPerformanceMetric(stod(userInput));
-					break;
-				}
-				else {
-					throw "Negative number  entered!";
-				}
-			}
-			catch (...) {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter Positive real number!!\n" << "\033[0m";
-			}
+		case 11:
+		{
+			auto performanceMetric = Utility::getUserInputDouble("performanceMetric", false);
+			employee.setPerformanceMetric(performanceMetric);
 		}
-	}
-	break;
-	case 12:
-	{
-		while (true) {
-			std::cout << "bonus : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
+		break;
 
-			if (userInput.size() == 0) {
-				break;
-			}
-			try {
-				if (stod(userInput) >= 0.0) {
-					employee.setBonus(stod(userInput));
-					break;
-				}
-				else {
-					throw "Negative number  entered!";
-				}
-			}
-			catch (...) {
-				std::cerr << "\033[0;31m" << "Wrong input...Please enter Positive real number!!\n" << "\033[0m";
-			}
+		case 12:
+		{
+			auto bonus = Utility::getUserInputDouble("bonus", false);
+			employee.setBonus(bonus);
 		}
-	}
-	break;
+		break;
 	}
 }
 
 void EmployeeView::getViewEmployeeInput(Employee& employee, int fieldNumber) {
-	std::string userInput;
-
 	switch (fieldNumber) {
-	case 1: 
-		while (true) {
-			std::cout << "employeeID* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "employeeID is mandatory...Please enter again!!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stoi(userInput) > 0) {
-						employee.setEmployeeID(stoi(userInput));
-					}
-					else {
-						throw "Negative number entered!";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 1:
+		{
+			auto employeeID = Utility::getUserInputInt("employeeID");
+			employee.setEmployeeID(employeeID.value());
 		}
 		break;
-	case 2:
-		while (true) {
-			std::cout << "firstName* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "First Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setFirstName(userInput);
-				break;
-			}
+		case 2:
+		{
+			auto firstName = Utility::getUserInputString("firstName");
+			employee.setFirstName(firstName.value());
 		}
 		break;
-	case 3:
-		while (true) {
-			std::cout << "middleName* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Middle Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setMiddleName(userInput);
-				break;
-			}
+		case 3:
+		{
+			auto middleName = Utility::getUserInputString("middleName");
+			employee.setMiddleName(middleName);
 		}
 		break;
-	case 4:
-		while (true) {
-			std::cout << "lastName* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Last Name is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setLastName(userInput);
-				break;
-			}
+		case 4:
+		{
+			auto lastName = Utility::getUserInputString("lastName");
+			employee.setLastName(lastName.value());
 		}
 		break;
-	case 5:
-		while (true) {
-			std::cout << "dateOfBirth* [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "dateOfBirth is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateDate(userInput)) {
-					employee.setDateOfBirth(userInput);
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : " << "\033[0m";
-				}
-			}
+		case 5:
+		{
+			auto dateOfBirth = Utility::getUserInputDate("dateOfBirth", Validator::validateDate, true);
+			employee.setDateOfBirth(dateOfBirth);
 		}
 		break;
-	case 6:
-		while (true) {
-			std::cout << "mobileNo* (Starting from [6-9]) : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "mobileNo is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateMobile(userInput)) {
-					employee.setMobileNo(std::stoll(userInput));
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong mobileNo...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		case 6:
+		{
+			auto mobileNo = Utility::getUserInputLL("mobileNo");
+			employee.setMobileNo(mobileNo.value());
 		}
 		break;
-	case 7:
-		while (true) {
-			std::cout << "email* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "email is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateEmail(userInput)) {
-					employee.setEmail(userInput);
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong email...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		case 7:
+		{
+			auto email = Utility::getUserInputString("email", Validator::validateEmail);
+			employee.setEmail(email.value());
 		}
 		break;
-	case 8:
-		while (true) {
-			std::cout << "address* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Address is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				employee.setAddress(userInput);
-				break;
-			}
+		case 8:
+		{
+			auto address = Utility::getUserInputString("address");
+			employee.setAddress(address.value());
 		}
 		break;
-	case 9:
-		while (true) {
-			std::cout << "gender* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Gender is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateGender(userInput)) {
-					employee.setGender(EmployeeDB::Model::getGenderFromString(userInput));
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-				}
-			}
+		case 9:
+		{
+			auto gender = Utility::getUserInputString("gender", Validator::validateGender);
+			employee.setGender(Model::getGenderFromString(gender.value()));
 		}
 		break;
-	case 10:
-		while (true) {
-			std::cout << "dateOfJoining* [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "dateOfJoining is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				if (Validator::validateDate(userInput)) {
-					employee.setDateOfJoining(userInput);
-					break;
-				}
-				else {
-					std::cerr << "\033[0;31m" << "Please Enter the date in format [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : " << "\033[0m";
-				}
-			}
+		case 10:
+		{
+			auto dateOfJoining = Utility::getUserInputDate("dateOfJoining", Validator::validateDate);
+			employee.setDateOfJoining(dateOfJoining.value());
 		}
 		break;
-	case 11:
-		while (true) {
-			std::cout << "mentorID* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "mentorID is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stoi(userInput) > 0) {
-						employee.setMentorID(stoi(userInput));
-					}
-					else {
-						throw "Negative Number";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 11:
+		{
+			auto mentorID = Utility::getUserInputInt("mentorID");
+			employee.setMentorID(mentorID);
 		}
 		break;
-	case 12:
-		while (true) {
-			std::cout << "performanceMetric* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "performanceMetric is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stod(userInput) > 0.0) {
-						employee.setPerformanceMetric(stoi(userInput));
-					}
-					else {
-						throw "Negative Number";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 12:
+		{
+			auto performanceMetric = Utility::getUserInputDouble("performanceMetric", true);
+			employee.setPerformanceMetric(performanceMetric);
 		}
 		break;
-	case 13:
-		while (true) {
-			std::cout << "bonus* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "bonus is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stod(userInput) > 0.0) {
-						employee.setBonus(stoi(userInput));
-					}
-					else {
-						throw "Negative Number";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 13:
+		{
+			auto bonus = Utility::getUserInputDouble("bonus", true);
+			employee.setBonus(bonus);
 		}
 		break;
 	}
 }
 
 void EmployeeView::getEmployeeIDInput(Employee& employee, const std::string& operation, const std::string& entity) {
-	std::string userInput;
-
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << operation + " " + entity << "\033[0m" << "------------------------------------------------- \n";
 	std::cout << "Please enter employeeID.\n";
 
-	while (true) {
-		std::cout << "employeeID* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "employeeID is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateEmployeeID(userInput, entity)) {
-				employee.setEmployeeID(stoi(userInput));
-				break;
-			}
-			else {
-				std::cout << "\033[0;31m" << "Wrong input...Please enter positive integer number!!\n" << "\033[0m";
-			}
-		}
-	}
+	auto employeeID = Utility::getUserInputInt("employeeID", Validator::validateEmployeeID, entity);
+	employee.setEmployeeID(employeeID.value());
 }

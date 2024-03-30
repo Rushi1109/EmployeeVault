@@ -26,95 +26,29 @@ void ManagerView::printViewManagerFields() {
 }
 
 void ManagerView::getInsertManagerInput(Manager& manager) {
-	std::string userInput;
-
-	while (true) {
-		std::cout << "managerID* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "managerID is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateEmployeeID(userInput, "*")) {
-				manager.setManagerID(stoi(userInput));
-				break;
-			}
-			else {
-				std::cout << "\033[0;31m" << "Wrong input...Please enter positive integer number!!\n" << "\033[0m";
-			}
-		}
-	}
-
-	while (true) {
-		std::cout << "teamSize* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "teamSize is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			try {
-				if (std::stoi(userInput) >= 0) {
-					manager.setTeamSize(std::stoi(userInput));
-				}
-				else {
-					throw "Negative Number";
-				}
-			}
-			catch (...) {
-				std::cout << "\033[0;31m" << "Wrong input...Please enter positive integer number!!\n" << "\033[0m";
-				continue;
-			}
-			break;
-		}
-	}
-
-	while (true) {
-		std::cout << "yearsOfExperience* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "yearsOfExperience is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			try {
-				if (std::stod(userInput) >= 0.0) {
-					manager.setYearsOfExperience(std::stod(userInput));
-				}
-				else {
-					throw "Negative Number";
-				}
-			}
-			catch (...) {
-				std::cout << "\033[0;31m" << "Wrong input...Please enter positive real number!!\n" << "\033[0m";
-				continue;
-			}
-			break;
-		}
+	{
+		auto managerID = Utility::getUserInputInt("managerId", Validator::validateEmployeeID, "*");
+		manager.setManagerID(managerID.value());
 	}
 
 	{
-		std::cout << "projectTitle : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() != 0) {
-			manager.setProjectTitle(userInput);
-		}
+		auto teamSize = Utility::getUserInputInt("teamSize");
+		manager.setTeamSize(teamSize.value());
 	}
 
 	{
-		std::cout << "role : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
+		auto yearsOfExperience = Utility::getUserInputInt("yearsOfExperience");
+		manager.setYearsOfExperience(yearsOfExperience.value());
+	}
 
-		if (userInput.size() != 0) {
-			manager.setRole(userInput);
-		}
+	{
+		auto projectTitle = Utility::getUserInputString("projectTitle", 0, false);
+		manager.setProjectTitle(projectTitle.value());
+	}
+
+	{
+		auto role = Utility::getUserInputString("role", 0, false);
+		manager.setRole(role.value());
 	}
 };
 
@@ -137,35 +71,18 @@ bool ManagerView::insertManager() {
 }
 
 bool ManagerView::getManagerIDInput(Manager& manager, const std::string& operation) {
-	std::string userInput;
-
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << operation + " Manager" << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "Please enter Manager ID.\n";
 
-	while (true) {
-		std::cout << "Manager ID* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "Manager ID is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			if (Validator::validateManagerID(userInput)) {
-				manager.setEmployeeID(stoi(userInput));
-				manager.setManagerID(stoi(userInput));
-				break;
-			}
-			else {
-				std::cout << "\033[0;31m" << "Wrong input...Please enter positive integer number!!\n" << "\033[0m";
-			}
-		}
+	{
+		auto managerID = Utility::getUserInputInt("managerID", Validator::validateManagerID);
+		manager.setManagerID(managerID.value());
 	}
 
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << operation + " Manager" << "\033[0m" <<"-------------------------------------------------\n";
-	ManagerController::selectManager("employeeID", userInput);
+	ManagerController::selectManager("employeeID", std::to_string(manager.getManagerID()));
 
 	return Utility::proceedFurther(operation);
 }
@@ -193,83 +110,33 @@ void ManagerView::getUpdateManagerInput(Manager& manager, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 13:
-		while (true) {
-			std::cout << "teamSize* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "teamSize is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (std::stoi(userInput) >= 0) {
-						manager.setTeamSize(std::stoi(userInput));
-					}
-					else {
-						throw "Negative Number";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter positive integer number!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 13:
+		{
+			auto teamSize = Utility::getUserInputInt("teamSize");
+			manager.setTeamSize(teamSize.value());
 		}
 		break;
 
-	case 14:
-		while (true) {
-			std::cout << "yearsOfExperience* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "yearsOfExperience is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (std::stod(userInput) >= 0.0) {
-						manager.setYearsOfExperience(std::stod(userInput));
-					}
-					else {
-						throw "Negative Number";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong input...Please enter positive real number!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 14:
+		{
+			auto yearsOfExperience = Utility::getUserInputInt("yearsOfExperience");
+			manager.setYearsOfExperience(yearsOfExperience.value());
 		}
 		break;
 
-	case 15:
-	{
-		std::cout << "projectTitle : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() != 0) {
-			manager.setProjectTitle(userInput);
+		case 15:
+		{
+			auto projectTitle = Utility::getUserInputString("projectTitle", 0, false);
+			manager.setProjectTitle(projectTitle.value());
 		}
-	}
-	break;
+		break;
 
-	case 16:
-	{
-		std::cout << "role : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() != 0) {
-			manager.setRole(userInput);
+		case 16:
+		{
+			auto role = Utility::getUserInputString("role", 0, false);
+			manager.setRole(role.value());
 		}
-	}
-	break;
+		break;
 	}
 }
 
@@ -349,112 +216,38 @@ void ManagerView::getViewManagerInput(Manager& manager, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 14:
-		while (true) {
-			std::cout << "departmentID* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Department ID is mandatory...Please enter again!!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stoi(userInput) > 0) {
-						manager.setDepartmentID(stoi(userInput));
-					}
-					else {
-						throw "Negative number entered!";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 14:
+		{
+			auto departmentID = Utility::getUserInputInt("departmentID");
+			manager.setDepartmentID(departmentID.value());
 		}
 		break;
-	case 15:
-		while (true) {
-			std::cout << "team size* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Team size is mandatory...Please enter again!!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stoi(userInput) > 0) {
-						manager.setTeamSize(stoi(userInput));
-					}
-					else {
-						throw "Negative number entered!";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 15:
+		{
+			auto teamSize = Utility::getUserInputInt("teamSize");
+			manager.setTeamSize(teamSize.value());
 		}
 		break;
-	case 16:
-		while (true) {
-			std::cout << "yearsOfExperience* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Years of Experience is mandatory...Please enter again!!!" << '\n' << "\033[0m";
-			}
-			else {
-				try {
-					if (stod(userInput) > 0.0) {
-						manager.setYearsOfExperience(stod(userInput));
-					}
-					else {
-						throw "Negative number entered!";
-					}
-				}
-				catch (...) {
-					std::cout << "\033[0;31m" << "Wrong Input...Please enter again!!\n" << "\033[0m";
-					continue;
-				}
-				break;
-			}
+		case 16:
+		{
+			auto yearsOfExperience = Utility::getUserInputInt("yearsOfExperience");
+			manager.setYearsOfExperience(yearsOfExperience.value());
 		}
 		break;
-	case 17:
-		while (true) {
-			std::cout << "Project Title* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Project Title is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				manager.setProjectTitle(userInput);
-				break;
-			}
+		case 17:
+		{
+			auto projectTitle = Utility::getUserInputString("projectTitle");
+			manager.setProjectTitle(projectTitle.value());
 		}
 		break;
-	case 18:
-		while (true) {
-			std::cout << "Role* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
 
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Role is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				manager.setRole(userInput);
-				break;
-			}
+		case 18:
+		{
+			auto role = Utility::getUserInputString("role");
+			manager.setRole(role.value());
 		}
 		break;
 	}

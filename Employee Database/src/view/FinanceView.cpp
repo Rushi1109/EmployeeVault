@@ -10,7 +10,7 @@ using EmployeeDB::Controller::FinanceController;
 using EmployeeDB::Validator;
 
 bool FinanceView::insertFinance() {
-	Finance obj;
+	Finance finance;
 
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << "Insert Finance" << "\033[0m" << "-------------------------------------------------\n";
@@ -22,55 +22,44 @@ bool FinanceView::insertFinance() {
 		return false;
 	}
 
-	EmployeeView::getInsertEmployeeInput(obj);
+	EmployeeView::getInsertEmployeeInput(finance);
 
-	std::string userInput;
-
-	while (true) {
-		std::cout << "accountingTool* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "accountingTool is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			obj.setAccountingTool(userInput);
-			break;
-		}
+	{
+		auto accountingTool = Utility::getUserInputString("accountingTool");
+		finance.setAccountingTool(accountingTool.value());
 	}
 
-	FinanceController::insertFinance(obj);
+	FinanceController::insertFinance(finance);
 
 	return Utility::repeatOperation("insert", "Finance");
 }
 
 bool FinanceView::deleteFinance() {
-	Finance obj;
+	Finance finance;
 
-	EmployeeView::getEmployeeIDInput(obj, "Delete", "Finance");
+	EmployeeView::getEmployeeIDInput(finance, "Delete", "Finance");
 
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << "Delete Finance" << "\033[0m" << "-------------------------------------------------\n";
-	FinanceController::selectFinance("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+	FinanceController::selectFinance("Employee.employeeID", std::to_string(finance.getEmployeeID()));
 
 	if (!Utility::proceedFurther("Delete")) {
 		return false;
 	}
 
-	FinanceController::deleteFinanceByID(obj.getEmployeeID());
+	FinanceController::deleteFinanceByID(finance.getEmployeeID());
 
 	return Utility::repeatOperation("delete", "Finance");
 }
 
 bool FinanceView::updateFinance() {
-	Finance obj{ true };
+	Finance finance{ true };
 
-	EmployeeView::getEmployeeIDInput(obj, "Update", "Finance");
+	EmployeeView::getEmployeeIDInput(finance, "Update", "Finance");
 
 	system("cls");
 	std::cout << "------------------------------------------" << "\033[0;36m" << "Update Finance" << "\033[0m" << "-------------------------------------------------\n";
-	FinanceController::selectFinance("Employee.employeeID", std::to_string(obj.getEmployeeID()));
+	FinanceController::selectFinance("Employee.employeeID", std::to_string(finance.getEmployeeID()));
 	if (!Utility::proceedFurther("Update")) {
 		return false;
 	}
@@ -106,7 +95,7 @@ bool FinanceView::updateFinance() {
 				std::exit(0);
 			}
 			else if (userInput >= 1 && userInput <= 12) {
-				EmployeeView::getUpdateEmployeeInput(obj, userInput);
+				EmployeeView::getUpdateEmployeeInput(finance, userInput);
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
 				}
@@ -115,18 +104,9 @@ bool FinanceView::updateFinance() {
 				}
 			}
 			else if (userInput == 13) {
-				while (true) {
-					std::cout << "accountingTool* : ";
-					std::getline(std::cin, inputLine);
-					Utility::removeEmptySpaces(inputLine);
-
-					if (inputLine.size() == 0) {
-						std::cout << "\033[0;31m" << "accountingTool is mandatory...Please enter again!!" << '\n' << "\033[0m";
-					}
-					else {
-						obj.setAccountingTool(inputLine);
-						break;
-					}
+				{
+					auto accountingTool = Utility::getUserInputString("accountingTool");
+					finance.setAccountingTool(accountingTool.value());
 				}
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
@@ -147,7 +127,7 @@ bool FinanceView::updateFinance() {
 		}
 	}
 
-	FinanceController::updateFinance(obj);
+	FinanceController::updateFinance(finance);
 
 	return Utility::repeatOperation("update", "Finance");
 }
@@ -216,19 +196,10 @@ void FinanceView::getViewFinanceInput(Finance& finance, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 14:
-		while (true) {
-			std::cout << "accountingTool* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Accounting Tool is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				finance.setAccountingTool(userInput);
-				break;
-			}
+		case 14:
+		{
+			auto accountingTool = Utility::getUserInputString("accountingTool");
+			finance.setAccountingTool(accountingTool.value());
 		}
 		break;
 	}

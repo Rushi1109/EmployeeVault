@@ -24,20 +24,9 @@ bool EngineerView::insertEngineer() {
 
 	EmployeeView::getInsertEmployeeInput(engineer);
 
-	std::string userInput;
-
-	while (true) {
-		std::cout << "technology* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "Technology is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			engineer.setTechnology(userInput);
-			break;
-		}
+	{
+		auto technology = Utility::getUserInputString("technology");
+		engineer.setTechnology(technology.value());
 	}
 
 	EngineerController::insertEngineer(engineer);
@@ -115,18 +104,9 @@ bool EngineerView::updateEngineer() {
 				}
 			}
 			else if (userInput == 13) {
-				while (true) {
-					std::cout << "technology* : ";
-					std::getline(std::cin, inputLine);
-					Utility::removeEmptySpaces(inputLine);
-
-					if (inputLine.size() == 0) {
-						std::cout << "Technology is mandatory...Please enter again!!" << '\n';
-					}
-					else {
-						engineer.setTechnology(inputLine);
-						break;
-					}
+				{
+					auto technology = Utility::getUserInputString("technology");
+					engineer.setTechnology(technology.value());
 				}
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
@@ -216,19 +196,10 @@ void EngineerView::getViewEngineerInput(Engineer& engineer, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 14:
-		while (true) {
-			std::cout << "technology* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Technology is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				engineer.setTechnology(userInput);
-				break;
-			}
+		case 14:
+		{
+			auto technology = Utility::getUserInputString("technology");
+			engineer.setTechnology(technology.value());
 		}
 		break;
 	}

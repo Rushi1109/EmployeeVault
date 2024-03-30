@@ -13,21 +13,9 @@ bool ExportView::exportToCSV(const std::string& entity) {
 	std::cout << "------------------------------------------" << "\033[36m" << "Export " << entity << "\033[0m" << "-------------------------------------------------\n";
 	std::cout << "\033[33m" << "Enter filename for exporting " << entity << "Table to csv.\n" << "\033[0m\n";
 
-	std::string userInput;
-	while (true) {
-		std::cout << "filename* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
+	auto fileNameInput = Utility::getUserInputString("File name");
 
-		if (userInput.size() == 0) {
-			std::cout << "\033[33m" << "filename is mandatory...Please enter again!!" << "\033[0m\n";
-		}
-		else {
-			break;
-		}
-	}
-
-	std::filesystem::path filename{ userInput };
+	std::filesystem::path filename{ fileNameInput.value() };
 
 	ExportController::exportToCSV(entity, filename);
 

@@ -73,7 +73,7 @@ namespace EmployeeDB::Model {
             return name.middleName;
         }
 
-        void setMiddleName(const std::string& middleName) {
+        void setMiddleName(const std::optional<std::string>& middleName) {
             name.middleName = middleName;
         }
 
@@ -89,7 +89,7 @@ namespace EmployeeDB::Model {
             return dateOfBirth;
         }
 
-        void setDateOfBirth(const std::string& dob) {
+        void setDateOfBirth(const std::optional<std::string>& dob) {
             dateOfBirth = dob;
         }
 
@@ -145,7 +145,7 @@ namespace EmployeeDB::Model {
             return mentorID;
         }
 
-        void setMentorID(int id) {
+        void setMentorID(std::optional<int> id) {
             mentorID = id;
         }
 
@@ -153,7 +153,7 @@ namespace EmployeeDB::Model {
             return performanceMetric;
         }
 
-        void setPerformanceMetric(double metric) {
+        void setPerformanceMetric(std::optional<double> metric) {
             performanceMetric = metric;
         }
 
@@ -161,7 +161,7 @@ namespace EmployeeDB::Model {
             return bonus;
         }
 
-        void setBonus(double b) {
+        void setBonus(std::optional<double> b) {
             bonus = b;
         }
 

@@ -24,20 +24,9 @@ bool QAView::insertQA() {
 
 	EmployeeView::getInsertEmployeeInput(qa);
 
-	std::string userInput;
-
-	while (true) {
-		std::cout << "testingTool* : ";
-		std::getline(std::cin, userInput);
-		Utility::removeEmptySpaces(userInput);
-
-		if (userInput.size() == 0) {
-			std::cout << "\033[0;31m" << "testingTool is mandatory...Please enter again!!" << '\n' << "\033[0m";
-		}
-		else {
-			qa.setTestingTool(userInput);
-			break;
-		}
+	{
+		auto testingTool = Utility::getUserInputString("testingTool");
+		qa.setTestingTool(testingTool.value());
 	}
 
 	QAController::insertQA(qa);
@@ -115,18 +104,9 @@ bool QAView::updateQA() {
 				}
 			}
 			else if (userInput == 13) {
-				while (true) {
-					std::cout << "testingTool* : ";
-					std::getline(std::cin, inputLine);
-					Utility::removeEmptySpaces(inputLine);
-
-					if (inputLine.size() == 0) {
-						std::cout << "testingTool is mandatory...Please enter again!!" << '\n';
-					}
-					else {
-						qa.setTestingTool(inputLine);
-						break;
-					}
+				{
+					auto testingTool = Utility::getUserInputString("testingTool");
+					qa.setTestingTool(testingTool.value());
 				}
 				if (Utility::repeatOperation("update", "field")) {
 					continue;
@@ -216,19 +196,10 @@ void QAView::getViewQAInput(QA& qa, int fieldNumber) {
 	std::string userInput;
 
 	switch (fieldNumber) {
-	case 14:
-		while (true) {
-			std::cout << "testingTool* : ";
-			std::getline(std::cin, userInput);
-			Utility::removeEmptySpaces(userInput);
-
-			if (userInput.size() == 0) {
-				std::cout << "\033[0;31m" << "Testing tool is mandatory...Please enter again!!" << '\n' << "\033[0m";
-			}
-			else {
-				qa.setTestingTool(userInput);
-				break;
-			}
+		case 14:
+		{
+			auto testingTool = Utility::getUserInputString("testingTool");
+			qa.setTestingTool(testingTool.value());
 		}
 		break;
 	}
