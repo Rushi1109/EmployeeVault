@@ -339,3 +339,17 @@
 30/03/24 23:14:12 : [DBLogger] [Info]: Success :  UPDATE Department SET baseSalary = 70000.000000 WHERE departmentID = 1; 
 30/03/24 23:14:18 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "7"  COLLATE NOCASE; 
 30/03/24 23:14:39 : [DBLogger] [Info]: Success :  UPDATE Department SET departmentName = "Noob dept" WHERE departmentID = 7; 
+31/03/24 00:07:40 : [DBLogger] [Info]: Success :  Opened database file 
+31/03/24 00:07:40 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+31/03/24 00:07:42 : [DBLogger] [Info]: Success :  Opened database file 
+31/03/24 00:07:42 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM Employee; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM Engineer; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM Finance; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
+31/03/24 00:08:22 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+31/03/24 00:10:49 : [DBLogger] [Info]: Success :  CREATE TABLE "juhi" ("id" int primary key, "name" text not null); 
+31/03/24 02:12:05 : [DBLogger] [Info]: Success :  Opened database file 
+31/03/24 02:12:05 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
