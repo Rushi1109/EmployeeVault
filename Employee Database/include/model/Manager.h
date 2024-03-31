@@ -20,8 +20,8 @@ namespace EmployeeDB::Model {
         Manager(bool isUpdateObj) : Employee(isUpdateObj),
             managerID{ 0 },
             departmentID{ 0 },
-            teamSize{ 0 },
-            yearsOfExperience{ 0 },
+            teamSize{ -1 },
+            yearsOfExperience{ -1.0 },
             projectTitle{ std::nullopt },
             role{ std::nullopt } {
         }

@@ -19,6 +19,10 @@ TEST(TestDepartmentController, Test_checkDepartmentExistence) {
 	ASSERT_FALSE(DepartmentController::checkDepartmentExistence("45"));
 }
 
+TEST_F(DepartmentFixture, Test_getUpdateQueryConditionEmpty) {
+	ASSERT_STREQ("", DepartmentControllerTest::getUpdateQueryCondition(*emptyDepartment).c_str());
+}
+
 TEST_F(DepartmentFixture, Test_getUpdateQueryCondition) {
 	emptyDepartment->setDepartmentName("Marketing");
 

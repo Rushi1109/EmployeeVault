@@ -5,7 +5,7 @@
 
 using EmployeeDB::Controller::DepartmentController;
 
-TEST(TestValidator, Test_validateEmailTrue) {
+TEST(TestValidator, Test_validateEmail) {
 	ASSERT_TRUE(EmployeeDB::Validator::validateEmail("rushi.gandhi@gmail.com"));
 	ASSERT_TRUE(EmployeeDB::Validator::validateEmail("rushi.gandhi@zuru.com"));
 	ASSERT_FALSE(EmployeeDB::Validator::validateEmail("rushi.gandhi@zu$ru.com"));

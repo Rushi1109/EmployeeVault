@@ -10,7 +10,7 @@ namespace EmployeeDB::Controller {
 	public:
 		static bool exportToCSV(const std::string& entity, std::filesystem::path filename);
 		static bool exportAll();
-	private:
+	protected:
 		static int exportCallback(void* arg, int argc, char** argv, char** azColName);
 		static void removeCommas(std::string& str);
 	};

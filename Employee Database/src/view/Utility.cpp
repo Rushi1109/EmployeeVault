@@ -116,12 +116,12 @@ std::optional<int> Utility::getUserInputInt(const std::string& inputPrompt, std:
 				}
 				else {
 					result = stoi(userInput);
-					break;
 				}
 
 				if (result < 0) {
 					throw "Negative Number\n";
 				}
+				break;
 			}
 			catch (...) {
 				std::cout << "\033[33m" << "Wrong input...Please enter positive number!!" << "\033[0m\n";
@@ -196,6 +196,7 @@ std::optional<long long> Utility::getUserInputLL(const std::string& inputPrompt,
 				if (result < 0) {
 					throw "Negative Number\n";
 				}
+				break;
 			}
 			catch (...) {
 				std::cout << "\033[33m" << "Wrong input...Please enter positive number!!" << "\033[0m\n";

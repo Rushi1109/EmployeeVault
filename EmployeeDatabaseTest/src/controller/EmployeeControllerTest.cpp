@@ -39,9 +39,17 @@ TEST_F(SalaryFixture, Test_getSalaryDetails) {
 	ASSERT_DOUBLE_EQ(7000.0, salary->getAllowance());
 }
 
+TEST_F(EmployeeFixture, Test_getUpdateQueryConditionEmpty) {
+	ASSERT_STREQ("", EmployeeControllerTest::getUpdateQueryCondition(*emptyEmployee).c_str());
+}
+
 TEST_F(EmployeeFixture, Test_getUpdateQueryCondition) {
-	emptyEmployee->setBonus(50000.000000);
 	emptyEmployee->setMiddleName("Singh");
 
-	ASSERT_STREQ("middleName = \"Singh\", bonus = 50000.000000", EmployeeControllerTest::getUpdateQueryCondition(*emptyEmployee).c_str());
+	ASSERT_STREQ("middleName = \"Singh\"", EmployeeControllerTest::getUpdateQueryCondition(*emptyEmployee).c_str());
+
+	emptyEmployee->setBonus(50000.000000);
+	emptyEmployee->setDateOfBirth("21/04/1995");
+
+	ASSERT_STREQ("middleName = \"Singh\", dateOfBirth = \"21/04/1995\", bonus = 50000.000000", EmployeeControllerTest::getUpdateQueryCondition(*emptyEmployee).c_str());
 }
