@@ -18,8 +18,8 @@ protected:
 		std::vector<std::array<std::string, 4>> foreignKeys;
 
 		columns.emplace_back(std::move(std::array<std::string, 3>{"ID", "INT", "NOT NULL UNIQUE PRIMARY KEY"}));
-		columns.emplace_back("DepartmentName", "TEXT", "NOT NULL");
-		columns.emplace_back("teamSize", "INT", "");
+		columns.emplace_back(std::move(std::array<std::string, 3>{"DepartmentName", "TEXT", "NOT NULL"}));
+		columns.emplace_back(std::move(std::array<std::string, 3>{"teamSize", "INT"}));
 
 		table->setAttributesVector(columns);
 

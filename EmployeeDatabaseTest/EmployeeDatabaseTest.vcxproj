@@ -133,6 +133,7 @@
     <ClInclude Include="include\controller\DepartmentControllerTest.h" />
     <ClInclude Include="include\controller\EmployeeControllerTest.h" />
     <ClInclude Include="include\controller\EngineerControllerTest.h" />
+    <ClInclude Include="include\controller\ExportControllerTest.h" />
     <ClInclude Include="include\controller\FinanceControllerTest.h" />
     <ClInclude Include="include\controller\HRControllerTest.h" />
     <ClInclude Include="include\controller\ManagerControllerTest.h" />
@@ -153,6 +154,7 @@
     <ClCompile Include="src\controller\DepartmentControllerTest.cpp" />
     <ClCompile Include="src\controller\EmployeeControllerTest.cpp" />
     <ClCompile Include="src\controller\EngineerControllerTest.cpp" />
+    <ClCompile Include="src\controller\ExportControllerTest.cpp" />
     <ClCompile Include="src\controller\FinanceControllerTest.cpp" />
     <ClCompile Include="src\controller\HRControllerTest.cpp" />
     <ClCompile Include="src\controller\ManagerControllerTest.cpp" />
