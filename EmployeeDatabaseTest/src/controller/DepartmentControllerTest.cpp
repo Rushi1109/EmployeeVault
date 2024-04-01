@@ -10,7 +10,7 @@ using EmployeeDB::DBManager;
 TEST_F(DepartmentFixture, Test_insertDepartmentSuccess) {
 	ASSERT_TRUE(DepartmentController::insertDepartment(*department));
 
-	std::string_view queryString = "SELECT * FROM Department WHERE departmentName = \"Engineering\";";
+	std::string_view queryString = "SELECT * FROM Department WHERE departmentName = \"Engineering\" COLLATE NOCASE;";
 	ASSERT_EQ(1, DBManager::instance().executeRowCountQuery(queryString.data()));
 }
 

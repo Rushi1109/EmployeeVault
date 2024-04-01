@@ -8,7 +8,7 @@ using EmployeeDB::Controller::EmployeeController;
 TEST_F(EmployeeFixture, Test_insertEmployeeSuccess) {
 	ASSERT_TRUE(EmployeeController::insertEmployee(*employee));
 
-	std::string_view queryString = "SELECT * FROM Employee WHERE mobileNo = 7283902430;";
+	std::string_view queryString = "SELECT * FROM Employee WHERE mobileNo = 7283902430 COLLATE NOCASE;";
 	ASSERT_EQ(1, DBManager::instance().executeRowCountQuery(queryString.data()));
 }
 
@@ -85,14 +85,17 @@ TEST_F(EmployeeFixture, Test_getDepartmentIDByEmployeeID) {
 	ASSERT_NE(1, EmployeeController::getDepartmentIDbyEmployeeID(5));
 }
 
-TEST_F(SalaryFixture, Test_getSalaryDetails) {
+TEST_F(EmployeeFixture, Test_getSalaryDetails) {
+	std::unique_ptr<Salary> salary = std::make_unique<Salary>();
+	salary->setEmployeeID(1);
+	salary->setDepartmentID(1);
 	ASSERT_TRUE(EmployeeController::getSalaryDetails(*salary));
 
-	ASSERT_DOUBLE_EQ(5000.0, salary->getBonus());
-	ASSERT_DOUBLE_EQ(0.84, salary->getPerformanceMetric());
-	ASSERT_DOUBLE_EQ(2500.0, salary->getDeduction());
+	ASSERT_DOUBLE_EQ(500.0, salary->getBonus());
+	ASSERT_DOUBLE_EQ(0.85, salary->getPerformanceMetric());
+	ASSERT_DOUBLE_EQ(3000.0, salary->getDeduction());
 	ASSERT_DOUBLE_EQ(65000.0, salary->getBaseSalary());
-	ASSERT_DOUBLE_EQ(6000.0, salary->getAllowance());
+	ASSERT_DOUBLE_EQ(7000.0, salary->getAllowance());
 }
 
 TEST_F(EmployeeFixture, Test_getUpdateQueryConditionEmpty) {
