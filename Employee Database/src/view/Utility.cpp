@@ -90,9 +90,12 @@ void Utility::removeEmptySpaces(std::string& str, const std::string& chars) {
 }
 
 std::optional<int> Utility::getUserInputInt(const std::string& inputPrompt, std::function<bool(const std::string&)> validator, bool isMandatory) {
+	auto isInvalidInput{ false };
 	std::string userInput;
 	std::optional<int> result{ std::nullopt };
+
 	do {
+		isInvalidInput = false;
 		std::cout << inputPrompt << (isMandatory ? "*" : "") << " : ";
 		std::getline(std::cin, userInput);
 		Utility::removeEmptySpaces(userInput);
@@ -124,10 +127,11 @@ std::optional<int> Utility::getUserInputInt(const std::string& inputPrompt, std:
 				break;
 			}
 			catch (...) {
+				isInvalidInput = true;
 				std::cout << "\033[33m" << "Wrong input...Please enter positive number!!" << "\033[0m\n";
 			}
 		}
-	} while (isMandatory);
+	} while (isMandatory || isInvalidInput);
 
 	return result;
 }
@@ -164,10 +168,12 @@ std::optional<int> Utility::getUserInputInt(const std::string& inputPrompt, std:
 }
 
 std::optional<long long> Utility::getUserInputLL(const std::string& inputPrompt, std::function<bool(const std::string&)> validator, bool isMandatory) {
-
+	auto isInvalidInput{ false };
 	std::string userInput;
 	std::optional<long long> result{ std::nullopt };
+
 	do {
+		isInvalidInput = false;
 		std::cout << inputPrompt << (isMandatory ? "*" : "") << " : ";
 		std::getline(std::cin, userInput);
 		Utility::removeEmptySpaces(userInput);
@@ -199,19 +205,22 @@ std::optional<long long> Utility::getUserInputLL(const std::string& inputPrompt,
 				break;
 			}
 			catch (...) {
+				isInvalidInput = true;
 				std::cout << "\033[33m" << "Wrong input...Please enter positive number!!" << "\033[0m\n";
 			}
 		}
-	} while (isMandatory);
+	} while (isMandatory || isInvalidInput);
 
 	return result;
 }
 
 std::optional<double> Utility::getUserInputDouble(const std::string& inputPrompt, bool isMandatory) {
-
+	auto isInvalidInput{ false };
 	std::string userInput;
 	std::optional<double> result{ std::nullopt };
+
 	do {
+		isInvalidInput = false;
 		std::cout << inputPrompt << (isMandatory ? "*" : "") << " : ";
 		std::getline(std::cin, userInput);
 		Utility::removeEmptySpaces(userInput);
@@ -232,19 +241,22 @@ std::optional<double> Utility::getUserInputDouble(const std::string& inputPrompt
 				break;
 			}
 			catch (...) {
+				isInvalidInput = true;
 				std::cout << "\033[33m" << "Wrong input...Please enter positive number!!" << "\033[0m\n";
 			}
 		}
-	} while (isMandatory);
+	} while (isMandatory || isInvalidInput);
 
 	return result;
 }
 
 std::optional<std::string> Utility::getUserInputString(const std::string& inputPrompt, std::function<bool(std::string&)> validator, bool isMandatory) {
-
+	auto isInvalidInput{ false };
 	std::string userInput;
 	std::optional<std::string> result{ std::nullopt };
+
 	do {
+		isInvalidInput = false;
 		std::cout << inputPrompt << (isMandatory ? "*" : "") << " : ";
 		std::getline(std::cin, userInput);
 		Utility::removeEmptySpaces(userInput);
@@ -262,6 +274,7 @@ std::optional<std::string> Utility::getUserInputString(const std::string& inputP
 					break;
 				}
 				else {
+					isInvalidInput = true;
 					std::cerr << "\033[33m" << "Wrong " << inputPrompt << "... Please enter again!!" << "\033[0m\n";
 				}
 			}
@@ -270,16 +283,18 @@ std::optional<std::string> Utility::getUserInputString(const std::string& inputP
 				break;
 			}
 		}
-	} while (isMandatory);
+	} while (isMandatory || isInvalidInput);
 
 	return result;
 }
 
 std::optional<std::string> Utility::getUserInputDate(const std::string& inputPrompt, std::function<bool(const std::string&)> validator, bool isMandatory) {
-
+	auto isInvalidInput{ false };
 	std::string userInput;
 	std::optional<std::string> result{ std::nullopt };
+
 	do {
+		isInvalidInput = false;
 		std::cout << inputPrompt << (isMandatory ? "*" : "") << " [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : ";
 		std::getline(std::cin, userInput);
 		Utility::removeEmptySpaces(userInput);
@@ -296,10 +311,11 @@ std::optional<std::string> Utility::getUserInputDate(const std::string& inputPro
 				break;
 			}
 			else {
+				isInvalidInput = true;
 				std::cerr << "\033[33m" << "Wrong date format. format: [dd-mm-yyyy or dd/mm/yyyy or dd.mm.yyyy] : " << "\033[0m\n";
 			}
 		}
-	} while (isMandatory);
+	} while (isMandatory || isInvalidInput);
 
 	return result;
 }
