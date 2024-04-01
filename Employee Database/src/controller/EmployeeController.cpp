@@ -44,7 +44,7 @@ bool EmployeeController::deleteEmployeeByID(int employeeID) {
 	}
 	return true;
 }
-
+	
 bool EmployeeController::updateEmployee(Employee& employee) {
 
 	std::string updateQueryCondition = getUpdateQueryCondition(employee);

@@ -21,13 +21,13 @@ protected:
 		department->setDeduction(500.00);
 
 
-		std::string insertQuery = "INSERT INTO Department(\"departmentID\", \"departmentName\", \"baseSalary\", \"allowance\", \"deduction\") VALUES "
+		std::string_view insertQuery = "INSERT INTO Department(\"departmentID\", \"departmentName\", \"baseSalary\", \"allowance\", \"deduction\") VALUES "
 			"(1, 'Engineer', 65000, 7000, 3000),"
 			"(2, 'Finance', 65000, 6000, 2500),"
 			"(3, 'HR', 55000, 4000, 1500),"
 			"(4, 'QA', 59000, 4800, 1900);";
 
-		DBManager::instance().executeQuery(insertQuery.c_str());
+		DBManager::instance().executeQuery(insertQuery.data());
 	}
 
 	void TearDown() override {
