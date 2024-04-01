@@ -22,7 +22,7 @@ bool ManagerController::insertManager(Manager& manager) {
 		std::to_string(manager.getTeamSize()) + ", " +
 		std::to_string(manager.getYearsOfExperience()) + ", " +
 		(!manager.getProjectTitle().has_value() ? "NULL" : "\"" + manager.getProjectTitle().value() + "\"") + "," +
-		(!manager.getRole().has_value() ? "NULL" : "\"" + manager.getRole().value() + "\"") + "\");";
+		(!manager.getRole().has_value() ? "NULL" : "\"" + manager.getRole().value() + "\"") + ");";
 
 	try {
 		DBManager::instance().executeQuery(queryString.c_str());
