@@ -376,3 +376,9 @@
 31/03/24 19:21:23 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 23; 
 31/03/24 19:21:23 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 26; 
 31/03/24 19:21:23 : [DBLogger] [Info]: Success :  SELECT * FROM ManagerView ; 
+01/04/24 09:48:02 : [DBLogger] [Info]: Success :  Opened database file 
+01/04/24 09:48:02 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+01/04/24 14:38:06 : [DBLogger] [Info]: Success :  Opened database file 
+01/04/24 14:38:06 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+01/04/24 17:37:19 : [DBLogger] [Info]: Success :  Opened database file 
+01/04/24 17:37:19 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 

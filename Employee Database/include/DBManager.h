@@ -16,6 +16,7 @@ namespace EmployeeDB {
 		int executeCustomQuery(const char* query, int (*callback)(void*, int, char**, char**), void* arg);
 		int executeRowCountQuery(const char* queryString);
 		static void executeConfigQuery();
+		static void executeTruncateQuery(const char* tableName);
 
 	private:
 		DBManager();

@@ -48,7 +48,7 @@ bool DepartmentController::selectDepartment(const std::string& attributeName, co
 		std::cout << "\033[0;32m" << "----------> " << rowCount << std::string{ " record" } + (rowCount > 1 ? "s" : "") + " found <----------\n" << "\033[0m";
 	}
 	catch (const std::exception& e) {
-		std::cerr << e.what() << '\n';
+		std::cerr << "\033[0;31m" << e.what() << "\033[0m\n";
 		return false;
 	}
 	return true;

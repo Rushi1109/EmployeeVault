@@ -1,7 +1,7 @@
 #ifndef __TableControllerTest_h__
 #define __TableControllerTest_h__
 
-#include "../../include/controller/TableController.h"
+#include "./include/controller/TableController.h"
 
 using EmployeeDB::Controller::TableController;
 

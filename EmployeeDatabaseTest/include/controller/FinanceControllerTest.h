@@ -1,7 +1,7 @@
 #ifndef __FinanceControllerTest_h__
 #define __FinanceControllerTest_h__
 
-#include "../../include/controller/FinanceController.h"
+#include "./include/controller/FinanceController.h"
 
 using EmployeeDB::Controller::FinanceController;
 

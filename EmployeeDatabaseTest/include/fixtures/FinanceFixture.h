@@ -2,7 +2,7 @@
 #define __FinanceFixture_h__
 
 #include "../../pch.h"
-#include "Finance.h"
+#include "./model/Finance.h"
 
 using EmployeeDB::Model::Finance;
 

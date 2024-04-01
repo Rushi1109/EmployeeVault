@@ -2,7 +2,7 @@
 #define __HRFixture_h__
 
 #include "../../pch.h"
-#include "HR.h"
+#include "./model/HR.h"
 
 using EmployeeDB::Model::HR;
 

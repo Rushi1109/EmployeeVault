@@ -1,7 +1,7 @@
 #ifndef __DepartmentControllerTest_h__
 #define __DepartmentControllerTest_h__
 
-#include "../../include/controller/DepartmentController.h"
+#include "./include/controller/DepartmentController.h"
 
 using EmployeeDB::Controller::DepartmentController;
 

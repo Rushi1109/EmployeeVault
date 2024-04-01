@@ -2,7 +2,7 @@
 #define __TableFixture_h__
 
 #include "../../pch.h"
-#include "Table.h"
+#include "./model/Table.h"
 
 using EmployeeDB::Model::Table;
 

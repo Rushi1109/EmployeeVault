@@ -1,7 +1,7 @@
 #ifndef __ManagerControllerTest_h__
 #define __ManagerControllerTest_h__
 
-#include "../../include/controller/ManagerController.h"
+#include "./include/controller/ManagerController.h"
 
 using EmployeeDB::Controller::ManagerController;
 

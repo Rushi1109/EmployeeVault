@@ -2,7 +2,7 @@
 #define __QAFixture_h__
 
 #include "../../pch.h"
-#include "QA.h"
+#include "./model/QA.h"
 
 using EmployeeDB::Model::QA;
 

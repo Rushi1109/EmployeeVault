@@ -43,14 +43,16 @@
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)Employee Database\;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Employee Database\include\model\</IncludePath>
+    <IncludePath>$(SolutionDir)Employee Database\;$(VC_IncludePath);$(WindowsSDK_IncludePath);$(SolutionDir)Employee Database\include\model\;$(SolutionDir)Employee Database\include;$(SolutionDIr)\Employee Database\include</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <ExternalIncludePath>$(SolutionDir)Employee Database\include;$(SolutionDir)Employee Database\lib\sqlite\;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)Employee Database;$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Work\C++ Training Projects\Project-2 Employee Database\Employee Database\include\model\</IncludePath>
+    <IncludePath>$(SolutionDir)Employee Database;$(VC_IncludePath);$(WindowsSDK_IncludePath);D:\Work\C++ Training Projects\Project-2 Employee Database\Employee Database\include\model\;$(SolutionDir)Employee Database\include;$(SolutionDIr)\Employee Database\include</IncludePath>
     <OutDir>$(SolutionDir)bin\$(Platform)\$(Configuration)\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <ExternalIncludePath>$(SolutionDir)Employee Database\include;$(SolutionDir)Employee Database\lib\sqlite\;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -86,8 +88,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug\Employee Database\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Validator;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DepartmentController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EmployeeController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ManagerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EngineerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\FinanceController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\HRController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\QAController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ExportController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\TableController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DBManager;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Log;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Validator;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DepartmentController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EmployeeController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ManagerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Utility;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EngineerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\FinanceController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\HRController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\QAController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ExportController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\TableController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DBManager;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Log;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -125,8 +127,8 @@
       <SubSystem>Console</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\x64\Debug\Employee Database\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Validator;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DepartmentController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EmployeeController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ManagerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DBManager;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Log;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Validator;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DepartmentController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\EmployeeController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\ManagerController;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Utility;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\DBManager;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\sqlite3;$(SolutionDir)bin-int\$(Platform)\$(Configuration)\Employee Database\Log;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -162,7 +164,8 @@
     <ClCompile Include="src\controller\TableControllerTest.cpp" />
     <ClCompile Include="src\model\EmployeeTest.cpp" />
     <ClCompile Include="src\model\SalaryTest.cpp" />
-    <ClCompile Include="src\Validator.cpp" />
+    <ClCompile Include="src\UtilityTest.cpp" />
+    <ClCompile Include="src\ValidatorTest.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

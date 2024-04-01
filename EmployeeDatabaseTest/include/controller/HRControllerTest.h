@@ -1,7 +1,7 @@
 #ifndef __HRControllerTest_h__
 #define __HRControllerTest_h__
 
-#include "../../include/controller/HRController.h"
+#include "./include/controller/HRController.h"
 
 using EmployeeDB::Controller::HRController;
 

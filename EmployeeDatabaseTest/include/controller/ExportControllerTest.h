@@ -1,7 +1,7 @@
 #ifndef __ExportControllerTest_h__
 #define __ExportControllerTest_h__
 
-#include "../../include/controller/ExportController.h"
+#include "./include/controller/ExportController.h"
 
 using EmployeeDB::Controller::ExportController;
 

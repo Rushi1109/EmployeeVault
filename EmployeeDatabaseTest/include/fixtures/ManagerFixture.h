@@ -2,7 +2,7 @@
 #define __ManagerFixture_h__
 
 #include "../../pch.h"
-#include "Manager.h"
+#include "./model/Manager.h"
 
 using EmployeeDB::Model::Manager;
 

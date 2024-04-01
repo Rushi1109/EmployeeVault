@@ -1,7 +1,7 @@
 #ifndef __EngineerControllerTest_h__
 #define __EngineerControllerTest_h__
 
-#include "../../include/controller/EngineerController.h"
+#include "./include/controller/EngineerController.h"
 
 using EmployeeDB::Controller::EngineerController;
 

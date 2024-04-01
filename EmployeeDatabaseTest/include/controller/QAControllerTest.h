@@ -1,7 +1,7 @@
 #ifndef __QAControllerTest_h__
 #define __QAControllerTest_h__
 
-#include "../../include/controller/QAController.h"
+#include "./include/controller/QAController.h"
 
 using EmployeeDB::Controller::QAController;
 

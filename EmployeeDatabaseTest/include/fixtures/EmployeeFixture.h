@@ -2,7 +2,7 @@
 #define __EmployeeFixture_h__
 
 #include "../../pch.h"
-#include "Employee.h"
+#include "./model/Employee.h"
 
 using EmployeeDB::Model::Employee;
 using EmployeeDB::Model::Salary;
