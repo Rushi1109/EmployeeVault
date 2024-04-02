@@ -3,6 +3,8 @@
 #include "include/Validator.h"
 #include "./controller/DepartmentController.h"
 #include "../include/fixtures/DepartmentFixture.h"
+#include "../include/fixtures/EmployeeFixture.h"
+#include "../include/fixtures/ManagerFixture.h"
 
 using EmployeeDB::Controller::DepartmentController;
 
@@ -63,27 +65,39 @@ TEST(TestValidator, Test_validateGenderFalse) {
 	ASSERT_FALSE(EmployeeDB::Validator::validateGender(std::string("f")));
 	ASSERT_FALSE(EmployeeDB::Validator::validateGender(std::string("oth")));
 }
-//
-//TEST(TestValidator, Test_validateEmployeeID) {
-//	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("1", "Engineer"));
-//	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("8", "Finance"));
-//	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("16", "hr"));
-//	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("25", "qA"));
-//}
-//
-//TEST(TestValidator, Test_validateManagerID) {
-//	ASSERT_TRUE(EmployeeDB::Validator::validateManagerID("1"));
-//	ASSERT_FALSE(EmployeeDB::Validator::validateManagerID("19"));
-//}
+
+TEST_F(EmployeeFixture, Test_validateEmployeeIDTrue) {
+	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("1", "Engineer"));
+	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("3", "Finance"));
+	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("4", "hr"));
+	ASSERT_TRUE(EmployeeDB::Validator::validateEmployeeID("5", "qA"));
+}
+
+TEST_F(EmployeeFixture, Test_validateEmployeeIDFalse) {
+	ASSERT_FALSE(EmployeeDB::Validator::validateEmployeeID("3", "Engineer"));
+	ASSERT_FALSE(EmployeeDB::Validator::validateEmployeeID("2", "Finance"));
+	ASSERT_FALSE(EmployeeDB::Validator::validateEmployeeID("1", "hr"));
+	ASSERT_FALSE(EmployeeDB::Validator::validateEmployeeID("4", "qA"));
+}
+
+TEST_F(ManagerFixture, Test_validateManagerIDTrue) {
+	ASSERT_TRUE(EmployeeDB::Validator::validateManagerID("1"));
+	ASSERT_TRUE(EmployeeDB::Validator::validateManagerID("3"));
+}
+
+TEST_F(ManagerFixture, Test_validateManagerIDFalse) {
+	ASSERT_FALSE(EmployeeDB::Validator::validateManagerID("4"));
+	ASSERT_FALSE(EmployeeDB::Validator::validateManagerID("19"));
+}
 
 TEST_F(DepartmentFixture, Test_validateDepartmentIDTrue) {
 	ASSERT_TRUE(EmployeeDB::Validator::validateDepartmentID("1"));
 	ASSERT_TRUE(EmployeeDB::Validator::validateDepartmentID("2"));
 	ASSERT_TRUE(EmployeeDB::Validator::validateDepartmentID("3"));
-	ASSERT_FALSE(EmployeeDB::Validator::validateDepartmentID("40"));
 }
 
 TEST_F(DepartmentFixture, Test_validateDepartmentIDFalse) {
 	ASSERT_FALSE(EmployeeDB::Validator::validateDepartmentID("5"));
 	ASSERT_FALSE(EmployeeDB::Validator::validateDepartmentID("6"));
+	ASSERT_FALSE(EmployeeDB::Validator::validateDepartmentID("40"));
 }

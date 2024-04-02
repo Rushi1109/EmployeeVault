@@ -1,0 +1,5 @@
+departmentID,departmentName,baseSalary,allowance,deduction
+1,Engineer,70000.0,10000.5,3500.77
+2,Finance,65000.0,6000.0,2500.0
+3,HR,40000.0,4000.0,15000.0
+4,QA,59000.0,4800.0,1900.0

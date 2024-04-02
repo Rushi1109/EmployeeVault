@@ -1,39 +1,15 @@
-#ifndef __ManagerFixture_h__
-#define __ManagerFixture_h__
+#ifndef __ExportFixture_h__
+#define __ExportFixture_h__
 
 #include "../../pch.h"
-#include "./model/Manager.h"
 #include "DBManager.h"
 
-using EmployeeDB::Model::Manager;
 using EmployeeDB::DBManager;
+namespace fs = std::filesystem;
 
-class ManagerFixture : public ::testing::Test {
+class ExportFixture : public ::testing::Test {
 protected:
 	void SetUp() override {
-		manager = std::make_unique<Manager>();
-		manager->setEmployeeID(2);
-		manager->setFirstName("David");
-		manager->setMiddleName("Lee");
-		manager->setLastName("Brown");
-		manager->setDateOfBirth("22-06-1989");
-		manager->setMobileNo(9675021123);
-		manager->setEmail("dalien.garcia@example.com");
-		manager->setAddress("234 Cedar St, City, Country");
-		manager->setGender(EmployeeDB::Model::Gender::Male);
-		manager->setDateOfJoining("30-08-2018");
-		manager->setDepartmentID(1);
-		manager->setMentorID(1);
-		manager->setPerformanceMetric(0.85);
-		manager->setBonus(550.0);
-		manager->setManagerID(2);
-		manager->setTeamSize(6);
-		manager->setYearsOfExperience(4.5);
-		manager->setProjectTitle("Heartbeat Tracker");
-		manager->setRole("Lead C++ developer");
-
-		emptyManager = std::make_unique<Manager>(true);
-
 		DBManager::executeConfigQuery();
 
 		std::string_view insertQuery = "INSERT INTO Department (\"departmentID\", \"departmentName\", \"baseSalary\", \"allowance\", \"deduction\") VALUES "
@@ -60,13 +36,60 @@ protected:
 	}
 
 	void TearDown() override {
+		fs::path exportPath{ "./data/CSVs/Manager.csv" };
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/Employee.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/Department.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/EngineerBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/ManagerBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/EmployeeBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/HRBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/FinanceBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/QABackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
+		exportPath = "./data/CSVs/DepartmentBackup.csv";
+		if (fs::exists(exportPath)) {
+			fs::remove(exportPath);
+		}
+
 		DBManager::instance().executeTruncateQuery("Department");
 		DBManager::instance().executeTruncateQuery("Employee");
 		DBManager::instance().executeTruncateQuery("Manager");
 	}
-
-	std::unique_ptr<Manager> manager;
-	std::unique_ptr<Manager> emptyManager;
 };
 
-#endif // !__ManagerFixture_h__
+#endif // !__ExportFixture_h__

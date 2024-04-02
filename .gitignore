@@ -40,3 +40,4 @@ packages/
 #others
 *.docx
 *.csv
+*.log

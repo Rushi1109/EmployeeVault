@@ -15,10 +15,10 @@ TEST_F(ManagerFixture, Test_insertManagerSuccess) {
 }
 
 TEST_F(ManagerFixture, Test_insertManagerFailure) {
-	manager->setManagerID(1);
+	manager->setManagerID(8);
 	ASSERT_FALSE(ManagerController::insertManager(*manager));
 
-	std::string_view queryString = "SELECT * FROM Manager WHERE managerID = 2;";
+	std::string_view queryString = "SELECT * FROM Manager WHERE managerID = 8;";
 	ASSERT_EQ(0, DBManager::instance().executeRowCountQuery(queryString.data()));
 }
 

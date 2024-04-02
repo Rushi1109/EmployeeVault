@@ -7,7 +7,7 @@ using EmployeeDB::Controller::TableController;
 
 class TableControllerTest : public TableController {
 public:
-	static std::string getUpdateQueryCondition(Table& table) {
+	static std::string getCreateTableQuery(Table& table) {
 		return TableController::getCreateTableQuery(table);
 	}
 };

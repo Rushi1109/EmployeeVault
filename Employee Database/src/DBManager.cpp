@@ -164,10 +164,10 @@ int DBManager::rowCountCallback(void* arg, int argc, char** argv, char** azColNa
 }
 
 void DBManager::executeConfigQuery() {
-	std::string queryString = "PRAGMA foreign_keys = ON";
+	std::string_view queryString = "PRAGMA foreign_keys = ON";
 
 	try {
-		instance().executeQuery(queryString.c_str());
+		instance().executeQuery(queryString.data());
 	}
 	catch (const std::exception& e) {
 		std::cerr << e.what() << '\n';

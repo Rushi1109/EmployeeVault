@@ -144,6 +144,7 @@
     <ClInclude Include="include\fixtures\DepartmentFixture.h" />
     <ClInclude Include="include\fixtures\EmployeeFixture.h" />
     <ClInclude Include="include\fixtures\EngineerFixture.h" />
+    <ClInclude Include="include\fixtures\ExportFixture.h" />
     <ClInclude Include="include\fixtures\FinanceFixture.h" />
     <ClInclude Include="include\fixtures\HRFixture.h" />
     <ClInclude Include="include\fixtures\ManagerFixture.h" />
