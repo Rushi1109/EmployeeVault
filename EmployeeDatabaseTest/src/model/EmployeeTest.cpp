@@ -10,10 +10,14 @@ TEST(TestEmployee, Test_getGenderFromString) {
 	ASSERT_NE(Gender::Female, EmployeeDB::Model::getGenderFromString(std::string{ "male" }));
 	ASSERT_EQ(Gender::Other, EmployeeDB::Model::getGenderFromString(std::string{ "other" }));
 	ASSERT_NE(Gender::Other, EmployeeDB::Model::getGenderFromString(std::string{ "male" }));
+	ASSERT_NE(Gender::Other, EmployeeDB::Model::getGenderFromString(std::string{ "ma" }));
+	ASSERT_EQ(Gender::Default, EmployeeDB::Model::getGenderFromString(std::string{ "def" }));
+	ASSERT_EQ(Gender::Default, EmployeeDB::Model::getGenderFromString(std::string{ "sdas" }));
 }
 
 TEST(TestEmployee, Test_getGenderString) {
 	ASSERT_STREQ("Male", EmployeeDB::Model::getGenderString(Gender::Male).c_str());
 	ASSERT_STREQ("Female", EmployeeDB::Model::getGenderString(Gender::Female).c_str());
 	ASSERT_STREQ("Other", EmployeeDB::Model::getGenderString(Gender::Other).c_str());
+	ASSERT_STREQ("Default", EmployeeDB::Model::getGenderString(Gender::Default).c_str());
 }

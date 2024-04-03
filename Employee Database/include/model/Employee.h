@@ -9,7 +9,7 @@
 namespace EmployeeDB::Model {
     enum class Gender
     {
-        Male, Female, Other
+        Male, Female, Other, Default
     };
 
     struct Name {
@@ -31,7 +31,7 @@ namespace EmployeeDB::Model {
             dateOfJoining{ "" },
             performanceMetric{ std::nullopt },
             mobileNo{ 0 },
-            gender{ Gender::Male },
+            gender{ Gender::Default },
             employeeID{ 0 },
             departmentID{ 0 },
             mentorID{ std::nullopt },
@@ -46,7 +46,7 @@ namespace EmployeeDB::Model {
             dateOfJoining{ "#" },
             performanceMetric{ std::nullopt },
             mobileNo{ -1 },
-            gender{ Gender::Other },
+            gender{ Gender::Default },
             employeeID{ -1 },
             departmentID{ -1 },
             mentorID{ std::nullopt },
@@ -181,9 +181,10 @@ namespace EmployeeDB::Model {
     };
 
     inline std::string getGenderString(Gender g) {
-        std::string tempStr{ "Male" };
+        std::string tempStr{ "Default" };
         switch (g) {
         case EmployeeDB::Model::Gender::Male:
+            tempStr = "Male";
             break;
         case EmployeeDB::Model::Gender::Female:
             tempStr = "Female";
@@ -196,7 +197,7 @@ namespace EmployeeDB::Model {
     }
 
     inline Gender getGenderFromString(std::string& genderString) {
-        auto gender{ Gender::Male };
+        auto gender{ Gender::Default };
 
         std::transform(genderString.begin(), genderString.end(), genderString.begin(), ::tolower);
         if (genderString == "male") {

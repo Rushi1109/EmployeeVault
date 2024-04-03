@@ -386,3 +386,41 @@
 02/04/24 00:29:57 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
 02/04/24 00:31:18 : [DBLogger] [Info]: Success :  Opened database file 
 02/04/24 00:31:18 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+02/04/24 17:14:31 : [DBLogger] [Info]: Success :  Opened database file 
+02/04/24 17:14:31 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+02/04/24 18:52:41 : [DBLogger] [Info]: Success :  Opened database file 
+02/04/24 18:52:41 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+02/04/24 18:52:49 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+03/04/24 10:24:36 : [DBLogger] [Info]: Success :  Opened database file 
+03/04/24 10:24:36 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+03/04/24 10:24:44 : [DBLogger] [Info]: Success :  SELECT * FROM Department WHERE departmentID = "1"  COLLATE NOCASE; 
+03/04/24 10:24:55 : [DBLogger] [Info]: Success :  SELECT departmentID FROM Department WHERE departmentName="Engineer" COLLATE NOCASE; 
+03/04/24 10:24:55 : [DBLogger] [Info]: Success :  SELECT employeeID FROM Employee WHERE employeeID = 2 AND departmentID = 1; 
+03/04/24 10:24:55 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 2; 
+03/04/24 10:24:55 : [DBLogger] [Info]: Success :  SELECT * FROM Employee NATURAL JOIN Engineer WHERE Employee.employeeID = "2"  COLLATE NOCASE; 
+03/04/24 10:25:14 : [DBLogger] [Info]: Success :  UPDATE Employee SET gender = "Other" WHERE employeeID = 2; 
+03/04/24 10:25:31 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 2; 
+03/04/24 10:25:31 : [DBLogger] [Info]: Success :  SELECT * FROM Employee NATURAL JOIN Engineer WHERE employeeID = "2"  COLLATE NOCASE; 
+03/04/24 10:57:29 : [DBLogger] [Info]: Success :  Opened database file 
+03/04/24 10:57:29 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+03/04/24 10:59:45 : [DBLogger] [Info]: Success :  SELECT departmentID FROM Department WHERE departmentName="Engineer" COLLATE NOCASE; 
+03/04/24 10:59:45 : [DBLogger] [Info]: Success :  INSERT INTO Employee (firstName, middleName, lastName, dateOfBirth, mobileNo, email, address, gender, dateOfJoining, departmentID, mentorID, performanceMetric, bonus)VALUES ("Jack", NULL, "Reacher", "11.03.1998", 8967809334, "jack.reacher@jack.com", "23, asdx", "Male", "01.01.2024", 1, 2, NULL, NULL); 
+03/04/24 10:59:45 : [DBLogger] [Info]: Success :  SELECT employeeID FROM Employee WHERE email="jack.reacher@jack.com" COLLATE NOCASE; 
+03/04/24 10:59:45 : [DBLogger] [Info]: Success :  INSERT INTO Engineer (employeeID, technology) VALUES (29, "NodeJS"); 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 1; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 5; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 8; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 11; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 15; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 17; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 23; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM SalaryView WHERE employeeID = 26; 
+03/04/24 11:00:33 : [DBLogger] [Info]: Success :  SELECT * FROM ManagerView ; 
+03/04/24 11:02:48 : [DBLogger] [Info]: Success :  CREATE TABLE "Roles" ("ID" INT UNIQUE NOT NULL PRIMARY KEY, "Name" TEXT NOT NULL, FOREIGN KEY ("ID") REFERENCES "RolesManager"("RoleID") ON DELETE CASCADE); 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Department; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Employee; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Engineer; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Finance; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
+03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
