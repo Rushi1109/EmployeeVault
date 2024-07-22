@@ -36,6 +36,7 @@
 bin/
 bin-int/
 packages/
+Employee Database/lib/sqlite/*
 
 #others
 *.docx

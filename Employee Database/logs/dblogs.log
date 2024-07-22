@@ -424,3 +424,7 @@
 03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM HR; 
 03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM QA; 
 03/04/24 11:03:05 : [DBLogger] [Info]: Success :  SELECT * FROM Manager; 
+29/05/24 10:07:36 : [DBLogger] [Info]: Success :  Opened database file 
+29/05/24 10:07:36 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 
+29/05/24 10:07:47 : [DBLogger] [Info]: Success :  Opened database file 
+29/05/24 10:07:47 : [DBLogger] [Info]: Success :  PRAGMA foreign_keys = ON 

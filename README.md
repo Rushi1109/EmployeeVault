@@ -17,9 +17,11 @@
 
 2. Clone this repository.
 
-3. Open the solution in Visual Studio.
+3. Double Click on `install_sqlite.bat` file or run it via terminal to download sqlite3.
 
-4. Build and run.
+4. Open the solution in Visual Studio.
+
+5. Build and run.
 
 # Database schema
 
